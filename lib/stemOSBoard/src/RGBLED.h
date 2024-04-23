@@ -11,9 +11,10 @@ public:
   void CONFIGURE_WIFI();  // Acesso enquanto estivermos configurando WiFi
   void OK();     
   void setColor(int cor[3]);         // Quando tudo estiver correto
+  void init();
 private:
   static const int PINO = 12;         // Pino GPIO do LED
-  static const int CHANNEL = 16;       // Canal PWM
+  static const int CHANNEL = 0;       // Canal PWM
   static const int LEDS_COUNT = 8;
   int AZUL[3] = {0, 0, 128};
   int VERMELHO[3] = {0, 0, 255};

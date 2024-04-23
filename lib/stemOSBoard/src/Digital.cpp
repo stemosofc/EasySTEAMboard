@@ -6,7 +6,7 @@ Digital::Digital(PortasDigitais entrada) {
   pinMode(signalPin, INPUT); 
 }
 
-// Retorna o Input da porta digital aa
+// Retorna o Input da porta digital
 bool Digital::getInput() {
   return digitalRead(signalPin);
 }

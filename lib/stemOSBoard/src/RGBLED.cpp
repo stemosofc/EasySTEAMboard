@@ -4,16 +4,19 @@ RGBLED::RGBLED() {
 
 }
 
-void RGBLED::ERRO() {
+void RGBLED::init() {
   fita.begin();
 	fita.setBrightness(10);	
 }
 
+void RGBLED::ERRO() {
+  fita.setAllLedsColorData(VERMELHO[0], VERMELHO[1], VERMELHO[2]);
+  fita.show();
+}
+
 void RGBLED::CONFIGURE_WIFI() {
-  fita.setAllLedsColor(AMARELO[0], AMARELO[1], AMARELO[2]);
-  delay(30);
   fita.setAllLedsColorData(AZUL[0], AZUL[1], AZUL[2]);
-  delay(30);
+  fita.show();
 }
 
 void RGBLED::OK() {

@@ -1,8 +1,9 @@
 #include "stemWiFi.h"
+RGBLED led;
 
+stemWiFi::stemWiFi() {
 
-stemWiFi w;
-stemWiFi::stemWiFi() {}
+}
 
 void stemWiFi::init() {
     server = new AsyncWebServer(80);
@@ -21,55 +22,23 @@ void stemWiFi::init() {
 }
 
 void stemWiFi::configureWiFiAP() {
+  led.init();
   //RGBLED::configureLED();
-  log_n("Definindo modo WiFi");
-   WiFi.mode(WIFI_AP);
-  log_n("Iniciando Acess Point");
-  WiFi.softAP(ssid, password);
+  log_n("Definindo modo WiFi", WiFi.mode(WIFI_AP));
 
-
+  log_n("Iniciando Acess Point", WiFi.softAP(ssid, password));
 
   log_n("Endereço IP");
   if(Serial) {
     Serial.println(WiFi.softAPIP());
   }
-  w.init();
+
+  init();
+
   delay(500);
   
-  //loadingWiFi();
+  led.CONFIGURE_WIFI();
 }
-
-/*
-void stemWiFi::loadingWiFi() {
-  log_n("Aguardando cliente");
-  while(()) {
-    client = server.available();
-    //RGBLED::CONFIGURE_WIFI();
-  }
-  log_n("Cliente conectado");
-}
-*/
-
-/*
-void stemWiFi::getGamepadValues() {
-    if(client.connected()) {
-      String data = webSocketServer.getData();
-
-      if (data.length() > 0) {
-
-        Gamepad::gamepad = handleReceivedMessage(data);
-
-      }
-   }
-  delay(20);
-}
-*/
-
-/*
-bool stemWiFi::getClientConnected() {
-  return client.connected();
-}
-*/
 
 JsonDocument stemWiFi::handleReceivedMessage(String message) {
   JsonDocument jon;                
@@ -94,40 +63,24 @@ void stemWiFi::errorJson(DeserializationError err) {
   }
 }
 
-/*
-bool stemWiFi::waitForStart() {
-  bool waitForStart = false;
-  while(!waitForStart) {
-    JsonDocument js = handleReceivedMessage(webSocketServer.getData());
-    waitForStart = js["Estado"];
-    Serial.println("Aguardando Init");
-    delay(20);
-  }
-  return true;
-}
-*/
-/*
-String stemWiFi::getEnable() {
-  JsonDocument js = handleReceivedMessage(handleWebSocketMessage());
-  String status = js["Estado"];
-  return status;
-}
-*/
-
 void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
  void *arg, uint8_t *data, size_t len) {
   switch (type) {
     case WS_EVT_CONNECT:
       Serial.println("WebSocket client connected");
+      led.OK();
       break;
     case WS_EVT_DISCONNECT:
       Serial.println("WebSocket client disconnected");
+      led.CONFIGURE_WIFI();
       break;
     case WS_EVT_DATA:
       handleWebSocketMessage(arg, data, len);
       break;
     case WS_EVT_PONG:
+      break;
     case WS_EVT_ERROR:
+      led.ERRO();
       break;
   }
 }
@@ -142,6 +95,8 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     JsonDocument jon;                
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
+    String state = jon["Estado"]; // BUG do vscode?
+    this->state = state;
     Gamepad::gamepad = jon;
   }
 }

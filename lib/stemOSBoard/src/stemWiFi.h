@@ -14,14 +14,10 @@ class stemWiFi {
   public:
     stemWiFi(void);
     void configureWiFiAP();
-    String getData();
-    void sendData(String message);
     JsonDocument handleReceivedMessage(String message);
-    void getGamepadValues();
     bool waitForStart();
-    String getEnable();
-    bool getClientConnected();
     void cleanupClients();
+    String state = "Desabilitado";
   private:
     const  char* ssid = "Arara";
     const char* password = "BlueStemOS";

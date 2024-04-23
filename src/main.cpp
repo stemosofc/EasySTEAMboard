@@ -9,10 +9,22 @@ Gamepad gamepad;
 void setup() {
   Serial.begin(115200);
   wifi.configureWiFiAP();
-  gamepad.applyDeadband(0.02);
+}
+
+void codeUser(void * arg) {
+  (void)arg;
+  Serial.println("Teste");
+  delay(50);
 }
 
 void loop() {
-  double y = gamepad.getLeftAxisY();
-  // motor.setPower(y);
+  if(wifi.state == "Habilitado") {
+    estado = true;
+  } else if (wifi.state == "Desabilitado") {
+    estado = false;
+  }
+  if(estado) {
+    esp_ipc_call(PRO_CPU_NUM, codeUser, NULL);
+  }
 }
+
