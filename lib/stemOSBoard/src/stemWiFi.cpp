@@ -24,11 +24,11 @@ void stemWiFi::init() {
 void stemWiFi::configureWiFiAP() {
   led.init();
   //RGBLED::configureLED();
-  log_n("Definindo modo WiFi", WiFi.mode(WIFI_AP));
+  log_i("Definindo modo WiFi", WiFi.mode(WIFI_AP));
 
-  log_n("Iniciando Acess Point", WiFi.softAP(ssid, password));
+  log_i("Iniciando Acess Point", WiFi.softAP(ssid, password));
 
-  log_n("Endereço IP");
+  log_i("Endereço IP");
   if(Serial) {
     Serial.println(WiFi.softAPIP());
   }
@@ -53,10 +53,10 @@ JsonDocument stemWiFi::handleReceivedMessage(String message) {
 void stemWiFi::errorJson(DeserializationError err) {
   switch (err.code()) { 
       case DeserializationError::InvalidInput:
-          Serial.println(F("Invalid input!"));
+          log_e("Invalid input!");
           break;
       case DeserializationError::NoMemory:
-          Serial.println(F("Not enough memory"));
+          log_e("Not enough memory");
           break;
       case DeserializationError::Ok:
           break;
