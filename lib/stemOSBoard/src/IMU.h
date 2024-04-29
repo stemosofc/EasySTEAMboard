@@ -1,16 +1,20 @@
 #include "Arduino.h"
 #include "ICM_20948.h"
 #include "esp32-hal-log.h"
+#include "Task.h"
 
 #define WIRE_PORT Wire;
 
-class IMU {
+class IMU : public Task {
     public:
         void init(void);
         double getYaw();
         double getRoll();
         double getPitch();
         void calcule();
+        void run(void * data) {
+            calcule();
+        }
     private:
         ICM_20948_I2C myICM;
         const int AD0_VAL = 0;

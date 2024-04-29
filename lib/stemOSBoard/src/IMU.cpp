@@ -82,54 +82,44 @@ void IMU::init() {
   {
     log_e("DMP Não habilitado!");
   }
-  /*
-  std::bind(xTaskCreatePinnedToCore, this, update, 
-            std::placeholders::_2, 
-            std::placeholders::_3
-            , std::placeholders::_4
-            , std::placeholders::_5
-            , std::placeholders::_6)(IMU::update, "IMU", 2048, this, 4, NULL, tskNO_AFFINITY);
-  */
-}
-
-void IMU::update(void * arg) {
-  while(1) {
-    calcule();
-  }
+  setStackSize(2000);
+  start();
 }
 
 void IMU::calcule() {
-  // Read any DMP data waiting in the FIFO
-  // Note:
-  //    readDMPdataFromFIFO will return ICM_20948_Stat_FIFONoDataAvail if no data is available.
-  //    If data is available, readDMPdataFromFIFO will attempt to read _one_ frame of DMP data.
-  //    readDMPdataFromFIFO will return ICM_20948_Stat_FIFOIncompleteData if a frame was present but was incomplete
-  //    readDMPdataFromFIFO will return ICM_20948_Stat_Ok if a valid frame was read.
-  //    readDMPdataFromFIFO will return ICM_20948_Stat_FIFOMoreDataAvail if a valid frame was read _and_ the FIFO contains more (unread) data.
-  icm_20948_DMP_data_t data;
-  myICM.readDMPdataFromFIFO(&data);
+  while(1) {
+    // Read any DMP data waiting in the FIFO
+    // Note:
+    //    readDMPdataFromFIFO will return ICM_20948_Stat_FIFONoDataAvail if no data is available.
+    //    If data is available, readDMPdataFromFIFO will attempt to read _one_ frame of DMP data.
+    //    readDMPdataFromFIFO will return ICM_20948_Stat_FIFOIncompleteData if a frame was present but was incomplete
+    //    readDMPdataFromFIFO will return ICM_20948_Stat_Ok if a valid frame was read.
+    //    readDMPdataFromFIFO will return ICM_20948_Stat_FIFOMoreDataAvail if a valid frame was read _and_ the FIFO contains more (unread) data.
+    icm_20948_DMP_data_t data;
+    myICM.readDMPdataFromFIFO(&data);
 
-  if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) // Was valid data available?
-  {
-
-    if ((data.header & DMP_header_bitmap_Quat6) > 0) // We have asked for GRV data so we should receive Quat6
+    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) // Was valid data available?
     {
-      q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
-      q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
-      q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
 
-      // Convert the quaternions to Euler angles (roll, pitch, yaw)
-      // https://en.wikipedia.org/w/index.php?title=Conversion_between_quaternions_and_Euler_angles&section=8#Source_code_2
+      if ((data.header & DMP_header_bitmap_Quat6) > 0) // We have asked for GRV data so we should receive Quat6
+      {
+        q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
+        q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
+        q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
 
-      q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+        // Convert the quaternions to Euler angles (roll, pitch, yaw)
+        // https://en.wikipedia.org/w/index.php?title=Conversion_between_quaternions_and_Euler_angles&section=8#Source_code_2
 
-      q2sqr = q2 * q2;
+        q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+
+        q2sqr = q2 * q2;
+      }
     }
-  }
 
-  if (myICM.status != ICM_20948_Stat_FIFOMoreDataAvail) // If more data is available then we should read it right away - and not delay
-  {
-    delay(10);
+    if (myICM.status != ICM_20948_Stat_FIFOMoreDataAvail) // If more data is available then we should read it right away - and not delay
+    {
+      delay(10);
+    }
   }
 }
 
