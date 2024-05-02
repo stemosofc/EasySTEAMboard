@@ -1,5 +1,12 @@
 #include "Motor.h"
 
+/**
+ * @brief Cria um objeto de Motor
+ *
+ * @param [in] entrada a porta na qual o motor esta conectado
+ * @param [in] reverse define se o motor deve ser invertido ou não
+ * @return N/A.
+ */
 Motor::Motor(int entrada, bool reverse) {
   pinos(entrada);
 
@@ -25,6 +32,13 @@ Motor::Motor(int entrada, bool reverse) {
   }
 }
 
+
+/**
+ * @brief Define as entradas digitais da Arara baseado na porta do motor
+ *
+ * @param [in] entrada a porta na qual o motor esta conectado
+ * @return N/A.
+ */
 void Motor::pinos(int entrada) {
   switch (entrada) {
     case Motor::PORTA_1:
@@ -54,12 +68,22 @@ void Motor::pinos(int entrada) {
   }
 }
 
+
+/**
+ * @brief Define a velocidade do motor
+ *
+ * @param [in] power - range de [-1.0, 1.0]
+ * @return N/A.
+ */
 void Motor::setPower(double power) {
   power = max(-1.0, min(1.0, power));
   double output_res = abs(power) * 1023;
   if (power < 0) {
     ledcWrite(channelB, output_res);
+    Serial.print("Canal Reverso: ");
   } else {
     ledcWrite(channelA, output_res);
+    Serial.print("Canal Direto: ");
   }
+    Serial.println(output_res);
 }

@@ -1,6 +1,11 @@
 #include "EncoderESP.h"
 
-// Classe de encoder
+/**
+ * @brief Cria um objeto de Encoder
+ *
+ * @param [in] entrada - porta que o encoder está conectado
+ * @return N/A.
+ */
 EncoderESP::EncoderESP(int entrada) {
   switch(entrada) {
     case PORTA_1_ENCODER:
@@ -24,22 +29,32 @@ EncoderESP::EncoderESP() {
   
 }
 
-// Obtém da posição do encoder
+/**
+ * @brief Define a velocidade do motor
+ *
+ * @param [void]
+ * @return double.
+ */
 double EncoderESP::getPosition() {
   return encoder.getCount() * factor;
 }
 
-// Define a posição do encoder
+/**
+ * @brief Define a velocidade do motor
+ *
+ * @param [in] position - define uma posição para o encoder
+ * @return double.
+ */
 void EncoderESP::setPosition(int position) {
   encoder.setCount(position / factor);
 }
 
-// Define o fator de conversão do encoder
+/**
+ * @brief Define a velocidade do motor
+ *
+ * @param [in] factor - define uma posição para o encoder
+ * @return double.
+ */
 void EncoderESP::setPositionFactor(double factor) {
     this->factor = factor;
-}
-
-// Atualiza o encoder para obter a nova posição
-void EncoderESP::update() {
-  // encoder.tick();
 }

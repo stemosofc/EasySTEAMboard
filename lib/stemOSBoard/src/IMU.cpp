@@ -1,5 +1,11 @@
 #include "IMU.h"
 
+/**
+ * @brief Inicia o IMU
+ *
+ * @param [void]
+ * @return N/A.
+ */
 void IMU::init() {
   Wire.begin();
   Wire.setClock(400000);
@@ -86,6 +92,12 @@ void IMU::init() {
   start();
 }
 
+/**
+ * @brief Obtém os quaternions do IMU
+ *
+ * @param [void]
+ * @return N/A.
+ */
 void IMU::calcule() {
   while(1) {
     // Read any DMP data waiting in the FIFO
@@ -123,6 +135,12 @@ void IMU::calcule() {
   }
 }
 
+/**
+ * @brief Retorna o valor do Roll (Eixo X) do IMU
+ *
+ * @param [void]
+ * @return double.
+ */
 double IMU::getRoll() {
   // roll (x-axis rotation)
   double t0 = +2.0 * (q0 * q1 + q2 * q3);
@@ -131,6 +149,12 @@ double IMU::getRoll() {
   return roll;
 }
 
+/**
+ * @brief Retorna o valor do Roll (Eixo Y) do IMU
+ *
+ * @param [void]
+ * @return double.
+ */
 double IMU::getPitch() {
   // pitch (y-axis rotation)
   double t2 = +2.0 * (q0 * q2 - q3 * q1);
@@ -140,6 +164,12 @@ double IMU::getPitch() {
   return pitch;
 }
 
+/**
+ * @brief Retorna o valor do Roll (Eixo Z) do IMU
+ *
+ * @param [void]
+ * @return double.
+ */
 double IMU::getYaw() {
   // yaw (z-axis rotation)
   double t3 = +2.0 * (q0 * q3 + q1 * q2);

@@ -14,4 +14,15 @@
 #include <freertos/task.h>
 #include <esp_ipc.h>
 bool estado = false;
+class Arara {
+    public:
+    stemWiFi wifi;
+     Arara(void) {
+        Serial.begin(115200);
+        wifi.configureWiFiAP();
+     };
+    private:
+};
+
+Arara arara();
 #endif

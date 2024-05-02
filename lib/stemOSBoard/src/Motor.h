@@ -21,6 +21,6 @@ class Motor {
     int channelB; // Canal PWM B
     void pinos(int entrada); // Configura os pinos com base na porta do motor
     static const int RESOLUTION = 10; // Resolução (bits) do canal PWM (1024)
-    static const int FREQUENCY = 9000; // Frequência do canal
+    static const int FREQUENCY = 20000; // Frequência do canal
 };
 #endif

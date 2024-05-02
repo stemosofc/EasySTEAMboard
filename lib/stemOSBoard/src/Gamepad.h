@@ -20,8 +20,9 @@ class Gamepad {
     double getLeftTrigger();
     static JsonDocument gamepad;
   private:
-    double deadband;
-    double returnValueWithDeadband(double value);
+    double deadband = 0.01;
+    double maxMagnitude = 1;
+    double getValue(double value);
 };
 
 #endif

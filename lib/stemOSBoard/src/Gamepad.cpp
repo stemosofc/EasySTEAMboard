@@ -2,73 +2,154 @@
 
 JsonDocument Gamepad::gamepad;
 
+/**
+ * @brief Aplica um valor de deadband ao gamepad
+ *
+ * @param [void]
+ * @return N/A.
+ */
 void Gamepad::applyDeadband(double deadband) {
   this->deadband = deadband;
 }
 
-double Gamepad::returnValueWithDeadband(double value) {
-  if(abs(value) < abs(deadband)) {
-    return .0;
+/**
+ * @brief Retorna o valor com a deadband aplicada
+ *
+ * @param [void]
+ * @return double.
+ */
+double Gamepad::getValue(double value) {
+  if(abs(value) > deadband) {
+    if(maxMagnitude / deadband > 1.0e12) {
+      return value > 0.0 ? value - deadband : value + deadband;
+    }
+    if(value > 0.0) {
+      return maxMagnitude * (value - deadband) / (maxMagnitude - deadband);
+    } else {
+      return maxMagnitude * (value + deadband) / (maxMagnitude - deadband);
+    }
   } else {
-    return value;
+    return 0.0;
   }
 }
-// Obtém o eixo esquerda Y do analógico
+
+/**
+ * @brief Retorna o valor do eixo Y do analógico esquerdo
+ *
+ * @param [void]
+ * @return double.
+ */
 double Gamepad::getLeftAxisY() {
- return returnValueWithDeadband(Gamepad::gamepad["LY"]);
+ return getValue(Gamepad::gamepad["LY"]);
 }
 
-// Obtém o eixo esquerda X do analógico
+/**
+ * @brief Retorna o valor do eixo X do analógico esquerdo
+ *
+ * @param [void]
+ * @return double.
+ */
 double Gamepad::getLeftAxisX() {
-  return Gamepad::gamepad["LX"];
+  return getValue(Gamepad::gamepad["LX"]);
 }
 
-// Obtém o eixo direita Y do analógico
+/**
+ * @brief Retorna o valor do eixo Y do analógico direito
+ *
+ * @param [void]
+ * @return double.
+ */
 double Gamepad::getRightAxisY() {
-  return Gamepad::gamepad["RY"];
+  return getValue(Gamepad::gamepad["RY"]);
 }
 
+/**
+ * @brief Retorna o valor do eixo X do analógico direito
+ *
+ * @param [void]
+ * @return double.
+ */
 // Obtém o eixo direita X do analógico
 double Gamepad::getRightAxisX() {
-  return Gamepad::gamepad["RX"];
+  return getValue(Gamepad::gamepad["RX"]);
 }
 
-// Retorna o botão A do gamepad
+/**
+ * @brief Retorna o valor do botão A
+ *
+ * @param [void]
+ * @return bool.
+ */
 bool Gamepad::getButtonA() {
   return Gamepad::gamepad["A"];
 }
 
-// Retorna o botão B do gamepad
+/**
+ * @brief Retorna o valor do botão B
+ *
+ * @param [void]
+ * @return bool.
+ */
 bool Gamepad::getButtonB() {
   return Gamepad::gamepad["B"];
 }
 
-// Retorna o botão X do gamepad
+/**
+ * @brief Retorna o valor do botão X
+ *
+ * @param [void]
+ * @return bool.
+ */
 bool Gamepad::getButtonX() {
   return Gamepad::gamepad["X"];
 }
 
-// Retorna o botão Y do gamepad
+/**
+ * @brief Retorna o valor do botão Y
+ *
+ * @param [void]
+ * @return bool.
+ */
 bool Gamepad::getButtonY() {
   return Gamepad::gamepad["Y"];
 }
 
-// Retorna o bumper direito do gamepad
+/**
+ * @brief Retorna o valor do botão Right Bumper
+ *
+ * @param [void]
+ * @return bool.
+ */
 bool Gamepad::getRightBumper() {
   return Gamepad::gamepad["RB"];
 }
 
-// Retorna o bumper esquerdo do gamepad
+/**
+ * @brief Retorna o valor do botão Left Bumper
+ *
+ * @param [void]
+ * @return bool.
+ */
 bool Gamepad::getLeftBumper() {
   return Gamepad::gamepad["LB"];
 }
 
-// Retorna o trigger direito do gamepad
+/**
+ * @brief Retorna o valor do botão Right Trigger
+ *
+ * @param [void]
+ * @return double.
+ */
 double Gamepad::getRightTrigger() {
   return Gamepad::gamepad["RT"];
 }
 
-// Retorna o trigger esquerdo do gamepad
+/**
+ * @brief Retorna o valor do botão Right Trigger
+ *
+ * @param [void]
+ * @return double.
+ */
 double Gamepad::getLeftTrigger() {
   return Gamepad::gamepad["LT"];
 }

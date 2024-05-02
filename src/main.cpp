@@ -1,34 +1,25 @@
 #include <Arduino.h>
 #include "stemOSBoard.h"
 
-Motor motor(Motor::PORTA_1, Motor::FORWARD);
+Motor motor1(Motor::PORTA_1, Motor::FORWARD);
+Motor motor2(Motor::PORTA_2, Motor::FORWARD);
+Motor motor3(Motor::PORTA_3, Motor::FORWARD);
+Motor motor4(Motor::PORTA_4, Motor::FORWARD);
+
 stemWiFi wifi;
-IMU imu;
 Gamepad gamepad;
 
 void setup() {
-  Serial.begin(115200);
-  wifi.configureWiFiAP();
-  imu.init();
+
 }
 
 void loop() {
- Serial.println(imu.getYaw());
+  motor1.setPower(1.0);
+  motor2.setPower(1.0);
+  motor3.setPower(1.0);
+  motor4.setPower(1.0);
 }
 
-
-void enable() {
-  if(wifi.state == "Habilitado") {
-    estado = true;
-  } else if (wifi.state == "Desabilitado") {
-    estado = false;
-  }
-  if(estado) {
-    double y = gamepad.getLeftAxisY();
-    Serial.println(y);
-    motor.setPower(y);
-  }
-}
 
 
 
