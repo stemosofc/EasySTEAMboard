@@ -71,6 +71,7 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       led.OK();
       break;
     case WS_EVT_DISCONNECT:
+      ws->cleanupClients();
       Serial.println("WebSocket client disconnected");
       led.CONFIGURE_WIFI();
       break;

@@ -77,13 +77,16 @@ void Motor::pinos(int entrada) {
  */
 void Motor::setPower(double power) {
   power = max(-1.0, min(1.0, power));
-  double output_res = abs(power) * 1023;
+  int output_res = abs(power) * 1023;
   if (power < 0) {
     ledcWrite(channelB, output_res);
     Serial.print("Canal Reverso: ");
-  } else {
+  } else if(power > 0){
     ledcWrite(channelA, output_res);
     Serial.print("Canal Direto: ");
+  } else {
+    ledcWrite(channelA, 0);
+    ledcWrite(channelB, 0);
   }
     Serial.println(output_res);
 }

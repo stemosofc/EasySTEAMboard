@@ -10,14 +10,12 @@ stemWiFi wifi;
 Gamepad gamepad;
 
 void setup() {
-
+  Serial.begin(115200);
+  wifi.configureWiFiAP();
 }
 
 void loop() {
-  motor1.setPower(1.0);
-  motor2.setPower(1.0);
-  motor3.setPower(1.0);
-  motor4.setPower(1.0);
+  motor1.setPower(gamepad.getLeftAxisY());
 }
 
 
