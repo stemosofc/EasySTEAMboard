@@ -1,38 +1,18 @@
 #include "stemOSboard.h"
-
-
-// Use #define TELEOPERADO for teleop and AUTONOMO for autonomous
-
-#define TELEOPERADO
-
 stemWiFi wifi;
 
 Gamepad gamepad;
 
-Motor motorEsquerdaFrente(Motor::PORTA_1, Motor::REVERSE);
-Motor motorEsquerdaTras(Motor::PORTA_2, Motor::REVERSE);
+Motor motorEsquerda(Motor::PORTA_1, Motor::REVERSE);
+Motor motorDireita(Motor::PORTA_2, Motor::FORWARD);
 
 void setup() {
   Serial.begin(115200);
   wifi.configureWiFiAP();
-
-  delay(100);
-
-  //esp_ipc_call(PRO_CPU_NUM, userCodeTeleopInit, NULL);
-  estado = wifi.waitForStart();
-  Serial.println(estado);
 }
 
 void loop() {
-  String stat = wifi.getEnable();
-
-  #ifdef TELEOPERADO
-    wifi.getGamepadValues();
-  #endif
-
   if(estado) {
-    //esp_ipc_call(PRO_CPU_NUM, userCodeTeleopLoop, NULL);
-    // Código Arcade Drive aqui dentro
     float y = gamepad.getLeftAxisY();
     float turn = gamepad.getRightAxisX();
 
@@ -44,48 +24,13 @@ void loop() {
     frontLeftPower /= maximum;
     backLeftPower /= maximum;
 
-    motorEsquerdaFrente.setPower(frontLeftPower);
-    motorEsquerdaTras.setPower(backLeftPower);
+    motorEsquerda.setPower(frontLeftPower);
+    motorDireita.setPower(backLeftPower);
   }
-  if(stat == "Habilitado") {
+  if(wifi.state == "Habilitado") {
     estado = true;
-  } else if(stat == "Desabilitado") {
+  } else if(wifi.state == "Desabilitado") {
     estado = false;
   }
 }
-
-// =============================================
-//          CÓDIGO-DO-USUÁRIO ABAIXO
-// =============================================
-
-// Código do usuário que executará em loop
-void userCodeTeleopLoop(void * arg) {
-  /*
-  #ifdef TELEOPERADO
-    float y = gamepad.getLeftAxisY();
-    float turn = gamepad.getRightAxisX();
-
-    double frontLeftPower = (y + turn);
-    double backLeftPower = (y - turn);
-
-    double maximum = max(abs(frontLeftPower), abs(backLeftPower));
-
-    frontLeftPower /= maximum;
-    backLeftPower /= maximum;
-
-    motorEsquerdaFrente.setPower(frontLeftPower);
-    motorEsquerdaTras.setPower(backLeftPower);
-  #else 
-    Serial.println("Habilitado Arcade Drive");
-  #endif
-    //esp_ipc_call(APP_CPU_NUM, updateIMU, NULL);
-  */
-}
-
-// Caso você queira utilizar um IMU utilize essa função junto do seu código
-/*
-void updateIMU(void * arg) {
-  imu.update();
-}
-*/
 

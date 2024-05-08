@@ -1,4 +1,4 @@
-#include "Servo.h"
+#include "ServoOS.h"
 
 /**
  * @brief Cria um objeto de Servo
@@ -6,7 +6,7 @@
  * @param [in] entrada a porta na qual o servo esta conectado
  * @return N/A.
  */
-Servo::Servo(PortaServo entrada) {
+ServoOS::ServoOS(PortaServo entrada) {
   switch(entrada) {
     case PortaServo::PORTA_1_SERVO:
       channel = 8;
@@ -18,8 +18,7 @@ Servo::Servo(PortaServo entrada) {
       channel = 10;
       break;
   }
-  ledcSetup(channel, Servo::FREQUENCY, Servo::RESOLUTION);
-  ledcAttachPin(entrada, channel);
+  servo.attach(entrada, channel, 0, 270, 500, 2500);
 }
 
 /**
@@ -28,8 +27,10 @@ Servo::Servo(PortaServo entrada) {
  * @param [in] position define a posição do servo
  * @return N/A.
  */
-void Servo::setPosition(float position) {
-  position = max(-1.f, min(1.f, position));
-  position = map(position, -1.f, 1.f, 0.f, 255.f);
-  ledcWrite(channel, position);
+void ServoOS::setPosition(float position) {
+  servo.write((int)position);
+}
+
+void ServoOS::setSpeed(double speed) {
+  servo.write((int)speed);
 }

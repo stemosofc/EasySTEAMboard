@@ -5,7 +5,7 @@
 #include "stemWiFi.h"
 #include "Gamepad.h"
 #include "Digital.h"
-#include "Servo.h"
+#include "ServoOS.h"
 #include "Analog.h"
 #include "RGBLED.h"
 #include "IMU.h"

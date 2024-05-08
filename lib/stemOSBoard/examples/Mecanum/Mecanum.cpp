@@ -26,14 +26,7 @@ void setup() {
 }
 
 void loop() {
-  String stat = wifi.getEnable();
-
-  #ifdef TELEOPERADO
-    wifi.getGamepadValues();
-  #endif
-
   if(estado) {
-    //esp_ipc_call(PRO_CPU_NUM, userCodeTeleopLoop, NULL);
     float y = gamepad.getLeftAxisY();
     float x = gamepad.getLeftAxisX();
     float turn = gamepad.getRightAxisX();
@@ -50,50 +43,10 @@ void loop() {
     motorDireitaFrente.setPower(frontRightPower);
     motorDireitaTras.setPower(backRightPower);
   }
-  if(stat == "Habilitado") {
+  if(wifi.state == "Habilitado") {
     estado = true;
-  } else if(stat == "Desabilitado") {
+  } else if(wifi.state == "Desabilitado") {
     estado = false;
   }
 }
-
-// =============================================
-//          CÓDIGO-DO-USUÁRIO ABAIXO
-// =============================================
-
-
-void userCodeTeleopInit(void * arg) {
-  // Código do usuário que precisar ser inicializado
-}
-
-// Código do usuário que executará em loop
-void userCodeTeleopLoop(void * arg) {
-  /*
-    float y = gamepad.getLeftAxisY();
-    float x = gamepad.getLeftAxisX();
-    float turn = gamepad.getRightAxisX();
-
-    float denominator = max(abs(y) + abs(x) + abs(turn), 1.f);
-
-    double frontLeftPower = (y + x + turn) / denominator;
-    double backLeftPower = (y - x + turn) / denominator;
-    double frontRightPower = (y - x - turn) / denominator;
-    double backRightPower = (y + x - turn) / denominator;
-
-    motorEsquerdaFrente.setPower(frontLeftPower);
-    motorEsquerdaTras.setPower(backLeftPower);
-    motorDireitaFrente.setPower(frontRightPower);
-    motorDireitaTras.setPower(backRightPower);
-    
-   // esp_ipc_call(APP_CPU_NUM, updateIMU, NULL);
-  */
-
-}
-
-// Caso você queira utilizar um IMU utilize essa função junto do seu código
-/*
-void updateIMU(void * arg) {
-  imu.update();
-}
-*/
 

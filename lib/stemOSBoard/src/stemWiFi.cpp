@@ -16,7 +16,6 @@ void stemWiFi::init() {
       , std::placeholders::_4
       , std::placeholders::_5
       , std::placeholders::_6));
-
     server->addHandler(ws);
     server->begin();
 }

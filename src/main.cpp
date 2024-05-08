@@ -1,13 +1,9 @@
-#include <Arduino.h>
-#include "stemOSBoard.h"
-
-Motor motor1(Motor::PORTA_1, Motor::FORWARD);
-Motor motor2(Motor::PORTA_2, Motor::FORWARD);
-Motor motor3(Motor::PORTA_3, Motor::FORWARD);
-Motor motor4(Motor::PORTA_4, Motor::FORWARD);
-
+#include "stemOSboard.h"
 stemWiFi wifi;
+
 Gamepad gamepad;
+
+ServoOS servo(PortaServo::PORTA_1_SERVO);
 
 void setup() {
   Serial.begin(115200);
@@ -15,11 +11,18 @@ void setup() {
 }
 
 void loop() {
-  motor1.setPower(gamepad.getLeftAxisY());
+  delay(2000);
+  for(double i = 135; i > 0; i -= 1) {
+    servo.setSpeed(i);
+    Serial.println(i);
+    delay(10);
+  }
+  delay(2000);
+    for(double i = 135; i < 270; i += 1) {
+    servo.setSpeed(i);
+    Serial.println(i);
+    delay(10);
+  }
+  delay(2000);
 }
-
-
-
-
-
 
