@@ -3,26 +3,26 @@ stemWiFi wifi;
 
 Gamepad gamepad;
 
-ServoOS servo(PortaServo::PORTA_1_SERVO);
+Motor MotorEsquerdaFrente(Motor::PORTA_1, Motor::REVERSE);
+Motor MotorDireitaTras(Motor::PORTA_2, Motor::FORWARD);
+Motor MotorEsquerdaTras(Motor::PORTA_3, Motor::REVERSE);
+Motor MotorDireitaFrente(Motor::PORTA_4, Motor::FORWARD);
 
 void setup() {
-  Serial.begin(115200);
   wifi.configureWiFiAP();
+  gamepad.applyDeadband(0.02);
 }
 
 void loop() {
-  delay(2000);
-  for(double i = 135; i > 0; i -= 1) {
-    servo.setSpeed(i);
-    Serial.println(i);
-    delay(10);
-  }
-  delay(2000);
-    for(double i = 135; i < 270; i += 1) {
-    servo.setSpeed(i);
-    Serial.println(i);
-    delay(10);
-  }
-  delay(2000);
+  double y = gamepad.getLeftAxisY();
+  double x = -gamepad.getLeftAxisX();
+
+  double powerLeft = y + x;
+  double powerRight = y - x;
+
+  MotorEsquerdaFrente.setPower(powerLeft);
+  MotorEsquerdaTras.setPower(powerLeft);
+  MotorDireitaFrente.setPower(powerRight);
+  MotorDireitaTras.setPower(powerRight);
 }
 
