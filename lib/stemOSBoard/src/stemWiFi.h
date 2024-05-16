@@ -19,11 +19,17 @@ class stemWiFi {
     void cleanupClients();
     String state = "Desabilitado";
   private:
-    const  char* ssid = "Arara";
+    long int PrevTime = 0;
+    long int tempo = 0;
+    long int diffTempo = 0;
+    int c = 0;
+    const  char* ssid = "AraraScan";
     const char* password = "BlueStemOS";
     AsyncWebServer * server;
     AsyncWebSocket * ws;
     void init();
+    static void sendRSSI(void * arg);
+    void initSendRSSI();
     // WiFiServer server;
     // WiFiClient client;
     void errorJson(DeserializationError error);
