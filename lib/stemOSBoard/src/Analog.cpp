@@ -7,12 +7,8 @@
  * @param [in] sensorType - saída ou entrada de dadoss
  * @return N/A.
  */
-Analog::Analog(const int entrada, const int sensorType) {
-  if (sensorType == Analog::SAIDA) {
-    pinMode(Analog::PORTA_ANALOGICA, OUTPUT);
-  } else {
-    pinMode(Analog::PORTA_ANALOGICA, INPUT);
-  }
+Analog::Analog() {
+ 
 }
 
 

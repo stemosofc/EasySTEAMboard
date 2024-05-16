@@ -6,7 +6,7 @@
 
 class Analog {
 public:
-  Analog(const int entrada, const int sensorType);  // Construtor da classe analógica
+  Analog(void);  // Construtor da classe analógica
   int getAnalogInput();                             // Obtém uma entrada analógica do sensor acoplado
   void setAnalogOutput(int duty);                   // Define uma saída analógica
   static const int PORTA_ANALOGICA = 17;            // A única porta de servo na placa
