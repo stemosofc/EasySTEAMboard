@@ -14,24 +14,18 @@ class stemWiFi {
   public:
     stemWiFi(void);
     void configureWiFiAP();
-    JsonDocument handleReceivedMessage(String message);
-    bool waitForStart();
-    void cleanupClients();
     String state = "Desabilitado";
   private:
-    long int PrevTime = 0;
-    long int tempo = 0;
-    long int diffTempo = 0;
-    int c = 0;
     const  char* ssid = "AraraScan";
     const char* password = "BlueStemOS";
     AsyncWebServer * server;
     AsyncWebSocket * ws;
+    JsonDocument handleReceivedMessage(String message);
+    void cleanupClients();
     void init();
+    void setChannel();
     static void sendRSSI(void * arg);
     void initSendRSSI();
-    // WiFiServer server;
-    // WiFiClient client;
     void errorJson(DeserializationError error);
     Gamepad joystick;
     void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,

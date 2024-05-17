@@ -21,15 +21,8 @@ void stemWiFi::init() {
 
 void stemWiFi::configureWiFiAP() {
   led.init();
-  //RGBLED::configureLED();
-  log_i("Definindo modo WiFi", WiFi.mode(WIFI_AP));
 
-  log_i("Iniciando Acess Point", WiFi.softAP(ssid, password));
-
-  log_i("Endereço IP");
-  if(Serial) {
-    Serial.println(WiFi.softAPIP());
-  }
+  setChannel();
 
   init();
 
@@ -37,7 +30,32 @@ void stemWiFi::configureWiFiAP() {
   
   led.CONFIGURE_WIFI();
 
-  ::xTaskCreatePinnedToCore(sendRSSI, "RSSI", 2000, NULL, 4, NULL, tskNO_AFFINITY);
+  // ::xTaskCreatePinnedToCore(sendRSSI, "RSSI", 2000, NULL, 4, NULL, tskNO_AFFINITY);
+}
+
+void stemWiFi::setChannel() {
+  int n = WiFi.scanNetworks();
+  log_d("Scan done");
+  if (n == 0) {
+    log_d("no networks found");
+  } else {
+        int canais[n];
+        int canaisFix[14] = {};
+        log_d("networks found");
+        for (int i = 0; i < n; ++i) {
+            canais[i] = WiFi.channel(i);
+            canaisFix[canais[i]]++;
+        }
+        int low = 20;
+        int channel = 0;
+        for(int i = 1; i < 14; i++) {
+          if(canaisFix[i] < low) {
+            channel = i;
+            low = canaisFix[i];
+          }
+        }
+        log_d("Iniciando AP", WiFi.softAP("Arara", "password", channel));
+    }
 }
 
 JsonDocument stemWiFi::handleReceivedMessage(String message) {
