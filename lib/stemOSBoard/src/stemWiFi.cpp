@@ -30,31 +30,32 @@ void stemWiFi::configureWiFiAP() {
   
   led.CONFIGURE_WIFI();
 
-  // ::xTaskCreatePinnedToCore(sendRSSI, "RSSI", 2000, NULL, 4, NULL, tskNO_AFFINITY);
+  // ::xTaskCreatePinnedToCore(sendRSSI, "AutoChannel", 2000, NULL, 2, NULL, tskNO_AFFINITY);
 }
 
 void stemWiFi::setChannel() {
   int n = WiFi.scanNetworks();
   log_d("Scan done");
   if (n == 0) {
-    log_d("no networks found");
+  log_d("no networks found");
   } else {
-        int canais[n];
-        int canaisFix[14] = {};
-        log_d("networks found");
-        for (int i = 0; i < n; ++i) {
-            canais[i] = WiFi.channel(i);
-            canaisFix[canais[i]]++;
+      int canais[n];
+      int canaisFix[14] = {};
+      log_d("networks found");
+      for (int i = 0; i < n; ++i) {
+          canais[i] = WiFi.channel(i);
+          canaisFix[canais[i]]++;
+      }
+      int low = 20;
+      int channel = 1;
+      for(int i = 1; i < 14; i++) {
+        if(canaisFix[i] < low) {
+          channel = i;
+          low = canaisFix[i];
         }
-        int low = 20;
-        int channel = 0;
-        for(int i = 1; i < 14; i++) {
-          if(canaisFix[i] < low) {
-            channel = i;
-            low = canaisFix[i];
-          }
-        }
-        log_d("Iniciando AP", WiFi.softAP("Arara", "password", channel));
+      }
+      Serial.println(channel);
+      log_d("Iniciando AP", WiFi.softAP(ssid, password, channel));
     }
 }
 
@@ -122,61 +123,11 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 }
 
   void stemWiFi::sendRSSI(void * arg) {
+    const TickType_t delay = 60000 / portTICK_PERIOD_MS;
+    stemWiFi wifi;
     while(1) {
-    int n = WiFi.scanNetworks();
-    Serial.println("Scan done");
-    if (n == 0) {
-        Serial.println("no networks found");
-    } else {
-        Serial.print(n);
-        Serial.println(" networks found");
-        Serial.println("Nr | SSID                             | RSSI | CH | Encryption");
-        for (int i = 0; i < n; ++i) {
-            // Print SSID and RSSI for each network found
-            Serial.printf("%2d",i + 1);
-            Serial.print(" | ");
-            Serial.printf("%-32.32s", WiFi.SSID(i).c_str());
-            Serial.print(" | ");
-            Serial.printf("%4d", WiFi.RSSI(i));
-            Serial.print(" | ");
-            Serial.printf("%2d", WiFi.channel(i));
-            Serial.print(" | ");
-            switch (WiFi.encryptionType(i))
-            {
-            case WIFI_AUTH_OPEN:
-                Serial.print("open");
-                break;
-            case WIFI_AUTH_WEP:
-                Serial.print("WEP");
-                break;
-            case WIFI_AUTH_WPA_PSK:
-                Serial.print("WPA");
-                break;
-            case WIFI_AUTH_WPA2_PSK:
-                Serial.print("WPA2");
-                break;
-            case WIFI_AUTH_WPA_WPA2_PSK:
-                Serial.print("WPA+WPA2");
-                break;
-            case WIFI_AUTH_WPA2_ENTERPRISE:
-                Serial.print("WPA2-EAP");
-                break;
-            case WIFI_AUTH_WPA3_PSK:
-                Serial.print("WPA3");
-                break;
-            case WIFI_AUTH_WPA2_WPA3_PSK:
-                Serial.print("WPA2+WPA3");
-                break;
-            case WIFI_AUTH_WAPI_PSK:
-                Serial.print("WAPI");
-                break;
-            default:
-                Serial.print("unknown");
-            }
-            Serial.println();
-            delay(10);
-        }
-    }
+      vTaskDelay(delay);
+      wifi.setChannel();
     }
   }
 

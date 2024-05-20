@@ -17,7 +17,7 @@ class stemWiFi {
     String state = "Desabilitado";
   private:
     const  char* ssid = "AraraScan";
-    const char* password = "BlueStemOS";
+    const char* password = "password";
     AsyncWebServer * server;
     AsyncWebSocket * ws;
     JsonDocument handleReceivedMessage(String message);
