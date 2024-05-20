@@ -14,10 +14,11 @@ class stemWiFi {
   public:
     stemWiFi(void);
     void configureWiFiAP();
-    String state = "Desabilitado";
+    String estado = "Desabilitado";
   private:
-    const  char* ssid = "AraraScan";
+    const  char* ssid = "AraraBancada";
     const char* password = "password";
+    int prevChannel = 0;
     AsyncWebServer * server;
     AsyncWebSocket * ws;
     JsonDocument handleReceivedMessage(String message);

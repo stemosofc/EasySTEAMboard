@@ -21,6 +21,7 @@ void stemWiFi::init() {
 
 void stemWiFi::configureWiFiAP() {
   led.init();
+  led.CONFIGURE_WIFI();
 
   setChannel();
 
@@ -28,9 +29,7 @@ void stemWiFi::configureWiFiAP() {
 
   delay(500);
   
-  led.CONFIGURE_WIFI();
-
-  // ::xTaskCreatePinnedToCore(sendRSSI, "AutoChannel", 2000, NULL, 2, NULL, tskNO_AFFINITY);
+  led.NO_DS();
 }
 
 void stemWiFi::setChannel() {
@@ -55,7 +54,10 @@ void stemWiFi::setChannel() {
         }
       }
       Serial.println(channel);
-      log_d("Iniciando AP", WiFi.softAP(ssid, password, channel));
+      if(channel != prevChannel) {
+        log_i("Iniciando AP", WiFi.softAP(ssid, password, channel));
+        prevChannel = channel;
+      }
     }
 }
 
@@ -90,15 +92,14 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       led.OK();
       break;
     case WS_EVT_DISCONNECT:
-      ws->cleanupClients();
+      // ws->cleanupClients(1);
       log_d("WebSocket client disconnected");
-      led.CONFIGURE_WIFI();
+      led.NO_DS();
       break;
     case WS_EVT_DATA:
       handleWebSocketMessage(arg, data, len);
       break;
     case WS_EVT_PONG:
-      log_d("Pong recebido");
       break;
     case WS_EVT_ERROR:
       led.ERRO();
@@ -116,8 +117,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     JsonDocument jon;                
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
-    String state = jon["Estado"]; // BUG do vscode?
-    this->state = state;
+    String state = jon["Estado"]; 
     Gamepad::gamepad = jon;
   }
 }
