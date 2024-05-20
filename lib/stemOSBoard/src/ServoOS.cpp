@@ -18,11 +18,11 @@ ServoOS::ServoOS(PortaServo entrada) {
       channel = 10;
       break;
   }
-  servo.attach(entrada, channel, 0, 270, 500, 2500);
+  servo.attach(entrada, channel, ANGLE_MIN, ANGLE_MAX, MIN_PULSE, MAX_PULSE);
 }
 
 /**
- * @brief Cria um objeto de Servo
+ * @brief Define a posição do servo
  *
  * @param [in] position define a posição do servo
  * @return N/A.
@@ -31,6 +31,14 @@ void ServoOS::setPosition(float position) {
   servo.write((int)position);
 }
 
+/**
+ * @brief Define a velocidade do servo no modo contínuo
+ *
+ * @param [in] speed define a posição do servo
+ * @return N/A.
+ */
 void ServoOS::setSpeed(double speed) {
-  servo.write((int)speed);
+  speed = max(0.0, speed);
+  int vel = speed * ANGLE_MAX;
+  servo.write(vel);
 }
