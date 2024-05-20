@@ -12,14 +12,19 @@ public:
   void ERRO();            // Sinaliza erro no código (Vermelho e preto)
   void CONFIGURE_WIFI();  // Acesso enquanto estivermos configurando WiFi
   void OK();   
+  void NO_DS();
 private:
   static const int PINO = 12;         // Pino GPIO do LED
   static const int CHANNEL = 0;       // Canal PWM
   static const int LEDS_COUNT = 8;
-  int AZUL[3] = {0, 0, 128};
-  int VERMELHO[3] = {0, 0, 255};
-  int AMARELO[3] = {255,215,0};
-  int VERDE[3] = 	{0,255,0};
+  static void CW(void * arg);
+  void STOP();
+  static int AZUL[3];
+  static int VERMELHO[3];
+  static int AMARELO[3];
+  static int VERDE[3];
+  static int ROXO[3];
+  static TaskHandle_t LED_HANDLER;
   static Freenove_ESP32_WS2812 fita;
 };
 #endif
