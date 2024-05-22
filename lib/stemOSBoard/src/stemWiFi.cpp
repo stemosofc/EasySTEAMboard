@@ -1,5 +1,4 @@
 #include "stemWiFi.h"
-RGBLED led;
 
 stemWiFi::stemWiFi() {
 
@@ -20,23 +19,22 @@ void stemWiFi::init() {
 }
 
 void stemWiFi::configureWiFiAP() {
-  led.init();
-  led.CONFIGURE_WIFI();
+  RGBLED::init();
+  RGBLED::CONFIGURE_WIFI();
+
+  WiFi.onEvent(std::bind(&stemWiFi::onEventWiFi, this, std::placeholders::_1));
 
   setChannel();
 
   init();
-
-  delay(500);
   
-  led.NO_DS();
+  RGBLED::NO_DS();
 }
 
 void stemWiFi::setChannel() {
   int n = WiFi.scanNetworks();
-  log_d("Scan done");
   if (n == 0) {
-  log_d("no networks found");
+    log_d("no networks found");
   } else {
       int canais[n];
       int canaisFix[14] = {};
@@ -53,12 +51,8 @@ void stemWiFi::setChannel() {
           low = canaisFix[i];
         }
       }
-      Serial.println(channel);
-      if(channel != prevChannel) {
-        log_i("Iniciando AP", WiFi.softAP(ssid, password, channel));
-        prevChannel = channel;
-      }
-    }
+  WiFi.softAP(ssid, password, channel);
+  }
 }
 
 JsonDocument stemWiFi::handleReceivedMessage(String message) {
@@ -88,13 +82,14 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
  void *arg, uint8_t *data, size_t len) {
   switch (type) {
     case WS_EVT_CONNECT:
+      id = client->id();
       log_d("WebSocket client connected");
-      led.OK();
+      RGBLED::OK();
       break;
     case WS_EVT_DISCONNECT:
-      // ws->cleanupClients(1);
+      estado["Estado"] = "Desabilitado";
       log_d("WebSocket client disconnected");
-      led.NO_DS();
+      RGBLED::NO_DS();
       break;
     case WS_EVT_DATA:
       handleWebSocketMessage(arg, data, len);
@@ -102,13 +97,36 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
     case WS_EVT_PONG:
       break;
     case WS_EVT_ERROR:
-      led.ERRO();
+      estado["Estado"] = "Desabilitado";
+      RGBLED::ERRO();
       break;
   }
 }
 
-void stemWiFi::cleanupClients() {
-  ws->cleanupClients();
+void stemWiFi::onEventWiFi(WiFiEvent_t event){
+    switch (event) {
+        case ARDUINO_EVENT_WIFI_READY: 
+            break;
+        case ARDUINO_EVENT_WIFI_SCAN_DONE:
+            log_d("Scan Done");
+            break;
+        case ARDUINO_EVENT_WIFI_AP_START:
+            break;
+        case ARDUINO_EVENT_WIFI_AP_STOP:
+            break;
+        case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
+            break;
+        case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
+            estado["Estado"] = "Desabilitado";
+            if(ws->hasClient(id)) {
+              RGBLED::ERRO();
+              ws->closeAll();         
+            }
+            break;
+        case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
+            break;
+        default: break;
+    }
 }
 
 void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
@@ -117,17 +135,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     JsonDocument jon;                
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
-    String state = jon["Estado"]; 
+    estado = jon; 
     Gamepad::gamepad = jon;
   }
 }
-
-  void stemWiFi::sendRSSI(void * arg) {
-    const TickType_t delay = 60000 / portTICK_PERIOD_MS;
-    stemWiFi wifi;
-    while(1) {
-      vTaskDelay(delay);
-      wifi.setChannel();
-    }
-  }
-
