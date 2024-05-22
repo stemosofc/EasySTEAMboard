@@ -9,9 +9,15 @@
 #include "Analog.h"
 #include "RGBLED.h"
 #include "IMU.h"
-#include "RGBLED.h"
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <esp_ipc.h>
-bool estado = false;
+
+class Arara {
+    private:
+    public:
+        virtual void init() = 0;
+        virtual void loop() = 0;
+};
+
 #endif
