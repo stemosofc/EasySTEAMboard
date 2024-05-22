@@ -1,28 +1,47 @@
-#include "stemOSboard.h"
+#include "stemOSBoard.h"
+#include "UserCode.h"
+
+UserClass UserCode;
 stemWiFi wifi;
+TaskHandle_t handlerUser;
 
-Gamepad gamepad;
+void initUser(void * arg) {
+  UserCode.init();
+  vTaskDelete(NULL);
+}
 
-Motor MotorEsquerdaFrente(Motor::PORTA_1, Motor::REVERSE);
-Motor MotorDireitaTras(Motor::PORTA_2, Motor::FORWARD);
-Motor MotorEsquerdaTras(Motor::PORTA_3, Motor::REVERSE);
-Motor MotorDireitaFrente(Motor::PORTA_4, Motor::FORWARD);
+void loopUser(void * arg) {
+  TickType_t delay = 20 / portTICK_PERIOD_MS;
+  while(1) {
+    UserCode.loop();
+    vTaskDelay(delay);
+  }
+}
+
 
 void setup() {
+  Serial.begin(115200);
+
   wifi.configureWiFiAP();
-  gamepad.applyDeadband(0.02);
+
+  ::xTaskCreatePinnedToCore(initUser, "InitUser", 5000, NULL, 4, &handlerUser, tskNO_AFFINITY);
+  ::xTaskCreatePinnedToCore(loopUser, "LoopUser", 10000, NULL, 4, &handlerUser, tskNO_AFFINITY);
+}
+
+void DISABLE() {
+  for(int i = 0; i <= 10; i++) {
+    ledcWrite(i, 0);
+  }
 }
 
 void loop() {
-  double y = gamepad.getLeftAxisY();
-  double x = -gamepad.getLeftAxisX();
-
-  double powerLeft = y + x;
-  double powerRight = y - x;
-
-  MotorEsquerdaFrente.setPower(powerLeft);
-  MotorEsquerdaTras.setPower(powerLeft);
-  MotorDireitaFrente.setPower(powerRight);
-  MotorDireitaTras.setPower(powerRight);
+  String estado = wifi.estado["Estado"];
+  if(estado == "Habilitado") {
+    vTaskResume(handlerUser);
+  } else {
+    vTaskSuspend(handlerUser);
+    // DISABLE();
+  }
 }
+
 
