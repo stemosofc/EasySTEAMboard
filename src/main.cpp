@@ -11,10 +11,10 @@ void initUser(void * arg) {
 }
 
 void loopUser(void * arg) {
-  TickType_t delay = 20 / portTICK_PERIOD_MS;
+  TickType_t delay = 500 / portTICK_PERIOD_MS;
+  vTaskDelay(delay);
   while(1) {
     UserCode.loop();
-    vTaskDelay(delay);
   }
 }
 
