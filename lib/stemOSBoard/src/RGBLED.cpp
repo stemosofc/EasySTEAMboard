@@ -4,10 +4,6 @@ Freenove_ESP32_WS2812 RGBLED::fita = Freenove_ESP32_WS2812(LEDS_COUNT, PINO, CHA
 
 TaskHandle_t RGBLED::LED_HANDLER = NULL;
 
-RGBLED::RGBLED() { 
-
-}
-
 void RGBLED::init() {
   fita.begin();
 	fita.setBrightness(10);	
@@ -38,10 +34,6 @@ void RGBLED::OK() {
 
 void RGBLED::setColor(int cor[3]) {
   fita.setAllLedsColor(cor[0], cor[1], cor[2]);
-}
-
-void RGBLED::STOP() {
-
 }
 
 void RGBLED::CONFIGURE_WIFI_THREAD(void * arg) {
