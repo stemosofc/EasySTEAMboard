@@ -5,12 +5,9 @@
 #include <freertos/task.h>
 #include <esp_ipc.h>
 #include "AraraConfig.h"
-<<<<<<< Updated upstream
 #include "esp_check.h"
 #include "esp_err.h"
 #include "esp_debug_helpers.h"
-=======
->>>>>>> Stashed changes
 
 UserClass UserCode;
 stemWiFi wifi;
@@ -25,7 +22,7 @@ void loopUser(void * arg) {
   TickType_t delay = 500 / portTICK_PERIOD_MS;
   vTaskDelay(delay);
   while(1) {
-    UserCode.loop();
+      UserCode.loop();
   }
 }
 
@@ -64,7 +61,7 @@ void __real_esp_panic_handler(void*);
 void __wrap_esp_panic_handler(void* info) 
 {
 
-  esp_rom_printf("Falhou");
+  esp_rom_printf("Um erro ocorreu \n");
   // Call the original panic handler function to finish processing this error (creating a core dump for example...)
   __real_esp_panic_handler(info);
 }

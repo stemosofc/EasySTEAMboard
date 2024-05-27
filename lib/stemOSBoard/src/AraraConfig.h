@@ -43,6 +43,7 @@ struct {
     const int PORTA_3 = 27;
 } Servo;
 
+struct {
 int PORTAS_TOTAIS[11] = {Motor.PORTA_1[0], Motor.PORTA_1[1],
                       Motor.PORTA_2[0], Motor.PORTA_2[1],
                       Motor.PORTA_3[0], Motor.PORTA_3[1],
@@ -51,5 +52,7 @@ int PORTAS_TOTAIS[11] = {Motor.PORTA_1[0], Motor.PORTA_1[1],
                       Servo.PORTA_3};
 
 int QuantPortas = sizeof(PORTAS_TOTAIS) / sizeof(int);
+} Portas;
+
 
 #endif
