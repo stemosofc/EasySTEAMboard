@@ -5,9 +5,12 @@
 #include <freertos/task.h>
 #include <esp_ipc.h>
 #include "AraraConfig.h"
+<<<<<<< Updated upstream
 #include "esp_check.h"
 #include "esp_err.h"
 #include "esp_debug_helpers.h"
+=======
+>>>>>>> Stashed changes
 
 UserClass UserCode;
 stemWiFi wifi;
@@ -35,7 +38,7 @@ void setup() {
 }
 
 void DISABLE() {
-  for(int i = 0; i <= QuantPortas; i++) {
+  for(int i = 0; i <= Portas.QuantPortas; i++) {
     digitalWrite(i, LOW);
   }
 }
@@ -50,4 +53,23 @@ void loop() {
   }
 }
 
+
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+void __real_esp_panic_handler(void*);
+void __wrap_esp_panic_handler(void* info) 
+{
+
+  esp_rom_printf("Falhou");
+  // Call the original panic handler function to finish processing this error (creating a core dump for example...)
+  __real_esp_panic_handler(info);
+}
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
