@@ -1,6 +1,6 @@
 #ifndef AraraConfig_h
 #define AraraConfig_h
-
+#define FORMAT_LITTLEFS_IF_FAILED true
 // EN: Preserve debugging information across device software restarts
 // RU: Сохранять отладочную информацию при программном перезапуске устройства
 #define CONFIG_RESTART_DEBUG_INFO 1
@@ -110,8 +110,6 @@ void __wrap_esp_panic_handler(void* info)
 #ifdef __cplusplus
 } // extern "C"
 #endif
-
-#define CONFIG_MESSAGE_TG_VERSION_TRACE "🔸 <b>O dispositivo está em execução</b>\n\n<code>Versão do firmware: </code><b>%s</b>\n<code>Motivo para reiniciar: </code >< b>%s</b>\n<code>CPU0: </code><i>%s</i>\n<code>CPU1: </code><i>%s</i> \n <code>HEAP: </code><i>%s</i>\n<code>TRACE: </code><i>%s</i>"
 
 struct {
     const int PORTA_1[2] = {4, 13};
