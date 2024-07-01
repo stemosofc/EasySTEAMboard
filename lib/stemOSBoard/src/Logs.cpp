@@ -4,7 +4,7 @@ Logs::Logs() {
   ESP_ERROR_CHECK_WITHOUT_ABORT(startFileSystem());
 }
 
-void Logs::listDir(fs::FS &fs, const char * dirname, uint8_t levels){
+void Logs::listDir(const char * dirname, uint8_t levels){
     Serial.printf("Listing directory: %s\r\n", dirname);
 
     File root = fs.open(dirname);
@@ -23,7 +23,7 @@ void Logs::listDir(fs::FS &fs, const char * dirname, uint8_t levels){
             Serial.print("  DIR : ");
             Serial.println(file.name());
             if(levels){
-                listDir(fs, file.path(), levels -1);
+                listDir(file.path(), levels -1);
             }
         } else {
             Serial.print("  FILE: ");
@@ -35,15 +35,11 @@ void Logs::listDir(fs::FS &fs, const char * dirname, uint8_t levels){
     }
 }
 
-void Logs::findFile(const char * path) {
+void Logs::findFile(const char * path, uint8_t level=0) {
 
 }
 
-void Logs::findDir(const char * path) {
-
-}
-
-void Logs::createDir(fs::FS &fs, const char * path){
+void Logs::createDir(const char * path){
   Serial.printf("Creating Dir: %s\n", path);
   if(fs.mkdir(path)){
     Serial.println("Dir created");
@@ -52,7 +48,7 @@ void Logs::createDir(fs::FS &fs, const char * path){
   }
 }
 
-void Logs::removeDir(fs::FS &fs, const char * path){
+void Logs::removeDir(const char * path){
   Serial.printf("Removing Dir: %s\n", path);
   if(fs.rmdir(path)){
     Serial.println("Dir removed");
@@ -61,7 +57,7 @@ void Logs::removeDir(fs::FS &fs, const char * path){
   }
 }
 
-void Logs::readFile(fs::FS &fs, const char * path){
+void Logs::readFile(const char * path){
   Serial.printf("Reading file: %s\r\n", path);
 
   File file = fs.open(path);
@@ -77,7 +73,7 @@ void Logs::readFile(fs::FS &fs, const char * path){
   file.close();
 }
 
-void Logs::writeToFile(fs::FS &fs, const char * path, const char * message){
+void Logs::writeToFile(const char * path, const char * message){
   Serial.printf("Writing file: %s\r\n", path);
 
   File file = fs.open(path, FILE_WRITE);
@@ -93,7 +89,7 @@ void Logs::writeToFile(fs::FS &fs, const char * path, const char * message){
   file.close();
 }
 
-void Logs::appendToFile(fs::FS &fs, const char * path, const char * message){
+void Logs::appendToFile(const char * path, const char * message){
   Serial.printf("Appending to file: %s\r\n", path);
 
   File file = fs.open(path, FILE_APPEND);
@@ -109,7 +105,7 @@ void Logs::appendToFile(fs::FS &fs, const char * path, const char * message){
   file.close();
 }
 
-void Logs::renameFile(fs::FS &fs, const char * path1, const char * path2){
+void Logs::renameFile(const char * path1, const char * path2){
   Serial.printf("Renaming file %s to %s\r\n", path1, path2);
   if (fs.rename(path1, path2)) {
     Serial.println("- file renamed");
@@ -118,7 +114,7 @@ void Logs::renameFile(fs::FS &fs, const char * path1, const char * path2){
   }
 }
 
-void Logs::deleteFile(fs::FS &fs, const char * path){
+void Logs::deleteFile(const char * path){
   Serial.printf("Deleting file: %s\r\n", path);
   if(fs.remove(path)){
     Serial.println("- file deleted");

@@ -9,19 +9,20 @@
 
 class Logs {
     private:
-        fs::FS fs = LittleFS;
+        static fs::FS fs;
+        static File root;
     public:
         Logs(void);
-        void listDir(fs::FS &fs, const char * dirname, uint8_t levels);
-        void createDir(fs::FS &fs, const char * path);
-        void removeDir(fs::FS &fs, const char * path);
-        void readFile(fs::FS &fs, const char * path);
-        void writeToFile(fs::FS &fs, const char * path, const char * message);
-        void appendToFile(fs::FS &fs, const char * path, const char * message);
-        void renameFile(fs::FS &fs, const char * path1, const char * path2);
-        void deleteFile(fs::FS &fs, const char * path);
-        void findFile(const char * path);
-        void findDir(const char * path);
+        void listDir(const char * dirname, uint8_t levels);
+        void createDir(const char * path);
+        void removeDir(const char * path);
+        void readFile(const char * path);
+        void writeToFile(const char * path, const char * message);
+        void appendToFile(const char * path, const char * message);
+        void renameFile(const char * path1, const char * path2);
+        void deleteFile(const char * path);
+        void findFile(const char * PathFile, uint8_t level=0);
+        bool findDir(const char * path);
         // void timeReadFile();
         esp_err_t startFileSystem();
 };
