@@ -119,8 +119,8 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
             estado["Estado"] = "Desabilitado";
             if(ws->hasClient(id)) {
-              RGBLED::ERRO();
-              ws->closeAll();         
+              ws->closeAll(); 
+              RGBLED::ERRO();   
             }
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:

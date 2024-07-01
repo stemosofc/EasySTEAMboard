@@ -35,7 +35,7 @@ void Logs::listDir(const char * dirname, uint8_t levels){
     }
 }
 
-void Logs::findFile(const char * path, uint8_t level=0) {
+void Logs::findFile(const char * path, uint8_t level) {
 
 }
 
