@@ -5,7 +5,7 @@
 #include <freertos/task.h>
 #include <esp_ipc.h>
 #include "AraraConfig.h"
-#include "Logs.h"
+
 UserClass UserCode;
 stemWiFi wifi;
 TaskHandle_t handlerUserInit;
@@ -32,25 +32,8 @@ void loopUser(void * arg) {
   }
 }
 
-void saveLog(void * arg) {
-  Logs logs = Logs();
-
-  
-  for(int i = 0; i < 28; i++) {
-    _debug_info.backtrace[i];
-  }
-  
-
-  vTaskDelete(NULL);
-}
-
 void setup() {
   Serial.begin(115200);
-  #if CONFIG_RESTART_DEBUG_INFO
-    esp_register_shutdown_handler(debugUpdate);
-  #endif 
-
-  ::xTaskCreatePinnedToCore(saveLog, "Logs", 5000, NULL, 4, NULL, tskNO_AFFINITY);
 
   wifi.configureWiFiAP();
 
