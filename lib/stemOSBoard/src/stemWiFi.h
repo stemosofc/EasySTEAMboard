@@ -14,7 +14,6 @@ class stemWiFi {
   public:
     stemWiFi(void);
     void configureWiFiAP();
-    JsonDocument estado;
   private:
     int id = -1;
     const  char* ssid = "AraraBancada";

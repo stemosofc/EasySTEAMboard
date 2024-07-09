@@ -87,7 +87,6 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       RGBLED::OK();
       break;
     case WS_EVT_DISCONNECT:
-      estado["Estado"] = "Desabilitado";
       log_d("WebSocket client disconnected");
       RGBLED::NO_DS();
       break;
@@ -97,7 +96,6 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
     case WS_EVT_PONG:
       break;
     case WS_EVT_ERROR:
-      estado["Estado"] = "Desabilitado";
       RGBLED::ERRO();
       break;
   }
@@ -117,7 +115,6 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
         case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
-            estado["Estado"] = "Desabilitado";
             if(ws->hasClient(id)) {
               ws->closeAll(); 
               RGBLED::ERRO();   
@@ -132,10 +129,11 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
 void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
   AwsFrameInfo *info = (AwsFrameInfo*)arg;
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
-    JsonDocument jon;                
+    JsonDocument jon;              
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
-    estado = jon; 
     Gamepad::gamepad = jon;
   }
 }
+
+

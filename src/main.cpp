@@ -8,7 +8,16 @@
 #include "Logs.h"
 UserClass UserCode;
 stemWiFi wifi;
-TaskHandle_t handlerUser;
+TaskHandle_t handlerUserInit;
+TaskHandle_t handlerUserLoop;
+
+
+void DISABLE() {
+  for(int i = 0; i <= Portas.QuantPortas; i++) {
+    ledcWrite(i, LOW);
+  }
+}
+
 
 void initUser(void * arg) {
   UserCode.init();
@@ -36,7 +45,7 @@ void saveLog(void * arg) {
 }
 
 void setup() {
-
+  Serial.begin(115200);
   #if CONFIG_RESTART_DEBUG_INFO
     esp_register_shutdown_handler(debugUpdate);
   #endif 
@@ -45,23 +54,13 @@ void setup() {
 
   wifi.configureWiFiAP();
 
-  ::xTaskCreatePinnedToCore(initUser, "InitUser", 5000, NULL, 4, &handlerUser, tskNO_AFFINITY);
-  ::xTaskCreatePinnedToCore(loopUser, "LoopUser", 10000, NULL, 4, &handlerUser, tskNO_AFFINITY);
+  ::xTaskCreatePinnedToCore(initUser, "InitUser", 5000, NULL, 2, &handlerUserInit, tskNO_AFFINITY);
+  ::xTaskCreatePinnedToCore(loopUser, "LoopUser", 10000, NULL, 2, &handlerUserLoop, tskNO_AFFINITY);
 }
 
-void DISABLE() {
-  for(int i = 0; i <= Portas.QuantPortas; i++) {
-    digitalWrite(i, LOW);
-  }
-}
 
 void loop() {
-  String estado = wifi.estado["Estado"];
-  if(estado == "Habilitado") {
-    vTaskResume(handlerUser);
-  } else {
-    vTaskSuspend(handlerUser);
-    DISABLE();
-  }
+
 }
+
 
