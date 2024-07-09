@@ -11,14 +11,6 @@ stemWiFi wifi;
 TaskHandle_t handlerUserInit;
 TaskHandle_t handlerUserLoop;
 
-
-void DISABLE() {
-  for(int i = 0; i <= Portas.QuantPortas; i++) {
-    ledcWrite(i, LOW);
-  }
-}
-
-
 void initUser(void * arg) {
   UserCode.init();
   vTaskDelete(NULL);
