@@ -8,12 +8,6 @@
 #include "Analog.h"
 #include "IMU.h"
 #include "PID.h"
-
-class Arara {
-    private:
-    public:
-        virtual void init() = 0;
-        virtual void loop() = 0;
-};
+#include "stemWiFi.h"
 
 #endif
