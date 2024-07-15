@@ -11,6 +11,19 @@
 // RU: Глубина сохранения стека процессора при перезапуске. 0 - не сохранять
 #define CONFIG_RESTART_DEBUG_STACK_DEPTH 28
 
+#if CONFIG_RESTART_DEBUG_INFO && (CONFIG_RESTART_DEBUG_STACK_DEPTH > 0)
+#include "esp_types.h"
+#include "esp_attr.h"
+#include "esp_err.h"
+#include "esp_debug_helpers.h"
+#include "soc/soc_memory_layout.h"
+#include "esp_heap_caps.h"
+#include "soc/cpu.h" 
+#include "esp_sntp.h"
+#include "esp_system.h"
+#include <string.h>
+#endif // CONFIG_RESTART_STACK_DEPTH
+
 #if CONFIG_RESTART_DEBUG_INFO
     typedef struct {
     size_t heap_total;
@@ -28,15 +41,6 @@
 __NOINIT_ATTR static re_restart_debug_t _debug_info;
 #endif // CONFIG_RESTART_DEBUG_INFO
 
-#if CONFIG_RESTART_DEBUG_INFO && (CONFIG_RESTART_DEBUG_STACK_DEPTH > 0)
-#include "esp_types.h"
-#include "esp_attr.h"
-#include "esp_err.h"
-#include "esp_debug_helpers.h"
-#include "soc/soc_memory_layout.h"
-#include "soc/cpu.h" 
-#include "esp_system.h"
-#endif // CONFIG_RESTART_STACK_DEPTH
 #if CONFIG_RESTART_DEBUG_INFO
 void IRAM_ATTR debugHeapUpdate()
 {
@@ -100,8 +104,7 @@ extern "C"
 void __real_esp_panic_handler(void*);
 void __wrap_esp_panic_handler(void* info) 
 {
-
-  esp_rom_printf("Um erro ocorreu \n");
+  esp_rom_printf("Panic has been triggered by the program!\n");
   debugBacktraceUpdate();
   // Call the original panic handler function to finish processing this error (creating a core dump for example...)
   __real_esp_panic_handler(info);
