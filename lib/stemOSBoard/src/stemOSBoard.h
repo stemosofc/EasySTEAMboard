@@ -9,5 +9,5 @@
 #include "IMU.h"
 #include "PID.h"
 #include "stemWiFi.h"
-
+#include "AraraConfig.h"
 #endif
