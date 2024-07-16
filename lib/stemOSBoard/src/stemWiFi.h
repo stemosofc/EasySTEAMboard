@@ -16,7 +16,7 @@ class stemWiFi {
     void configureWiFiAP();
   private:
     int id = -1;
-    const  char* ssid = "AraraBancada";
+    const  char* ssid = "Arara_";
     const char* password = "password";
     AsyncWebServer * server;
     AsyncWebSocket * ws;

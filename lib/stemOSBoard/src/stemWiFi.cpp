@@ -51,7 +51,7 @@ void stemWiFi::setChannel() {
           low = canaisFix[i];
         }
       }
-  WiFi.softAP(ssid, password, channel);
+  WiFi.softAP(ssid + WiFi.macAddress(), password, channel);
   }
 }
 
