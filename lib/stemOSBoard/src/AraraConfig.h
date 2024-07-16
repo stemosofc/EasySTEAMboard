@@ -120,7 +120,7 @@ struct {
     const int PORTA_3[2] = {23, 25};
     const int PORTA_4[2] = {32, 33};
     
-} Motor;
+} MotorPorta;
 
 struct {
     const int PORTA_1 = 2;
@@ -129,10 +129,10 @@ struct {
 } Servo;
 
 struct {
-int PORTAS_TOTAIS[11] = {Motor.PORTA_1[0], Motor.PORTA_1[1],
-                      Motor.PORTA_2[0], Motor.PORTA_2[1],
-                      Motor.PORTA_3[0], Motor.PORTA_3[1],
-                      Motor.PORTA_4[0], Motor.PORTA_4[1],
+int PORTAS_TOTAIS[11] = {MotorPorta.PORTA_1[0], MotorPorta.PORTA_1[1],
+                      MotorPorta.PORTA_2[0], MotorPorta.PORTA_2[1],
+                      MotorPorta.PORTA_3[0], MotorPorta.PORTA_3[1],
+                      MotorPorta.PORTA_4[0], MotorPorta.PORTA_4[1],
                       Servo.PORTA_1, Servo.PORTA_2, 
                       Servo.PORTA_3};
 
