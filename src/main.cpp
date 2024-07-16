@@ -2,9 +2,6 @@
 #include "stemOSBoard.h"
 
 
-stemWiFi wifi;
-
-
 void setup() {
   wifi.configureWiFiAP();
 }
