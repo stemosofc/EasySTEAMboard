@@ -4,14 +4,13 @@
 #include "ESP32Encoder.h"
 
 // Classe wrapper de encoder
-class EncoderESP {
+class Encoder {
   public:
-    EncoderESP(int entrada); // Construtor da classe encoder
-    EncoderESP(void); // Construtor vazio
+    Encoder(int entrada); // Construtor da classe encoder
+    Encoder(void); // Construtor vazio
     double getPosition(); // Obtém a posição do encoder
     void setPosition(int position); // Define a posição do encoder
     void setPositionFactor(double factor); // Define o fator de conversão do encoder
-    void update(); // Atualiza o encoder
     ESP32Encoder encoder; // Objeto do encoder da bibilioteca
     static const int PORTA_1_ENCODER = 1;
     static const int PORTA_2_ENCODER = 2;

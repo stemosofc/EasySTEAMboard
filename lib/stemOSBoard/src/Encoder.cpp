@@ -1,4 +1,4 @@
-#include "EncoderESP.h"
+#include "Encoder.h"
 
 /**
  * @brief Cria um objeto de Encoder
@@ -6,7 +6,7 @@
  * @param [in] entrada - porta que o encoder está conectado
  * @return N/A.
  */
-EncoderESP::EncoderESP(int entrada) {
+Encoder::Encoder(int entrada) {
   switch(entrada) {
     case PORTA_1_ENCODER:
       pinAEncoder = 5;
@@ -23,7 +23,7 @@ EncoderESP::EncoderESP(int entrada) {
    encoder.attachFullQuad(pinBEncoder, pinAEncoder);
    this->encoder = encoder;
 }
-EncoderESP::EncoderESP() {
+Encoder::Encoder() {
   
 }
 
@@ -33,7 +33,7 @@ EncoderESP::EncoderESP() {
  * @param [void]
  * @return double.
  */
-double EncoderESP::getPosition() {
+double Encoder::getPosition() {
   return encoder.getCount() * factor;
 }
 
@@ -43,7 +43,7 @@ double EncoderESP::getPosition() {
  * @param [in] position - posição a ser definida
  * @return double.
  */
-void EncoderESP::setPosition(int position) {
+void Encoder::setPosition(int position) {
   encoder.setCount(position / factor);
 }
 
@@ -53,6 +53,6 @@ void EncoderESP::setPosition(int position) {
  * @param [in] factor - define uma posição para o encoder
  * @return double.
  */
-void EncoderESP::setPositionFactor(double factor) {
+void Encoder::setPositionFactor(double factor) {
     this->factor = factor;
 }
