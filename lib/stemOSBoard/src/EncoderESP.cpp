@@ -17,9 +17,7 @@ EncoderESP::EncoderESP(int entrada) {
       pinBEncoder = 16;
       break;
     default:
-      if(Serial) {
-        Serial.println("Encoder não pode ser inicializado");
-      }
+      log_e("Encoder não pode ser inicializado");
   }
    ESP32Encoder encoder;
    encoder.attachFullQuad(pinBEncoder, pinAEncoder);
@@ -30,7 +28,7 @@ EncoderESP::EncoderESP() {
 }
 
 /**
- * @brief Define a velocidade do motor
+ * @brief Retorna a posição do encoder
  *
  * @param [void]
  * @return double.
@@ -40,9 +38,9 @@ double EncoderESP::getPosition() {
 }
 
 /**
- * @brief Define a velocidade do motor
+ * @brief Define a posição do encoder
  *
- * @param [in] position - define uma posição para o encoder
+ * @param [in] position - posição a ser definida
  * @return double.
  */
 void EncoderESP::setPosition(int position) {
@@ -50,7 +48,7 @@ void EncoderESP::setPosition(int position) {
 }
 
 /**
- * @brief Define a velocidade do motor
+ * @brief Define o fator de conversão utilizado no cálculo do encoder
  *
  * @param [in] factor - define uma posição para o encoder
  * @return double.

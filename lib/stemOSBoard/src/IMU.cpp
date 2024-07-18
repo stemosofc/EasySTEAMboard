@@ -136,7 +136,7 @@ void IMU::calcule() {
 }
 
 /**
- * @brief Retorna o valor do Roll (Eixo X) do IMU
+ * @brief Retorna o valor do roll (Eixo X) do IMU
  *
  * @param [void]
  * @return double.
@@ -150,7 +150,7 @@ double IMU::getRoll() {
 }
 
 /**
- * @brief Retorna o valor do Roll (Eixo Y) do IMU
+ * @brief Retorna o valor do pitch (Eixo Y) do IMU
  *
  * @param [void]
  * @return double.
@@ -165,7 +165,7 @@ double IMU::getPitch() {
 }
 
 /**
- * @brief Retorna o valor do Roll (Eixo Z) do IMU
+ * @brief Retorna o valor do Yaw (Eixo Z) do IMU
  *
  * @param [void]
  * @return double.
