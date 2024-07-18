@@ -26,9 +26,9 @@ Motor::Motor(int entrada, bool reverse) {
 
   if(Motor::PORTA_1 ^ Motor::PORTA_2) {
    // Encoder encoder(entrada);
-    EncoderESP encoderESP(entrada);
+    Encoder encoderESP(entrada);
   //  this->encoder = encoder;
-    this->encoderESP = encoderESP;
+    this->encoder = encoderESP;
   }
 }
 

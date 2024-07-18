@@ -1,3 +1,5 @@
+#ifndef IMU_h
+#define IMU_h
 #include "Arduino.h"
 #include "ICM_20948.h"
 #include "esp32-hal-log.h"
@@ -11,10 +13,6 @@ class IMU : public Task {
         double getYaw();
         double getRoll();
         double getPitch();
-        void calcule();
-        void run(void * data) {
-            calcule();
-        }
     private:
         ICM_20948_I2C myICM;
         const int AD0_VAL = 0;
@@ -25,4 +23,10 @@ class IMU : public Task {
         double q2;
         double q3;
         double q4;
+        void calcule();
+        void run(void * data) {
+            calcule();
+        }
 };
+
+#endif
