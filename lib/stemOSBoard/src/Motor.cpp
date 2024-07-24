@@ -79,8 +79,10 @@ void Motor::setPower(double power) {
   power = max(-1.0, min(1.0, power));
   int output_res = abs(power) * 1002;
   if (power < 0) {
+    ledcWrite(channelA, 0);
     ledcWrite(channelB, output_res);
   } else if(power > 0){
+    ledcWrite(channelB, 0);
     ledcWrite(channelA, output_res);
   } else {
     ledcWrite(channelA, 0);
