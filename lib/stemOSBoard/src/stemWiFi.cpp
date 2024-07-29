@@ -18,7 +18,7 @@ void stemWiFi::init() {
     server->begin();
 }
 
-void stemWiFi::configureWiFiAP() {
+void stemWiFi::start() {
   RGBLED::init();
   RGBLED::CONFIGURE_WIFI();
 

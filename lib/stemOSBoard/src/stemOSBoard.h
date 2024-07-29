@@ -19,6 +19,8 @@ ServoOS servo1(PORTA_1_SERVO);
 ServoOS servo2(PORTA_2_SERVO);
 ServoOS servo3(PORTA_3_SERVO);
 
-stemWiFi wifi;
+stemWiFi Arara;
+
+Gamepad gamepad;
 
 #endif

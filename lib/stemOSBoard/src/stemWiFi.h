@@ -13,7 +13,7 @@
 class stemWiFi {
   public:
     stemWiFi(void);
-    void configureWiFiAP();
+    void start();
   private:
     int id = -1;
     const  char* ssid = "Arara_";
