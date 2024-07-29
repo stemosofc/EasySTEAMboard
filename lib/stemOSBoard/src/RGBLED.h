@@ -2,7 +2,7 @@
 #define RGBLED_h
 #include "Arduino.h"
 #include "Freenove_WS2812_Lib_for_ESP32.h"
-
+#include "stemWiFi.h"
 struct {
   const int AZUL[3] = {0, 0, 128};
   const int VERMELHO[3] = {255, 0, 0};
@@ -14,6 +14,14 @@ struct {
 
 class RGBLED {
 public:
+private:
+  friend class stemWiFi;
+  static const int PINO = 12;         // Pino GPIO do LED
+  static const int CHANNEL = 11;       // Canal PWM
+  static const int LEDS_COUNT = 8;
+  static void CONFIGURE_WIFI_THREAD(void * arg);
+  static TaskHandle_t LED_HANDLER;
+  static Freenove_ESP32_WS2812 fita;
   static void configureLED(); 
   static void setColor(int cor[3]);         
   static void init();
@@ -21,12 +29,5 @@ public:
   static void CONFIGURE_WIFI();  // Acesso enquanto estivermos configurando WiFi
   static void OK();             // Quando tudo estiver correto
   static void NO_DS();
-private:
-  static const int PINO = 12;         // Pino GPIO do LED
-  static const int CHANNEL = 11;       // Canal PWM
-  static const int LEDS_COUNT = 8;
-  static void CONFIGURE_WIFI_THREAD(void * arg);
-  static TaskHandle_t LED_HANDLER;
-  static Freenove_ESP32_WS2812 fita;
 };
 #endif
