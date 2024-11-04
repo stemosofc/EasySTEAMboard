@@ -1,4 +1,4 @@
-#include "stemOSboard.h"
+#include "Arara.h"
 
 void setup() {
   Arara.start();
@@ -16,7 +16,7 @@ void loop() {
   frontLeftPower /= maximum;
   backLeftPower /= maximum;
 
-  motorEsquerda.setPower(frontLeftPower);
-  motorDireita.setPower(backLeftPower);
+  motor1.setPower(frontLeftPower);
+  motor2.setPower(backLeftPower);
 }
 
