@@ -19,6 +19,14 @@ ServoOS servo1(PORTA_1_SERVO);
 ServoOS servo2(PORTA_2_SERVO);
 ServoOS servo3(PORTA_3_SERVO);
 
+Digital di1(PortasDigitais::PORTA_1);
+Digital di2(PortasDigitais::PORTA_2);
+Digital di3(PortasDigitais::PORTA_3);
+Digital di4(PortasDigitais::PORTA_4);
+Digital di5(PortasDigitais::PORTA_5);
+
+IMU imu;
+
 stemWiFi Arara;
 
 Gamepad gamepad;

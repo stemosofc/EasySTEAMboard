@@ -1,0 +1,100 @@
+ Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[     5][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    12][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    50][D][esp32-hal-cpu.c:244] setCpuFrequencyMhz(): PLL: 480 / 2 = 240 Mhz, APB: 80000000 Hz
+[    77][D][esp32-hal-rmt.c:615] rmtInit():  -- TX RMT - CH 0 - 1 RAM Blocks - pin 12
+[    99][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[   188][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  6412][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 1 - SCAN_DONE
+[  6420][D][stemWiFi.cpp:109] onEventWiFi(): Scan Done
+[  6425][D][stemWiFi.cpp:41] setChannel(): networks found
+[  6436][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 10 - AP_START
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[     5][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    12][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    50][D][esp32-hal-cpu.c:244] setCpuFrequencyMhz(): PLL: 480 / 2 = 240 Mhz, APB: 80000000 Hz
+[    77][D][esp32-hal-rmt.c:615] rmtInit():  -- TX RMT - CH 0 - 1 RAM Blocks - pin 12
+[    99][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[   187][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  6211][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 1 - SCAN_DONE
+[  6219][D][stemWiFi.cpp:109] onEventWiFi(): Scan Done
+[  6224][D][stemWiFi.cpp:41] setChannel(): networks found
+[  6235][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 10 - AP_START
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[     5][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    12][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    50][D][esp32-hal-cpu.c:244] setCpuFrequencyMhz(): PLL: 480 / 2 = 240 Mhz, APB: 80000000 Hz
+[    77][D][esp32-hal-rmt.c:615] rmtInit():  -- TX RMT - CH 0 - 1 RAM Blocks - pin 12
+[    99][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[   188][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  6412][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 1 - SCAN_DONE
+[  6419][D][stemWiFi.cpp:109] onEventWiFi(): Scan Done
+[  6425][D][stemWiFi.cpp:41] setChannel(): networks found
+[  6436][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 10 - AP_START
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[     5][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    12][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    50][D][esp32-hal-cpu.c:244] setCpuFrequencyMhz(): PLL: 480 / 2 = 240 Mhz, APB: 80000000 Hz
+[    77][D][esp32-hal-rmt.c:615] rmtInit():  -- TX RMT - CH 0 - 1 RAM Blocks - pin 12
+[    99][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[   187][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  6412][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 1 - SCAN_DONE
+[  6419][D][stemWiFi.cpp:109] onEventWiFi(): Scan Done
+[  6424][D][stemWiFi.cpp:41] setChannel(): networks found
+[  6436][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 10 - AP_START
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[     5][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    12][E][Encoder.cpp:20] Encoder(): Encoder não pode ser inicializado
+[    50][D][esp32-hal-cpu.c:244] setCpuFrequencyMhz(): PLL: 480 / 2 = 240 Mhz, APB: 80000000 Hz
+[    77][D][esp32-hal-rmt.c:615] rmtInit():  -- TX RMT - CH 0 - 1 RAM Blocks - pin 12
+[    99][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 0 - WIFI_READY
+[   188][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 2 - STA_START
+[  6212][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 1 - SCAN_DONE
+[  6219][D][stemWiFi.cpp:109] onEventWiFi(): Scan Done
+[  6224][D][stemWiFi.cpp:41] setChannel(): networks found
+[  6236][D][WiFiGeneric.cpp:1040] _eventCallback(): Arduino Event: 10 - AP_START

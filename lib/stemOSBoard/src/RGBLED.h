@@ -18,7 +18,7 @@ private:
   friend class stemWiFi;
   static const int PINO = 12;         // Pino GPIO do LED
   static const int CHANNEL = 11;       // Canal PWM
-  static const int LEDS_COUNT = 8;
+  static const int LEDS_COUNT = 1;
   static void CONFIGURE_WIFI_THREAD(void * arg);
   static TaskHandle_t LED_HANDLER;
   static Freenove_ESP32_WS2812 fita;

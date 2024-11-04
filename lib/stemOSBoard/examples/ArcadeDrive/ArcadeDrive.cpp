@@ -1,13 +1,7 @@
 #include "stemOSboard.h"
-stemWiFi wifi;
-
-Gamepad gamepad;
-
-Motor motorEsquerda(Motor::PORTA_1, Motor::REVERSE);
-Motor motorDireita(Motor::PORTA_2, Motor::FORWARD);
 
 void setup() {
-  wifi.configureWiFiAP();
+  Arara.start();
 }
 
 void loop() {
