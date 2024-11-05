@@ -83,6 +83,7 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
   switch (type) {
     case WS_EVT_CONNECT:
       id = client->id();
+      client->text("Conectado");
       log_d("WebSocket client connected");
       RGBLED::OK();
       break;
