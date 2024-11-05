@@ -88,6 +88,7 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       RGBLED::OK();
       break;
     case WS_EVT_DISCONNECT:
+    client->text("Desconectado");
       log_d("WebSocket client disconnected");
       RGBLED::NO_DS();
       break;
