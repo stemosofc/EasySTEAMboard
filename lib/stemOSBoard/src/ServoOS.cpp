@@ -34,11 +34,11 @@ void ServoOS::setPosition(float position) {
 /**
  * @brief Define a velocidade do servo no modo contínuo
  *
- * @param [in] speed define a posição do servo
+ * @param [in] speed define a velocidade do servo
  * @return N/A.
  */
 void ServoOS::setSpeed(double speed) {
-  speed = max(0.0, speed);
+  speed = max(0.0, min(1.0, speed));
   int vel = speed * ANGLE_MAX;
   servo.write(vel);
 }

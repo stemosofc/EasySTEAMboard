@@ -11,6 +11,7 @@ class Encoder {
     double getPosition(); // Obtém a posição do encoder
     void setPosition(int position); // Define a posição do encoder
     void setPositionFactor(double factor); // Define o fator de conversão do encoder
+    void reset();
     ESP32Encoder encoder; // Objeto do encoder da bibilioteca
     static const int PORTA_1_ENCODER = 1;
     static const int PORTA_2_ENCODER = 2;

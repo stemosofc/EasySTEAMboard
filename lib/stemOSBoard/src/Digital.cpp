@@ -3,7 +3,7 @@
 /**
  * @brief Cria um objeto da porta digital
  *
- * @param [in] entrada - define a entrada do sensor digital
+ * @param [in] Porta a qual o sensor está conectado
  * @return N/A.
  */
 Digital::Digital(PortasDigitais entrada) {

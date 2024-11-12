@@ -3,8 +3,8 @@
 /**
  * @brief Cria um objeto de Motor
  *
- * @param [in] entrada a porta na qual o motor esta conectado
- * @param [in] reverse define se o motor deve ser invertido ou não
+ * @param int entrada a porta na qual o motor esta conectado
+ * @param int reverse define se o motor deve ser invertido ou não
  * @return N/A.
  */
 Motor::Motor(int entrada, bool reverse) {
@@ -39,7 +39,7 @@ Motor::Motor(int entrada, bool reverse) {
 /**
  * @brief Define as entradas digitais da Arara baseado na porta do motor
  *
- * @param [in] entrada a porta na qual o motor esta conectado
+ * @param [in] Porta na qual o motor esta conectado
  * @return N/A.
  */
 void Motor::pinos(int entrada) {

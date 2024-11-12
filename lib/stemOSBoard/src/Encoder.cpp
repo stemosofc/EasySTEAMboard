@@ -30,7 +30,7 @@ Encoder::Encoder() {
 /**
  * @brief Retorna a posição do encoder
  *
- * @param [void]
+ * @param void
  * @return double.
  */
 double Encoder::getPosition() {
@@ -55,4 +55,15 @@ void Encoder::setPosition(int position) {
  */
 void Encoder::setPositionFactor(double factor) {
     this->factor = factor;
+}
+
+
+/**
+ * @brief Zera a leitura do encoder
+ * 
+ * @param void
+ * @return N/A.
+ */
+void Encoder::reset() {
+  encoder.clearCount();
 }
