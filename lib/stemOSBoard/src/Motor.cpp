@@ -30,6 +30,9 @@ Motor::Motor(int entrada, bool reverse) {
   //  this->encoder = encoder;
     this->encoder = encoderESP;
   }
+
+  ledcWrite(channelA, 0);
+  ledcWrite(channelB, 0);
 }
 
 
