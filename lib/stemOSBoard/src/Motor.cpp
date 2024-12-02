@@ -80,7 +80,7 @@ void Motor::pinos(int entrada) {
  */
 void Motor::setPower(double power) {
   power = max(-1.0, min(1.0, power));
-  int output_res = abs(power) * 1002;
+  int output_res = abs(power) * MAX_OUTPUT;
   if (power < 0) {
     ledcWrite(channelA, 0);
     ledcWrite(channelB, output_res);

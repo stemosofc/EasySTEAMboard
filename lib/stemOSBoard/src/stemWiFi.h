@@ -16,7 +16,7 @@ class stemWiFi {
     void start();
   private:
     int id = -1;
-    const  char* ssid = "Arara_";
+    const  char* ssid = "EasySTEAM_";
     const char* password = "password";
     AsyncWebServer * server;
     AsyncWebSocket * ws;

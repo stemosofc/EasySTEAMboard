@@ -27,7 +27,7 @@ Digital di5(PortasDigitais::PORTA_5);
 
 IMU imu;
 
-stemWiFi Arara;
+stemWiFi easySTEAM;
 
 Gamepad gamepad;
 

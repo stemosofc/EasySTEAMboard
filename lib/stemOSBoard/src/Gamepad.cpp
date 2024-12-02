@@ -40,7 +40,7 @@ double Gamepad::getValue(double value) {
  * @return double.
  */
 double Gamepad::getLeftAxisY() {
- return getValue(Gamepad::gamepad["LY"]);
+  return getValue(Gamepad::gamepad["LY"]);
 }
 
 /**
