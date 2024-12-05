@@ -43,7 +43,7 @@ void stemWiFi::setChannel() {
           canais[i] = WiFi.channel(i);
           canaisFix[canais[i]]++;
       }
-      int low = 20;
+      int low = 1e7;
       int channel = 1;
       for(int i = 1; i < 14; i++) {
         if(canaisFix[i] < low) {
