@@ -2,7 +2,7 @@
 #define Gamepad_h
 #include <ArduinoJson.h>
 #include "Arduino.h"
-
+#include "stemWiFi.h"
 class Gamepad {
   public:
     void applyDeadband(double deadband = 0.01);
@@ -23,6 +23,9 @@ class Gamepad {
     double deadband = 0.01;
     double maxMagnitude = 1;
     double getValue(double value);
+    static bool status();
+    static void reset();
+    friend class stemWiFi;
 };
 
 #endif

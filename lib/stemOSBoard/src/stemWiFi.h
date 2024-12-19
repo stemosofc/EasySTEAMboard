@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include <WiFi.h>
 #include <ArduinoJson.h>
+#include <EasySTEAM.h>
 #include "Gamepad.h"
 #include "RGBLED.h"
 #include <AsyncTCP.h>
@@ -29,6 +30,8 @@ class stemWiFi {
                 void *arg, uint8_t *data, size_t len);
     void onEventWiFi(WiFiEvent_t event);
     void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
+    int previousTime = 0;
+    bool previousGamepadState = false;
   };
 
 #endif

@@ -153,3 +153,16 @@ double Gamepad::getRightTrigger() {
 double Gamepad::getLeftTrigger() {
   return Gamepad::gamepad["LT"];
 }
+
+bool Gamepad::status() {
+  return Gamepad::gamepad["EN"];
+}
+
+
+void Gamepad::reset() {
+  char * buttonsAndAxis[] = {"LT", "RT", "LB", "RB", "LY", "LX", "RX", "RY", "A", "B", "Y", "X"};
+  
+  for(int i = 0; i <= (sizeof(buttonsAndAxis)/sizeof(char)); i++) {
+    Gamepad::gamepad[buttonsAndAxis[i]] = 0;
+  }
+}

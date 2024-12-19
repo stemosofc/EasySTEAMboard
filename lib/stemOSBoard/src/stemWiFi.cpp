@@ -131,10 +131,25 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
 void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
   AwsFrameInfo *info = (AwsFrameInfo*)arg;
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
+    int actualTime = millis();
+    if(!previousGamepadState && Gamepad::status()) {
+      previousTime = millis();
+    }
     JsonDocument jon;              
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
     Gamepad::gamepad = jon;
+    int delay = actualTime - previousTime;
+    if(delay >= 100) {
+      // aqui deve ser feito o comando de parada geral
+      Gamepad::reset();
+      EasySTEAM::stopAll();
+      ws->closeAll();
+      RGBLED::ERRO();
+      log_e("Sem atualização periódica de 100ms");
+    }
+    previousTime = actualTime;
+    previousGamepadState = Gamepad::status();
   }
 }
 
