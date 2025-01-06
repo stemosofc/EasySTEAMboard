@@ -1,14 +1,4 @@
-#ifndef stemOSboard_h
-#define stemOSboard_h
-#include "Arduino.h"
-#include "Motor.h"
-#include "Gamepad.h"
-#include "Digital.h"
-#include "ServoOS.h"
-#include "Analog.h"
-#include "IMU.h"
-#include "PID.h"
-#include "stemWiFi.h"
+#include "Objects.h"
 
 Motor motor1(Motor::PORTA_1, Motor::FORWARD);
 Motor motor2(Motor::PORTA_2, Motor::FORWARD);
@@ -27,8 +17,18 @@ Digital di5(PortasDigitais::PORTA_5);
 
 IMU imu;
 
-stemWiFi easySTEAM;
+void Control::disableMotors() {
+    Motor::stop();
+    motor1.setPower(0);
+    motor2.setPower(0);
+    motor3.setPower(0);
+    motor4.setPower(0);
+}
 
-Gamepad gamepad;
+void Control::stopAll() {
+    disableMotors();
+}
 
-#endif
+void Control::enableAll() {
+    Motor::enable();
+}

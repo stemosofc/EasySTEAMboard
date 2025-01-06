@@ -1,5 +1,5 @@
-#ifndef IMU_h
-#define IMU_h
+#ifndef IMU_H
+#define IMU_H
 #include "Arduino.h"
 #include "ICM_20948.h"
 #include "esp32-hal-log.h"

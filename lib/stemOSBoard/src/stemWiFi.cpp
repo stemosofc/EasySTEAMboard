@@ -21,11 +21,11 @@ void stemWiFi::init() {
 void stemWiFi::start() {
   RGBLED::init();
   RGBLED::CONFIGURE_WIFI();
-
+  
   WiFi.onEvent(std::bind(&stemWiFi::onEventWiFi, this, std::placeholders::_1));
 
   setChannel();
-
+  
   init();
   
   RGBLED::NO_DS();
@@ -35,6 +35,7 @@ void stemWiFi::setChannel() {
   int n = WiFi.scanNetworks();
   if (n == 0) {
     log_d("no networks found");
+    WiFi.softAP(ssid + WiFi.macAddress(), password);
   } else {
       int canais[n];
       int canaisFix[14] = {};
@@ -51,7 +52,7 @@ void stemWiFi::setChannel() {
           low = canaisFix[i];
         }
       }
-  WiFi.softAP(ssid + WiFi.macAddress(), password, channel);
+    WiFi.softAP(ssid + WiFi.macAddress(), password, channel);
   }
 }
 
@@ -85,12 +86,14 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       id = client->id();
       client->text("Conectado");
       log_d("WebSocket client connected");
+      previousTime = millis();
       RGBLED::OK();
       break;
     case WS_EVT_DISCONNECT:
-    client->text("Desconectado");
+      client->text("Desconectado");
       log_d("WebSocket client disconnected");
       RGBLED::NO_DS();
+      disconnect(false);
       break;
     case WS_EVT_DATA:
       handleWebSocketMessage(arg, data, len);
@@ -117,10 +120,7 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
         case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
-            if(ws->hasClient(id)) {
-              ws->closeAll(); 
-              RGBLED::ERRO();   
-            }
+            disconnect(true);
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
             break;
@@ -131,26 +131,43 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
 void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
   AwsFrameInfo *info = (AwsFrameInfo*)arg;
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
-    int actualTime = millis();
-    if(!previousGamepadState && Gamepad::status()) {
-      previousTime = millis();
+    bool gamepadState = Gamepad::status();
+
+    if(gamepadState) {
+      int actualTime = millis();
+
+      if(!previousGamepadState) {
+        previousTime = millis();
+        Control::enableAll();
+      }
+
+      int delay = actualTime - previousTime;
+      Serial.println(delay);
+      previousTime = actualTime;
+      if(delay >= 200) {
+        disconnect(true);
+        log_e("Latência maior que 200ms");
+      } 
+    } else {
+      disconnect(false);
     }
+
     JsonDocument jon;              
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
+
     Gamepad::gamepad = jon;
-    int delay = actualTime - previousTime;
-    if(delay >= 100) {
-      // aqui deve ser feito o comando de parada geral
-      Gamepad::reset();
-      EasySTEAM::stopAll();
-      ws->closeAll();
-      RGBLED::ERRO();
-      log_e("Sem atualização periódica de 100ms");
-    }
-    previousTime = actualTime;
-    previousGamepadState = Gamepad::status();
+
+    previousGamepadState = gamepadState;
   }
 }
 
-
+void stemWiFi::disconnect(bool error) {
+  // aqui deve ser feito o comando de parada geral
+  Gamepad::reset();
+  control.stopAll();
+  if(error) {
+    ws->closeAll();
+    RGBLED::ERRO();
+  }
+}

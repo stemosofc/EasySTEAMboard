@@ -1,5 +1,5 @@
-#ifndef EncoderESP_h
-#define EncoderESP_h
+#ifndef ENCODER_H
+#define ENCODER_H
 #include "Arduino.h"
 #include "ESP32Encoder.h"
 

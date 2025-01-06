@@ -42,3 +42,7 @@ void ServoOS::setSpeed(double speed) {
   int vel = speed * ANGLE_MAX;
   servo.write(vel);
 }
+
+void ServoOS::disable() {
+  servo.detach();
+}

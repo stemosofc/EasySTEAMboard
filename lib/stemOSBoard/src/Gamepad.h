@@ -1,10 +1,12 @@
-#ifndef Gamepad_h
-#define Gamepad_h
+#ifndef GAMEPAD_H
+#define GAMEPAD_H
+
 #include <ArduinoJson.h>
 #include "Arduino.h"
-#include "stemWiFi.h"
+
 class Gamepad {
   public:
+    Gamepad(void);
     void applyDeadband(double deadband = 0.01);
     double getLeftAxisY();
     double getLeftAxisX();

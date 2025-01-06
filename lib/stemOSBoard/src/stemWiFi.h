@@ -1,15 +1,13 @@
-#ifndef stemWiFi_h
-#define stemWiFi_h
-
+#pragma once
 #include "Arduino.h"
 #include <WiFi.h>
 #include <ArduinoJson.h>
-#include <EasySTEAM.h>
-#include "Gamepad.h"
 #include "RGBLED.h"
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include "esp32-hal-log.h"
+#include "Gamepad.h"
+#include "Objects.h"
 
 class stemWiFi {
   public:
@@ -24,14 +22,14 @@ class stemWiFi {
     JsonDocument handleReceivedMessage(String message);
     void init();
     void setChannel();
+    void disconnect(bool error=false);
+    int checkDelay();
     void errorJson(DeserializationError error);
-    Gamepad joystick;
     void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
                 void *arg, uint8_t *data, size_t len);
     void onEventWiFi(WiFiEvent_t event);
     void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
     int previousTime = 0;
     bool previousGamepadState = false;
-  };
-
-#endif
+    Control control;
+};

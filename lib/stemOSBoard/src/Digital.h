@@ -1,5 +1,5 @@
-#ifndef Digital_h
-#define Digital_h
+#ifndef DIGITAL_H
+#define DIGITAL_H
 #include "Arduino.h"
 
 // Enum das portas digitais para corresponder aos pinos

@@ -1,17 +1,7 @@
-#ifndef EasySTEAM_h
-#define EasySTEAM_h
+#pragma once
 
-#include "stemOSBoard.h"
+#include "stemWiFi.h"
 
-class EasySTEAM {
-    private:
-        static void stopAll();
-        static void stopMotors();
-        static void stopServos();
-        static void stopSensors();
-        friend class stemWiFi;
-    public:
-};
-
-#endif
+Gamepad gamepad;
+stemWiFi easySTEAM;
 

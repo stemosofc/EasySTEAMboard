@@ -1,8 +1,8 @@
-#ifndef RGBLED_h
-#define RGBLED_h
+#ifndef RGBLED_H
+#define RGBLED_H
 #include "Arduino.h"
 #include "Freenove_WS2812_Lib_for_ESP32.h"
-#include "stemWiFi.h"
+
 struct {
   const int AZUL[3] = {0, 0, 128};
   const int VERMELHO[3] = {255, 0, 0};

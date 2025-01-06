@@ -6,7 +6,6 @@ TaskHandle_t RGBLED::LED_HANDLER = NULL;
 
 void RGBLED::init() {
   fita.begin();
-	fita.setBrightness(10);	
 }
 
 void RGBLED::ERRO() {
