@@ -17,6 +17,7 @@ class stemWiFi {
     int id = -1;
     const  char* ssid = "EasySTEAM_";
     const char* password = "password";
+    const int TIMEOUT_DELAY = 200;
     AsyncWebServer * server;
     AsyncWebSocket * ws;
     JsonDocument handleReceivedMessage(String message);

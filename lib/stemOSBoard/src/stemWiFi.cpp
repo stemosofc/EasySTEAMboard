@@ -87,6 +87,7 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       client->text("Conectado");
       log_d("WebSocket client connected");
       previousTime = millis();
+      Gamepad::gamepad["EN"] = false;
       RGBLED::OK();
       break;
     case WS_EVT_DISCONNECT:
@@ -142,9 +143,8 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
       }
 
       int delay = actualTime - previousTime;
-      Serial.println(delay);
       previousTime = actualTime;
-      if(delay >= 200) {
+      if(delay >= TIMEOUT_DELAY) {
         disconnect(true);
         log_e("Latência maior que 200ms");
       } 
@@ -163,7 +163,6 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 }
 
 void stemWiFi::disconnect(bool error) {
-  // aqui deve ser feito o comando de parada geral
   Gamepad::reset();
   control.stopAll();
   if(error) {

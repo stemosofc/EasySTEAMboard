@@ -24,6 +24,8 @@ class ServoOS {
       int channel;
       int signalPin;
       Servo servo;
-      void disable();
+      static bool connect;
+      static void disable();
+      static void enable();
 };
 #endif

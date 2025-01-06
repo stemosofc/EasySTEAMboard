@@ -6,6 +6,11 @@ void setup() {
 }
 
 void loop() {
-  motor1.setPower(gamepad.getLeftAxisY());
+  servo1.setPosition(0);
+  delay(1000);
+  servo1.setPosition(90);
+  delay(1000);
+  servo1.setPosition(270);
+  delay(1000);
 }
 
