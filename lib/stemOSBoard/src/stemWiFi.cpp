@@ -4,7 +4,7 @@ stemWiFi::stemWiFi() {
 
 }
 
-void stemWiFi::init() {
+void stemWiFi::initServer() {
     server = new AsyncWebServer(80);
     ws = new AsyncWebSocket("/ws");
     ws->onEvent(std::bind(&stemWiFi::onEvent, this

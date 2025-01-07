@@ -21,10 +21,9 @@ class stemWiFi {
     AsyncWebServer * server;
     AsyncWebSocket * ws;
     JsonDocument handleReceivedMessage(String message);
-    void init();
+    void initServer();
     void setChannel();
     void disconnect(bool error=false);
-    int checkDelay();
     void errorJson(DeserializationError error);
     void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
                 void *arg, uint8_t *data, size_t len);
