@@ -4,7 +4,7 @@ stemWiFi::stemWiFi() {
 
 }
 
-void stemWiFi::initServer() {
+void stemWiFi::initWebServer() {
     server = new AsyncWebServer(80);
     ws = new AsyncWebSocket("/ws");
     ws->onEvent(std::bind(&stemWiFi::onEvent, this
@@ -26,7 +26,7 @@ void stemWiFi::start() {
 
   setChannel();
   
-  init();
+  initWebServer();
   
   RGBLED::NO_DS();
 }
@@ -167,6 +167,7 @@ void stemWiFi::disconnect(bool error) {
   control.stopAll();
   if(error) {
     ws->closeAll();
+    ws->cleanupClients();
     RGBLED::ERRO();
   }
 }
