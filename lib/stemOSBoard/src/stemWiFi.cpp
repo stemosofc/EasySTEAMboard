@@ -142,11 +142,18 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
         Control::enableAll();
       }
 
-      int delay = actualTime - previousTime;
+      if(count > 4) count = 0;
+      delay[count] = actualTime - previousTime;
+      ++count;
+      int medDelay = (delay[0] + delay[1] + delay[2] + delay[3] + delay[4]) / 5;
       previousTime = actualTime;
-      if(delay >= TIMEOUT_DELAY) {
+      delay = {0,0}
+      if(medDelay >= TIMEOUT_DELAY) {
         disconnect(true);
-        log_e("Latência maior que 200ms");
+        log_e("Latência maior que 100ms");
+        for(int i = 0; i < sizeof(delay)/sizeof(int); i++) {
+          delay[i] = 0;
+        }
       } 
     } else {
       disconnect(false);

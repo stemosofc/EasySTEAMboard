@@ -17,7 +17,7 @@ class stemWiFi {
     int id = -1;
     const  char* ssid = "EasySTEAM_";
     const char* password = "password";
-    const int TIMEOUT_DELAY = 200;
+    const int TIMEOUT_DELAY = 100;
     AsyncWebServer * server;
     AsyncWebSocket * ws;
     JsonDocument handleReceivedMessage(String message);
@@ -31,5 +31,7 @@ class stemWiFi {
     void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
     int previousTime = 0;
     bool previousGamepadState = false;
+    int count = 0;
+    int delay[5];
     Control control;
 };
