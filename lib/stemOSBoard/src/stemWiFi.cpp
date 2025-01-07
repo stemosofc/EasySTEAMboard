@@ -121,7 +121,7 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
         case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
-            disconnect(true);
+          if(ws->hasClient(id)) disconnect(true);
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
             break;
