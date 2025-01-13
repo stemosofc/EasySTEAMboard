@@ -19,8 +19,8 @@ void stemWiFi::initWebServer() {
 }
 
 void stemWiFi::start() {
-  RGBLED::init();
-  RGBLED::CONFIGURE_WIFI();
+  LED::init();
+  LED::CONFIGURE_WIFI();
   
   WiFi.onEvent(std::bind(&stemWiFi::onEventWiFi, this, std::placeholders::_1));
 
@@ -28,7 +28,7 @@ void stemWiFi::start() {
   
   initWebServer();
   
-  RGBLED::NO_DS();
+  LED::NO_DS();
 }
 
 void stemWiFi::setChannel() {
@@ -88,12 +88,12 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       log_d("WebSocket client connected");
       previousTime = millis();
       Gamepad::gamepad["EN"] = false;
-      RGBLED::OK();
+      LED::OK();
       break;
     case WS_EVT_DISCONNECT:
       client->text("Desconectado");
       log_d("WebSocket client disconnected");
-      RGBLED::NO_DS();
+      LED::NO_DS();
       disconnect(false);
       break;
     case WS_EVT_DATA:
@@ -102,7 +102,7 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
     case WS_EVT_PONG:
       break;
     case WS_EVT_ERROR:
-      RGBLED::ERRO();
+      LED::ERRO();
       break;
   }
 }
@@ -147,7 +147,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
       ++count;
       int medDelay = (delay[0] + delay[1] + delay[2] + delay[3] + delay[4]) / 5;
       previousTime = actualTime;
-      delay = {0,0}
+
       if(medDelay >= TIMEOUT_DELAY) {
         disconnect(true);
         log_e("Latência maior que 100ms");
@@ -175,6 +175,6 @@ void stemWiFi::disconnect(bool error) {
   if(error) {
     ws->closeAll();
     ws->cleanupClients();
-    RGBLED::ERRO();
+    LED::ERRO();
   }
 }
