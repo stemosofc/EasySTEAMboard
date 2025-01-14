@@ -26,7 +26,7 @@ Motor::Motor(int entrada, bool reverse) {
     ledcAttachPin(pinPWMB, channelA);
   }
 
-  if(Motor::PORTA_1 ^ Motor::PORTA_2) {
+  if(Motor::PORTA_1 || Motor::PORTA_2) {
    // Encoder encoder(entrada);
     Encoder encoderESP(entrada);
   //  this->encoder = encoder;
