@@ -1,1 +1,7 @@
-#include "stemOSBoard.h"
+#pragma once
+
+#include "stemWiFi.h"
+
+Gamepad gamepad;
+stemWiFi easySTEAM;
+

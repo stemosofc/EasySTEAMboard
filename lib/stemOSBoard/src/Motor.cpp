@@ -1,5 +1,7 @@
 #include "Motor.h"
 
+bool Motor::connection = false;
+
 /**
  * @brief Cria um objeto de Motor
  *
@@ -24,7 +26,7 @@ Motor::Motor(int entrada, bool reverse) {
     ledcAttachPin(pinPWMB, channelA);
   }
 
-  if(Motor::PORTA_1 ^ Motor::PORTA_2) {
+  if(Motor::PORTA_1 || Motor::PORTA_2) {
    // Encoder encoder(entrada);
     Encoder encoderESP(entrada);
   //  this->encoder = encoder;
@@ -79,16 +81,29 @@ void Motor::pinos(int entrada) {
  * @return N/A.
  */
 void Motor::setPower(double power) {
-  power = max(-1.0, min(1.0, power));
-  int output_res = abs(power) * MAX_OUTPUT;
-  if (power < 0) {
-    ledcWrite(channelA, 0);
-    ledcWrite(channelB, output_res);
-  } else if(power > 0){
-    ledcWrite(channelB, 0);
-    ledcWrite(channelA, output_res);
+  if(connection) {
+    power = max(-1.0, min(1.0, power));
+    int output_res = abs(power) * MAX_OUTPUT;
+    if (power < 0) {
+      ledcWrite(channelA, 0);
+      ledcWrite(channelB, output_res);
+    } else if(power > 0) {
+      ledcWrite(channelB, 0);
+      ledcWrite(channelA, output_res);
+    } else {
+      ledcWrite(channelA, 0);
+      ledcWrite(channelB, 0);
+    }
   } else {
     ledcWrite(channelA, 0);
     ledcWrite(channelB, 0);
   }
+}
+
+void Motor::stop() {
+  connection = false;
+}
+
+void Motor::enable() {
+  connection = true;
 }

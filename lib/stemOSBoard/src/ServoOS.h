@@ -1,5 +1,5 @@
-#ifndef ServoOS_h
-#define ServoOS_h
+#ifndef SERVOOS_H
+#define SERVOOS_H
 #include "Servo.h"
 
 enum PortaServo {
@@ -8,12 +8,13 @@ enum PortaServo {
   PORTA_3_SERVO = 27,
 };
 
-  class ServoOS {
+class ServoOS {
     public:
       ServoOS(PortaServo entrada);
       void setPosition(float position);
       void setSpeed(double speed);
     private:
+      friend class EasySTEAM;
       static const int FREQUENCY = 9000;
       static const int RESOLUTION = 8;
       static const int ANGLE_MAX = 270;
@@ -23,5 +24,8 @@ enum PortaServo {
       int channel;
       int signalPin;
       Servo servo;
-  };
+      static bool connect;
+      static void disable();
+      static void enable();
+};
 #endif

@@ -4,7 +4,7 @@ stemWiFi::stemWiFi() {
 
 }
 
-void stemWiFi::init() {
+void stemWiFi::initWebServer() {
     server = new AsyncWebServer(80);
     ws = new AsyncWebSocket("/ws");
     ws->onEvent(std::bind(&stemWiFi::onEvent, this
@@ -19,22 +19,23 @@ void stemWiFi::init() {
 }
 
 void stemWiFi::start() {
-  RGBLED::init();
-  RGBLED::CONFIGURE_WIFI();
-
+  LED::init();
+  LED::CONFIGURE_WIFI();
+  
   WiFi.onEvent(std::bind(&stemWiFi::onEventWiFi, this, std::placeholders::_1));
 
   setChannel();
-
-  init();
   
-  RGBLED::NO_DS();
+  initWebServer();
+  
+  LED::NO_DS();
 }
 
 void stemWiFi::setChannel() {
   int n = WiFi.scanNetworks();
   if (n == 0) {
     log_d("no networks found");
+    WiFi.softAP(ssid + WiFi.macAddress(), password);
   } else {
       int canais[n];
       int canaisFix[14] = {};
@@ -51,7 +52,7 @@ void stemWiFi::setChannel() {
           low = canaisFix[i];
         }
       }
-  WiFi.softAP(ssid + WiFi.macAddress(), password, channel);
+    WiFi.softAP(ssid + WiFi.macAddress(), password, channel);
   }
 }
 
@@ -85,12 +86,15 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       id = client->id();
       client->text("Conectado");
       log_d("WebSocket client connected");
-      RGBLED::OK();
+      previousTime = millis();
+      Gamepad::gamepad["EN"] = false;
+      LED::OK();
       break;
     case WS_EVT_DISCONNECT:
-    client->text("Desconectado");
+      client->text("Desconectado");
       log_d("WebSocket client disconnected");
-      RGBLED::NO_DS();
+      LED::NO_DS();
+      disconnect(false);
       break;
     case WS_EVT_DATA:
       handleWebSocketMessage(arg, data, len);
@@ -98,7 +102,7 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
     case WS_EVT_PONG:
       break;
     case WS_EVT_ERROR:
-      RGBLED::ERRO();
+      LED::ERRO();
       break;
   }
 }
@@ -117,10 +121,7 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
         case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
-            if(ws->hasClient(id)) {
-              ws->closeAll(); 
-              RGBLED::ERRO();   
-            }
+          if(ws->hasClient(id)) disconnect(true);
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
             break;
@@ -131,11 +132,49 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
 void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
   AwsFrameInfo *info = (AwsFrameInfo*)arg;
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
+    bool gamepadState = Gamepad::status();
+
+    if(gamepadState) {
+      int actualTime = millis();
+
+      if(!previousGamepadState) {
+        previousTime = millis();
+        Control::enableAll();
+      }
+
+      if(count > 4) count = 0;
+      delay[count] = actualTime - previousTime;
+      ++count;
+      int medDelay = (delay[0] + delay[1] + delay[2] + delay[3] + delay[4]) / 5;
+      previousTime = actualTime;
+
+      if(medDelay >= TIMEOUT_DELAY) {
+        disconnect(true);
+        log_e("Latência maior que 100ms");
+        for(int i = 0; i < sizeof(delay)/sizeof(int); i++) {
+          delay[i] = 0;
+        }
+      } 
+    } else {
+      disconnect(false);
+    }
+
     JsonDocument jon;              
     DeserializationError err = deserializeJson(jon, data);
     errorJson(err);
+
     Gamepad::gamepad = jon;
+
+    previousGamepadState = gamepadState;
   }
 }
 
-
+void stemWiFi::disconnect(bool error) {
+  Gamepad::reset();
+  control.stopAll();
+  if(error) {
+    ws->closeAll();
+    ws->cleanupClients();
+    LED::ERRO();
+  }
+}

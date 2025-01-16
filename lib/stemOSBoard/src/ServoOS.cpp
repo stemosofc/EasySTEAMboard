@@ -1,5 +1,7 @@
 #include "ServoOS.h"
 
+bool ServoOS::connect = false;
+
 /**
  * @brief Cria um objeto de Servo
  *
@@ -28,6 +30,7 @@ ServoOS::ServoOS(PortaServo entrada) {
  * @return N/A.
  */
 void ServoOS::setPosition(float position) {
+  if(!connect) return;
   servo.write((int)position);
 }
 
@@ -41,4 +44,12 @@ void ServoOS::setSpeed(double speed) {
   speed = max(0.0, min(1.0, speed));
   int vel = speed * ANGLE_MAX;
   servo.write(vel);
+}
+
+void ServoOS::disable() {
+  connect = false;
+}
+
+void ServoOS::enable() {
+  connect = true;
 }

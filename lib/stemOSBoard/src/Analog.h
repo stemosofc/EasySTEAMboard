@@ -1,5 +1,5 @@
-#ifndef Analog_h
-#define Analog_h
+#ifndef ANALOG_H
+#define ANALOH_H
 #include "Arduino.h"
 
 // Classe utilizada tanto para input como output de dispositivos analógicos
