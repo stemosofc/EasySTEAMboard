@@ -1,0 +1,20 @@
+{
+    "name": "EasySTEAM",
+    "keywords": "esp32, ftc",
+    "description": "Biblioteca para utilização do controlador EasySTEAM",
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/stemosofc/EasySTEAM"
+    },
+    "authors":
+    {
+        "name": "stemOS",
+        "url": "https://github.com/stemosofc",
+        "maintainer": true
+    },
+    "version": "2.0.0",
+    "license": "MIT",
+    "frameworks": "arduino",
+    "platforms": "espressif3"
+}
