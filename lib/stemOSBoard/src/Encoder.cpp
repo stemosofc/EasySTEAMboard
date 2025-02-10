@@ -19,12 +19,7 @@ Encoder::Encoder(int entrada) {
     default:
       log_e("Encoder não pode ser inicializado");
   }
-   ESP32Encoder encoder;
-   encoder.attachFullQuad(pinBEncoder, pinAEncoder);
-   this->encoder = encoder;
-}
-Encoder::Encoder() {
-  
+  encoder.attachFullQuad(pinBEncoder, pinAEncoder);
 }
 
 /**

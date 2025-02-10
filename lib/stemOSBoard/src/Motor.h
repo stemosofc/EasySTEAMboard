@@ -5,7 +5,7 @@
 
 class Motor {
   public:
-    Motor(int entrada, bool reverse); // Construtor da classe motor
+    explicit Motor(int entrada, bool reverse); // Construtor da classe motor
     void setPower(double power); // Define a velocidade do motor (-1.0 a 1.0)
     Encoder encoder;
     static const int PORTA_1 = 1; // Portas de motor da placa

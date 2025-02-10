@@ -9,7 +9,7 @@ bool Motor::connection = false;
  * @param int reverse define se o motor deve ser invertido ou não
  * @return N/A.
  */
-Motor::Motor(int entrada, bool reverse) {
+Motor::Motor(int entrada, bool reverse) : encoder(entrada) {
   pinos(entrada);
 
   if (reverse) {
@@ -24,13 +24,6 @@ Motor::Motor(int entrada, bool reverse) {
 
     ledcSetup(channelB, Motor::FREQUENCY, Motor::RESOLUTION);
     ledcAttachPin(pinPWMB, channelA);
-  }
-
-  if(Motor::PORTA_1 || Motor::PORTA_2) {
-   // Encoder encoder(entrada);
-    Encoder encoderESP(entrada);
-  //  this->encoder = encoder;
-    this->encoder = encoderESP;
   }
 
   ledcWrite(channelA, 0);
