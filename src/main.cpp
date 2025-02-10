@@ -8,4 +8,3 @@ void setup() {
 void loop() {
   motor1.setPower(0.5);
 }
-

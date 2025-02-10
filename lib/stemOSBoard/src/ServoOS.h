@@ -27,5 +27,6 @@ class ServoOS {
       static bool connect;
       static void disable();
       static void enable();
+      friend class Control;
 };
 #endif

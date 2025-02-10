@@ -31,4 +31,5 @@ class Control {
         static void stopAll();
         static void enableAll();
         static void disableMotors();
+        static void disableServos();
 };

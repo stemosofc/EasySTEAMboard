@@ -25,10 +25,16 @@ void Control::disableMotors() {
     motor4.setPower(0);
 }
 
+void Control::disableServos() {
+    ServoOS::disable();
+}
+
 void Control::stopAll() {
     disableMotors();
+    disableServos();
 }
 
 void Control::enableAll() {
     Motor::enable();
+    ServoOS::enable();
 }
