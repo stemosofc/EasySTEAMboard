@@ -17,7 +17,6 @@ struct {
 
 
 class LED {
-public:
 private:
   friend class stemWiFi;
   static const int PINO = 12;         // Pino GPIO do LED

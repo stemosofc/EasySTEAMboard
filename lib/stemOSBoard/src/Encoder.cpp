@@ -11,20 +11,14 @@ Encoder::Encoder(int entrada) {
     case PORTA_1_ENCODER:
       pinAEncoder = 5;
       pinBEncoder = 14;
+      encoder.attachFullQuad(pinBEncoder, pinAEncoder);
       break;
     case PORTA_2_ENCODER:
       pinAEncoder = 15;
       pinBEncoder = 16;
+      encoder.attachFullQuad(pinBEncoder, pinAEncoder);
       break;
-    default:
-      log_e("Encoder não pode ser inicializado");
   }
-   ESP32Encoder encoder;
-   encoder.attachFullQuad(pinBEncoder, pinAEncoder);
-   this->encoder = encoder;
-}
-Encoder::Encoder() {
-  
 }
 
 /**
