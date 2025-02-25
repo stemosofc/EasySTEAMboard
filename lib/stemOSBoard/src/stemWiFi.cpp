@@ -29,8 +29,6 @@ void stemWiFi::start() {
   initWebServer();
   
   LED::NO_DS();
-
-  Control::enableAll();
 }
 
 void stemWiFi::setChannel() {
