@@ -1,7 +1,7 @@
 #include "ServoOS.h"
 
 bool ServoOS::connect = false;
-
+int initialized = 0;
 /**
  * @brief Cria um objeto de Servo
  *
@@ -20,7 +20,13 @@ ServoOS::ServoOS(PortaServo entrada) {
       channel = 10;
       break;
   }
-  servo.attach(entrada, channel, ANGLE_MIN, ANGLE_MAX, MIN_PULSE, MAX_PULSE);
+  if(!initialized)
+  {
+    ESP32PWM::allocateTimer(3);
+    initialized = 1;
+  }
+
+  servo.attach(entrada, MIN_PULSE, MAX_PULSE);
 }
 
 /**

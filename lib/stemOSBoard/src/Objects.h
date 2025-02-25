@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "Motor.h"
 #include "Digital.h"
-#include "ServoOS.h"
+#include "servos/ServoOS.h"
 #include "Analog.h"
 #include "IMU.h"
 #include "PID.h"

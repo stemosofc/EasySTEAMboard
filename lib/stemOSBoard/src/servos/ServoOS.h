@@ -1,7 +1,7 @@
 #ifndef SERVOOS_H
 #define SERVOOS_H
-#include "Servo.h"
-
+#include "servolowlevel/ESP32Servo.h"
+#include "servolowlevel/ESP32PWM.h"
 enum PortaServo {
   PORTA_1_SERVO = 2,
   PORTA_2_SERVO = 26,
@@ -15,8 +15,6 @@ class ServoOS {
       void setSpeed(double speed);
     private:
       friend class EasySTEAM;
-      static const int FREQUENCY = 9000;
-      static const int RESOLUTION = 8;
       static const int ANGLE_MAX = 270;
       static const int ANGLE_MIN = 0;
       static const int MIN_PULSE = 500;

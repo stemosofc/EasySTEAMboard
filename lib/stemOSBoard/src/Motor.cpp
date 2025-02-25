@@ -13,21 +13,17 @@ Motor::Motor(int entrada, bool reverse) : encoder(entrada) {
   pinos(entrada);
 
   if (reverse) {
-    ledcSetup(channelA, Motor::FREQUENCY, Motor::RESOLUTION);
-    ledcAttachPin(pinPWMA, channelA);
+    ledcAttachChannel(pinPWMA, Motor::FREQUENCY, Motor::RESOLUTION, channelA);
 
-    ledcSetup(channelB, Motor::FREQUENCY, Motor::RESOLUTION);
-    ledcAttachPin(pinPWMB, channelB);
+    ledcAttachChannel(pinPWMB, Motor::FREQUENCY, Motor::RESOLUTION, channelB);
   } else {
-    ledcSetup(channelA, Motor::FREQUENCY, Motor::RESOLUTION);
-    ledcAttachPin(pinPWMA, channelB);
+    ledcAttachChannel(pinPWMA, Motor::FREQUENCY, Motor::RESOLUTION, channelB);
 
-    ledcSetup(channelB, Motor::FREQUENCY, Motor::RESOLUTION);
-    ledcAttachPin(pinPWMB, channelA);
+    ledcAttachChannel(pinPWMB, Motor::FREQUENCY, Motor::RESOLUTION, channelA);
   }
 
-  ledcWrite(channelA, 0);
-  ledcWrite(channelB, 0);
+  ledcWriteChannel(channelA, 0);
+  ledcWriteChannel(channelB, 0);
 }
 
 
@@ -78,18 +74,18 @@ void Motor::setPower(double power) {
     power = max(-1.0, min(1.0, power));
     int output_res = abs(power) * MAX_OUTPUT;
     if (power < 0) {
-      ledcWrite(channelA, 0);
-      ledcWrite(channelB, output_res);
+      ledcWriteChannel(channelA, 0);
+      ledcWriteChannel(channelB, output_res);
     } else if(power > 0) {
-      ledcWrite(channelB, 0);
-      ledcWrite(channelA, output_res);
+      ledcWriteChannel(channelB, 0);
+      ledcWriteChannel(channelA, output_res);
     } else {
-      ledcWrite(channelA, 0);
-      ledcWrite(channelB, 0);
+      ledcWriteChannel(channelA, 0);
+      ledcWriteChannel(channelB, 0);
     }
   } else {
-    ledcWrite(channelA, 0);
-    ledcWrite(channelB, 0);
+    ledcWriteChannel(channelA, 0);
+    ledcWriteChannel(channelB, 0);
   }
 }
 
