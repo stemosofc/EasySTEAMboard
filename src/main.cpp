@@ -7,5 +7,5 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(motor2.encoder.getPosition());
+  //Serial.println(motor2.encoder.getPosition());
 }

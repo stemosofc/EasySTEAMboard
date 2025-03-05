@@ -22,7 +22,8 @@ ServoOS::ServoOS(PortaServo entrada) {
   }
   if(!initialized)
   {
-    ESP32PWM::allocateTimer(3);
+    ESP32PWM::allocateTimer(0);
+    ESP32PWM::allocateTimer(1);
     initialized = 1;
   }
 
