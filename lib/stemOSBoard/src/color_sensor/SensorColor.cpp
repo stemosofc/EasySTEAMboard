@@ -1,5 +1,8 @@
 #include "SensorColor.h"
 
+SensorColor::SensorColor() {}
+
+
 void SensorColor::start()
 {
     initialize();

@@ -5,8 +5,9 @@
 #include "Digital.h"
 #include "servos/ServoOS.h"
 #include "Analog.h"
-#include "IMU.h"
+//#include "IMU.h"
 #include "PID.h"
+#include "color_sensor/SensorColor.h"
 
 extern Motor motor1;
 extern Motor motor2;
@@ -23,7 +24,9 @@ extern Digital di3;
 extern Digital di4;
 extern Digital di5;
 
-extern IMU imu;
+//extern IMU imu;
+
+extern SensorColor sensorColor;
 
 class Control {
     private:
