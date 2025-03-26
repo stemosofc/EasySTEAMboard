@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Arduino.h"
-#include "Motor.h"
-#include "Digital.h"
+#include "motor/Motor.h"
+#include "digital/Digital.h"
 #include "servos/ServoOS.h"
-#include "Analog.h"
-#include "IMU.h"
-#include "PID.h"
+#include "analog/Analog.h"
+#include "imu/IMU.h"
+#include "pid/PID.h"
 
 extern Motor motor1;
 extern Motor motor2;

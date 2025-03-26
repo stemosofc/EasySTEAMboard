@@ -2,11 +2,11 @@
 #include "Arduino.h"
 #include <WiFi.h>
 #include <ArduinoJson.h>
-#include "LED.h"
+#include "led/LED.h"
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include "esp32-hal-log.h"
-#include "Gamepad.h"
+#include "gamepad/Gamepad.h"
 #include "Objects.h"
 
 class stemWiFi {
