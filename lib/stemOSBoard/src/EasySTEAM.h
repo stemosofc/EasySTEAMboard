@@ -1,6 +1,6 @@
 #pragma once
 
-#include "stemWiFi.h"
+#include "wifi/stemWiFi.h"
 
 Gamepad gamepad;
 stemWiFi easySTEAM;

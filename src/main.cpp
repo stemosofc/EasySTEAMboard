@@ -3,8 +3,9 @@
 void setup() {
   Serial.begin(115200);
   easySTEAM.start();
+  motor2.setPower(0.1);
 }
 
 void loop() {
-  motor1.setPower(0.5);
+  //Serial.println(motor2.encoder.getPosition());
 }
