@@ -20,7 +20,6 @@ class EasyServo {
     private:
         ServoLL servoLowLevel;
         int channel;
-        int pinNumber;
 };
 
 #endif
