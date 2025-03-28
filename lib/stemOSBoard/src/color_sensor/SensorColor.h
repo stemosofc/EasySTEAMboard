@@ -4,6 +4,8 @@
 #include "APDS9151.h"
 #include "esp32-hal-log.h"
 
+// class for use of sensor color
+
 class SensorColor
 {
     public:

@@ -2,7 +2,7 @@
 
 SensorColor::SensorColor() {}
 
-
+// start color sensor
 void SensorColor::start()
 {
     initialize();
