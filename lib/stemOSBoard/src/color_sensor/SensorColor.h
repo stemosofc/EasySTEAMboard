@@ -1,8 +1,10 @@
 #ifndef SensorColor_h
 #define SensorColor_h
 
-#include "APDS9151.h"
+#include "chip/APDS9151.h"
 #include "esp32-hal-log.h"
+
+// class for use of sensor color
 
 class SensorColor
 {
