@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "random": "cpp",
+        "*.tcc": "cpp",
+        "exception": "cpp",
+        "memory_resource": "cpp",
+        "format": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "stop_token": "cpp",
+        "streambuf": "cpp"
+    }
+}

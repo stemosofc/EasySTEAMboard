@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Arduino.h"
+
 #include "motor/Motor.h"
 #include "digital/Digital.h"
 #include "servos/Servo.h"
@@ -24,6 +25,8 @@ extern Digital di4;
 extern Digital di5;
 
 extern IMU imu;
+
+extern SensorColor sensorColor;
 
 class Control {
     private:

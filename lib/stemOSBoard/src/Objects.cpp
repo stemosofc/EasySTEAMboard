@@ -15,7 +15,9 @@ Digital di3(PortasDigitais::PORTA_3);
 Digital di4(PortasDigitais::PORTA_4);
 Digital di5(PortasDigitais::PORTA_5);
 
-IMU imu;
+//IMU imu;
+
+SensorColor sensorColor;
 
 void Control::disableMotors() {
     Motor::stop();
