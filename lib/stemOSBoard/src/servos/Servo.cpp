@@ -1,16 +1,16 @@
 #include "Servo.h"
 
-EasyServo::EasyServo(Servo::PortaServo entrada)
+EasyServo::EasyServo(Servo::ServoPorts entrada)
 {
     switch(entrada)
     {
-        case Servo::PortaServo::PORTA_1:
+        case Servo::ServoPorts::PORTA_1:
             channel = 8;
             break;
-        case Servo::PortaServo::PORTA_2:
+        case Servo::ServoPorts::PORTA_2:
             channel = 9;
             break;
-        case Servo::PortaServo::PORTA_3: 
+        case Servo::ServoPorts::PORTA_3: 
             channel = 10;
             break;
     }

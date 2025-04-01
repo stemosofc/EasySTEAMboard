@@ -1,6 +1,6 @@
 #include "Encoder.h"
 
-Encoder::Encoder(Config_Encoder::EncoderPorts encoderPort)
+Encoder::Encoder(uint8_t encoderPort)
 {
     switch(encoderPort)
     {

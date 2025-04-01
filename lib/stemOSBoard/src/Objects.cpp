@@ -5,38 +5,33 @@ Motor motor2(Motor::PORTA_2, Motor::FORWARD);
 Motor motor3(Motor::PORTA_3, Motor::FORWARD);
 Motor motor4(Motor::PORTA_4, Motor::FORWARD);
 
-ServoOS servo1(PORTA_1_SERVO);
-ServoOS servo2(PORTA_2_SERVO);
-ServoOS servo3(PORTA_3_SERVO);
+EasyServo servo1(Servo::ServoPorts::PORTA_1);
+EasyServo servo2(Servo::ServoPorts::PORTA_1);
+EasyServo servo3(Servo::ServoPorts::PORTA_1);
 
-Digital di1(PortasDigitais::PORTA_1);
-Digital di2(PortasDigitais::PORTA_2);
-Digital di3(PortasDigitais::PORTA_3);
-Digital di4(PortasDigitais::PORTA_4);
-Digital di5(PortasDigitais::PORTA_5);
+Digital di1(IOPorts::PORTA_1);
+Digital di2(IOPorts::PORTA_2);
+Digital di3(IOPorts::PORTA_3);
+Digital di4(IOPorts::PORTA_4);
+Digital di5(IOPorts::PORTA_5);
 
-//IMU imu;
+IMU imu;
 
-SensorColor sensorColor;
+//SensorColor sensorColor;
+
 
 void Control::disableMotors() {
-    Motor::stop();
-    motor1.setPower(0);
-    motor2.setPower(0);
-    motor3.setPower(0);
-    motor4.setPower(0);
+
 }
 
 void Control::disableServos() {
-    ServoOS::disable();
+
 }
 
 void Control::stopAll() {
-    disableMotors();
-    disableServos();
+
 }
 
 void Control::enableAll() {
-    Motor::enable();
-    ServoOS::enable();
+
 }

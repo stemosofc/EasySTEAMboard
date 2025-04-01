@@ -15,7 +15,7 @@ class IMU : public Task {
         double getPitch();
     private:
         ICM_20948_I2C myICM;
-        const int AD0_VAL = 1;
+        const int AD0_VAL = 0;
         void update(void * arg);
         double q2sqr;
         double q0;

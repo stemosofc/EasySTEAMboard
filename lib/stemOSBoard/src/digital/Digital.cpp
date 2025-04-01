@@ -6,7 +6,7 @@
  * @param [in] Porta a qual o sensor está conectado
  * @return N/A.
  */
-Digital::Digital(PortasDigitais entrada) {
+Digital::Digital(IOPorts entrada) {
   signalPin = entrada;
   pinMode(signalPin, INPUT); 
 }

@@ -3,7 +3,7 @@
 #include "Arduino.h"
 
 // Enum das portas digitais para corresponder aos pinos
-enum PortasDigitais {
+enum IOPorts {
   PORTA_1 = 34,
   PORTA_2 = 35,
   PORTA_3 = 36,
@@ -13,7 +13,7 @@ enum PortasDigitais {
 
 class Digital {
   public:
-    Digital(PortasDigitais entrada); // Construtor da classe Digital
+    Digital(IOPorts entrada); // Construtor da classe Digital
     bool getInput(); // Obtém a entrada da porta digital
   private:
     int signalPin; // Pino de sinal

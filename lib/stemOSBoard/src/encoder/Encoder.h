@@ -15,7 +15,7 @@ namespace Config_Encoder
 class Encoder : public EncoderLL
 {
     public:
-        Encoder(Config_Encoder::EncoderPorts encoderPort);
+        Encoder(uint8_t entrada);
         float getPosition();
         void reset();
         void setPositionFactor(float factor);

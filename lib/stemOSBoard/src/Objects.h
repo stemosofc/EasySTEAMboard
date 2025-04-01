@@ -26,8 +26,6 @@ extern Digital di5;
 
 extern IMU imu;
 
-extern SensorColor sensorColor;
-
 class Control {
     private:
         friend class stemWiFi;
