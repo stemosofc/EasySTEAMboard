@@ -1,5 +1,7 @@
 #include "stemWiFi.h"
 
+bool DS_CONECTADA = false;
+
 stemWiFi::stemWiFi() {
 
 }
@@ -139,7 +141,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
       if(!previousGamepadState) {
         previousTime = millis();
-        Control::enableAll();
+        DS_CONECTADA = true;
       }
 
       if(count > 4) count = 0;
@@ -171,10 +173,10 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
 void stemWiFi::disconnect(bool error) {
   Gamepad::reset();
-  control.stopAll();
+  ws->closeAll();
+  ws->cleanupClients();
+  DS_CONECTADA = false;
   if(error) {
-    ws->closeAll();
-    ws->cleanupClients();
     LED::ERRO();
   }
 }

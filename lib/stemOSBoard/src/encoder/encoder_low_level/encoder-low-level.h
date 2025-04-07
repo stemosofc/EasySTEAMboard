@@ -1,7 +1,7 @@
 #ifndef encoder_low_level_h
 #define encoder_low_level_h
 
-#include "driver/gpio.h"
+#include "master.h"
 #include "driver/pulse_cnt.h"
 #include "hal/pcnt_types.h"
 #include <freertos/FreeRTOS.h>

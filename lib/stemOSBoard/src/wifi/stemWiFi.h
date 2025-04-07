@@ -1,14 +1,12 @@
 #pragma once
-#include "Arduino.h"
+
 #include <WiFi.h>
 #include <ArduinoJson.h>
 #include "led/LED.h"
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include "esp32-hal-log.h"
 #include "gamepad/Gamepad.h"
-#include "Objects.h"
-
+#include "master.h"
 class stemWiFi {
   public:
     stemWiFi(void);
@@ -33,5 +31,4 @@ class stemWiFi {
     bool previousGamepadState = false;
     int count = 0;
     int delay[5];
-    Control control;
 };
