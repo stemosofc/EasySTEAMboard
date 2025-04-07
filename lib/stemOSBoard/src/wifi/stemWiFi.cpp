@@ -139,7 +139,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
     ACTUATORS_ENABLE = DS_ENABLE = Gamepad::status();
 
-    if(jon["COMM"] == false)
+    if(!jon["COMM"])
     {
       disconnectWebsocketClients(false);
     }
