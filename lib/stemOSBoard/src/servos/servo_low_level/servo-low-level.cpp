@@ -18,7 +18,7 @@ void ServoLL::attach(int pin, int min, int max, int channel)
     if(ledcAttachChannel(pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel))
         log_i("Successful Servo Attached on pin(%d), freq(%d), resl(%d) and channel(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel);
     else
-        log_e("Successful Servo don't Attached on pin(%d), freq(%d), resl(%d) and channel(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel);
+        log_e("Servo don't Attached on pin(%d), freq(%d), resl(%d) and channel(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel);
 }
 
 void ServoLL::attach(int pin, int channel)
