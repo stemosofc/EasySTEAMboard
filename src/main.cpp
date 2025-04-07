@@ -6,5 +6,10 @@ void setup() {
   easySTEAM.start();
 }
 void loop() {
-
+  servo1.setPosition(270);
+  Serial.printf("Servo 1: %d\n", servo1.getPosition());
+  delay(1000);
+  servo1.setPosition(0);
+  Serial.printf("Servo 1: %d\n", servo1.getPosition());
+  delay(1000);
 }

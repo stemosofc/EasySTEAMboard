@@ -137,13 +137,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
     Gamepad::gamepad = jon;
 
-    DS_ENABLE = Gamepad::status();
-
-    if(!DS_ENABLE) {
-      ACTUATORS_ENABLE = false;
-    } else {
-      ACTUATORS_ENABLE = true;
-    }
+    ACTUATORS_ENABLE = DS_ENABLE = Gamepad::status();
 
     if(jon["COMM"] == false)
     {
@@ -156,7 +150,7 @@ void stemWiFi::disconnectWebsocketClients(bool error) {
   Gamepad::reset();
   ws->cleanupClients();
   ws->closeAll();
-  ACTUATORS_ENABLE = false;
+  ACTUATORS_ENABLE = DS_ENABLE = false;
   if(error) {
     LED::ERRO();
   }
