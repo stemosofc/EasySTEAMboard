@@ -7,8 +7,8 @@ enum PortasDigitais {
   PORTA_1 = 34,
   PORTA_2 = 35,
   PORTA_3 = 36,
-  PORTA_4 = 39,
-  PORTA_5 = 17
+  PORTA_4 = 17,
+  PORTA_5 = 39
 };
 
 class Digital {

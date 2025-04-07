@@ -29,6 +29,8 @@ void stemWiFi::start() {
   initWebServer();
   
   LED::NO_DS();
+
+  Control::enableAll();
 }
 
 void stemWiFi::setChannel() {
@@ -142,6 +144,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
         Control::enableAll();
       }
 
+      /*
       if(count > 4) count = 0;
       delay[count] = actualTime - previousTime;
       ++count;
@@ -155,6 +158,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
           delay[i] = 0;
         }
       } 
+       */
     } else {
       disconnect(false);
     }

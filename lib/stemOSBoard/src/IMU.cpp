@@ -16,9 +16,10 @@ void IMU::init() {
 
   while (!initialized)
   {
-    myICM.begin(Wire, AD0_VAL);
+    myICM.begin(Wire, true);
 
-    log_d("Initialization of the sensor returned", Serial.println(myICM.statusString()));
+    log_d("Initialization of the sensor returned");
+    Serial.println(myICM.statusString());
 
     if (myICM.status != ICM_20948_Stat_Ok)
     {
