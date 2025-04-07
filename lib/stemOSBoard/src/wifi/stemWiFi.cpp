@@ -1,9 +1,20 @@
 #include "stemWiFi.h"
 
-bool DS_CONECTADA = false;
+bool DS_ENABLE = false;
+bool ACTUATORS_ENABLE = false;
 
-stemWiFi::stemWiFi() {
 
+void stemWiFi::start() {
+  LED::init();
+  LED::CONFIGURE_WIFI();
+  
+  WiFi.onEvent(std::bind(&stemWiFi::onEventWiFi, this, std::placeholders::_1));
+
+  setChannel();
+  
+  initWebServer();
+  
+  LED::NO_DS();
 }
 
 void stemWiFi::initWebServer() {
@@ -18,19 +29,6 @@ void stemWiFi::initWebServer() {
       , std::placeholders::_6));
     server->addHandler(ws);
     server->begin();
-}
-
-void stemWiFi::start() {
-  LED::init();
-  LED::CONFIGURE_WIFI();
-  
-  WiFi.onEvent(std::bind(&stemWiFi::onEventWiFi, this, std::placeholders::_1));
-
-  setChannel();
-  
-  initWebServer();
-  
-  LED::NO_DS();
 }
 
 void stemWiFi::setChannel() {
@@ -83,20 +81,19 @@ void stemWiFi::errorJson(DeserializationError err) {
 
 void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
  void *arg, uint8_t *data, size_t len) {
+  Serial.printf("Type of event %d\n", type);
   switch (type) {
     case WS_EVT_CONNECT:
       id = client->id();
       client->text("Conectado");
       log_d("WebSocket client connected");
-      previousTime = millis();
       Gamepad::gamepad["EN"] = false;
       LED::OK();
       break;
     case WS_EVT_DISCONNECT:
-      client->text("Desconectado");
-      log_d("WebSocket client disconnected");
       LED::NO_DS();
-      disconnect(false);
+      log_d("WebSocket client disconnected");
+      disconnectWebsocketClients(false);
       break;
     case WS_EVT_DATA:
       handleWebSocketMessage(arg, data, len);
@@ -123,7 +120,7 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
         case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
-          if(ws->hasClient(id)) disconnect(true);
+          if(ws->hasClient(id)) disconnectWebsocketClients(true);
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
             break;
@@ -134,31 +131,12 @@ void stemWiFi::onEventWiFi(WiFiEvent_t event){
 void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
   AwsFrameInfo *info = (AwsFrameInfo*)arg;
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
-    bool gamepadState = Gamepad::status();
+    DS_ENABLE = Gamepad::status();
 
-    if(gamepadState) {
-      int actualTime = millis();
-
-      if(!previousGamepadState) {
-        previousTime = millis();
-        DS_CONECTADA = true;
-      }
-
-      if(count > 4) count = 0;
-      delay[count] = actualTime - previousTime;
-      ++count;
-      int medDelay = (delay[0] + delay[1] + delay[2] + delay[3] + delay[4]) / 5;
-      previousTime = actualTime;
-
-      if(medDelay >= TIMEOUT_DELAY) {
-        disconnect(true);
-        log_e("Latência maior que 100ms");
-        for(int i = 0; i < sizeof(delay)/sizeof(int); i++) {
-          delay[i] = 0;
-        }
-      } 
+    if(!DS_ENABLE) {
+      ACTUATORS_ENABLE = false;
     } else {
-      disconnect(false);
+      ACTUATORS_ENABLE = true;
     }
 
     JsonDocument jon;              
@@ -166,16 +144,14 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     errorJson(err);
 
     Gamepad::gamepad = jon;
-
-    previousGamepadState = gamepadState;
   }
 }
 
-void stemWiFi::disconnect(bool error) {
+void stemWiFi::disconnectWebsocketClients(bool error) {
   Gamepad::reset();
   ws->closeAll();
-  ws->cleanupClients();
-  DS_CONECTADA = false;
+  //ws->cleanupClients();
+  ACTUATORS_ENABLE = false;
   if(error) {
     LED::ERRO();
   }

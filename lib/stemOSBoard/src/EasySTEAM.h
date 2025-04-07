@@ -2,8 +2,6 @@
 #define _EASYSTEAM_H
 
 #include "digital/Digital.h"
-#include "encoder/Encoder.h"
-#include "gamepad/Gamepad.h"
 #include "motor/Motor.h"
 #include "servos/Servo.h"
 #include "wifi/stemWiFi.h"

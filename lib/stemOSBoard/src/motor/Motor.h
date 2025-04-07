@@ -1,7 +1,6 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#include "master.h"
 #include "encoder/Encoder.h"
 
 class Motor {

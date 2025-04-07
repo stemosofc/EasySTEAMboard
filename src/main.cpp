@@ -3,7 +3,8 @@
 
 void setup() {
   Serial.begin(115200);
+  easySTEAM.start();
 }
 void loop() {
-  Serial.printf("Encoder 1: %lf\n", motor1.encoder.getPosition());
+
 }

@@ -8,6 +8,7 @@
 #include "esp32-hal-log.h"
 #include "Arduino.h"
 
-extern bool DS_CONECTADA;
+extern bool DS_ENABLE;
+extern bool ACTUATORS_ENABLE;
 
 #endif

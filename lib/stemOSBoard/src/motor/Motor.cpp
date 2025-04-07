@@ -68,7 +68,7 @@ void Motor::pinos(int entrada) {
  * @return N/A.
  */
 void Motor::setPower(double power) {
-  if(DS_CONECTADA) {
+  if(DS_ENABLE) {
     power = max(-1.0, min(1.0, power));
     int output_res = abs(power) * MAX_OUTPUT;
     if (power < 0) {
