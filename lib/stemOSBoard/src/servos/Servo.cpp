@@ -1,16 +1,16 @@
 #include "Servo.h"
 
-EasyServo::EasyServo(Servo::ServoPorts entrada)
+EasyServo::EasyServo(Config_Servo::Port entrada)
 {
     switch(entrada)
     {
-        case Servo::ServoPorts::PORTA_1:
+        case Config_Servo::Port::PORTA_1:
             channel = 8;
             break;
-        case Servo::ServoPorts::PORTA_2:
+        case Config_Servo::Port::PORTA_2:
             channel = 9;
             break;
-        case Servo::ServoPorts::PORTA_3: 
+        case Config_Servo::Port::PORTA_3: 
             channel = 10;
             break;
     }
@@ -21,7 +21,7 @@ EasyServo::EasyServo(Servo::ServoPorts entrada)
 
 void EasyServo::setPosition(int angleInDegrees)
 {
-    servoLowLevel.writeAngleDegrees(angleInDegrees);
+    if(DS_ENABLE) servoLowLevel.writeAngleDegrees(angleInDegrees);
 }
 
 int EasyServo::getPosition()

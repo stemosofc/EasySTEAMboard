@@ -1,8 +1,7 @@
-#ifndef servo_low_level_h
-#define servo_low_level_h
+#ifndef _SERVO_LOW_LEVEL_h_
+#define _SERVO_LOW_LEVEL_h_
 
-#include "esp32-hal-log.h"
-#include "Arduino.h"
+#include "master.h"
 
 class ServoLL
 {
@@ -18,7 +17,7 @@ class ServoLL
         static const int DEFAULT_MIN_PULSE = 500;
         static const int DEFAULT_MAX_PULSE = 2500; 
         static const int DEFAULT_FREQUENCY = 50; 
-        static const int DEFAULT_RESOLUTION_BITS = 10;
+        static const int DEFAULT_RESOLUTION_BITS = LEDC_TIMER_10_BIT;
         static const int DEFAULT_REFRESH_USEC = 20000;
         static const int DEFAULT_TIMER_WIDTH_TICKS = 1024;
         
