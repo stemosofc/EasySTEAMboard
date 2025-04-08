@@ -142,7 +142,6 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
     if(!comm)
     {
-      log_i("Desconectando!!!");
       disconnectWebsocketClients(false);
     }
   } 
