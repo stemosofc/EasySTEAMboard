@@ -90,7 +90,6 @@ void stemWiFi::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
       LED::OK();
       break;
     case WS_EVT_DISCONNECT:
-      LED::NO_DS();
       log_i("DS disconnected");
       break;
     case WS_EVT_DATA:
@@ -139,8 +138,11 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
     ACTUATORS_ENABLE = DS_ENABLE = Gamepad::status();
 
-    if(!jon["COMM"])
+    bool comm = jon["COMM"] | true;
+
+    if(!comm)
     {
+      log_i("Desconectando!!!");
       disconnectWebsocketClients(false);
     }
   } 
@@ -148,10 +150,13 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 
 void stemWiFi::disconnectWebsocketClients(bool error) {
   Gamepad::reset();
-  ws->cleanupClients();
   ws->closeAll();
+  ws->cleanupClients();
   ACTUATORS_ENABLE = DS_ENABLE = false;
   if(error) {
     LED::ERRO();
+  } else
+  {
+    LED::NO_DS();
   }
 }
