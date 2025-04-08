@@ -1,7 +1,7 @@
-#include "Arara.h"
+#include "EasySTEAM.h"
 
 void setup() {
-    Arara.start();
+    easySTEAM.start();
 }
 
 void loop() {
