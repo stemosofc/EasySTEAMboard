@@ -4,7 +4,7 @@
 #include "digital/Digital.h"
 #include "motor/Motor.h"
 #include "servos/Servo.h"
-#include "wifi/stemWiFi.h"
+#include "wifi/easyWiFi.h"
 
 Motor motor1(Motor::PORTA_1);
 Motor motor2(Motor::PORTA_2);
