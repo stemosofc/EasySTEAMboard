@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EASY_WIFI_H_
+#define EASY_WIFI_H_
 
 #include <WiFi.h>
 #include <ArduinoJson.h>
@@ -27,3 +28,5 @@ class stemWiFi {
     void onEventWiFi(WiFiEvent_t event);
     void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
 };
+
+#endif

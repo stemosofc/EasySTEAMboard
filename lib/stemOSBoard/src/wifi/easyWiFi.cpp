@@ -1,4 +1,4 @@
-#include "stemWiFi.h"
+#include "easyWiFi.h"
 
 bool DS_ENABLE = false;
 bool ACTUATORS_ENABLE = false;
