@@ -1,6 +1,6 @@
 #include "servo-low-level.h"
 
-void ServoLL::attach(int pin, int min, int max, int channel)
+void ServoLL::attach(uint8_t pin, uint32_t min, uint32_t max, uint8_t channel)
 {
     this->pin = pin;
 
@@ -21,17 +21,17 @@ void ServoLL::attach(int pin, int min, int max, int channel)
         log_e("Servo don't Attached on pin(%d), freq(%d), resl(%d) and channel(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel);
 }
 
-void ServoLL::attach(int pin, int channel)
+void ServoLL::attach(uint8_t pin, uint8_t channel)
 {
     attach(pin, DEFAULT_MIN_PULSE, DEFAULT_MAX_PULSE, channel);
 }
 
-void ServoLL::writeAngleDegrees(int angleInDegrees)
+void ServoLL::writeAngleDegrees(uint16_t angleInDegrees)
 {
     writeMicroseconds(angleToUs(angleInDegrees));
 }
 
-void ServoLL::writeMicroseconds(int microseconds)
+void ServoLL::writeMicroseconds(uint32_t microseconds)
 {
     writeTicks(usToTicks(microseconds));  // convert to ticks
 }
@@ -47,27 +47,27 @@ int ServoLL::readAngleDegrees()
     return (map(readMicroseconds(), DEFAULT_MIN_PULSE, DEFAULT_MAX_PULSE, DEFAULT_ANGLE_MIN_DEGREES, DEFAULT_ANGLE_MAX_DEGREES));
 }
 
-int ServoLL::readMicroseconds()
+uint32_t ServoLL::readMicroseconds()
 {
     return ticksToUs(currentTicks);
 }
 
-int ServoLL::readTicks()
+uint32_t ServoLL::readTicks()
 {
     return currentTicks;
 }
 
-int ServoLL::usToTicks(int usec)
+uint32_t ServoLL::usToTicks(uint32_t usec)
 {
     return (int)((double)usec / ((double)DEFAULT_REFRESH_USEC / (double)this->DEFAULT_TIMER_WIDTH_TICKS)*(((double)DEFAULT_FREQUENCY)/50.0));
 }
 
-int ServoLL::ticksToUs(int ticks)
+uint32_t ServoLL::ticksToUs(uint32_t ticks)
 {
     return (int)((double)ticks * ((double)DEFAULT_REFRESH_USEC / (double)this->DEFAULT_TIMER_WIDTH_TICKS)/(((double)DEFAULT_FREQUENCY)/50.0));
 }
 
-int ServoLL::angleToUs(int angleInDegrees)
+uint32_t ServoLL::angleToUs(uint16_t angleInDegrees)
 {
     return map(angleInDegrees, DEFAULT_ANGLE_MIN_DEGREES, DEFAULT_ANGLE_MAX_DEGREES, DEFAULT_MIN_PULSE, DEFAULT_MAX_PULSE);
 }

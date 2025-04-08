@@ -4,11 +4,11 @@ Encoder::Encoder(uint8_t encoderPort)
 {
     switch(encoderPort)
     {
-        case Config_Encoder::EncoderPorts::PORTA_1_ENCODER:
+        case Config_Encoder::EncoderPorts::PORTA_1:
             pinA = GPIO_NUM_5;
             pinB = GPIO_NUM_14;
             break;
-        case Config_Encoder::EncoderPorts::PORTA_2_ENCODER:
+        case Config_Encoder::EncoderPorts::PORTA_2:
             pinA = GPIO_NUM_15;
             pinB = GPIO_NUM_16;
             break;

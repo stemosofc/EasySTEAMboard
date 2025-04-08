@@ -6,9 +6,9 @@
 class ServoLL
 {
     public:
-        void attach(int pin, int minPulse, int maxPulse, int channel);
-        void attach(int pin, int channel);
-        void writeAngleDegrees(int angleInDegrees); 
+        void attach(uint8_t pin, uint32_t minPulse, uint32_t maxPulse, uint8_t channel);
+        void attach(uint8_t pin, uint8_t channel);
+        void writeAngleDegrees(uint16_t angleInDegrees); 
         int readAngleDegrees();
 
     private:
@@ -26,15 +26,15 @@ class ServoLL
         int pin = -1;
         int currentTicks = 0;
 
-        int usToTicks(int usec);
-        int ticksToUs(int ticks);
-        int angleToUs(int angleInDegrees);
+        uint32_t usToTicks(uint32_t usec);
+        uint32_t ticksToUs(uint32_t ticks);
+        uint32_t angleToUs(uint16_t angleInDegrees);
 
-        void writeMicroseconds(int microseconds);    
+        void writeMicroseconds(uint32_t microseconds);    
         void writeTicks(uint32_t ticks);   
         
-        int readMicroseconds();
-        int readTicks();
+        uint32_t readMicroseconds();
+        uint32_t readTicks();
 };
 
 
