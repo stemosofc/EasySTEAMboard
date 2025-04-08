@@ -7,8 +7,8 @@ namespace Config_Encoder
 {
     enum EncoderPorts
     {
-        PORTA_1_ENCODER = 1,
-        PORTA_2_ENCODER = 2,
+        PORTA_1 = 1,
+        PORTA_2 = 2,
     };
 }
 
