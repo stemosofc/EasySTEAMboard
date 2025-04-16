@@ -2,7 +2,6 @@
 
 void setup() {
   easySTEAM.start();
-  Serial.begin(115200);
 }
 
 void loop() {

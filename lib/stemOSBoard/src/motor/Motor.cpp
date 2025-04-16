@@ -1,7 +1,5 @@
 #include "Motor.h"
 
-bool Motor::connection = false;
-
 /**
  * @brief Cria um objeto de Motor
  *
@@ -13,13 +11,13 @@ Motor::Motor(int entrada, bool reverse) : encoder(entrada) {
   pinos(entrada);
 
   if (reverse) {
-    ledcAttachChannel(pinPWMA, Motor::FREQUENCY, Motor::RESOLUTION, channelA);
+    ledcAttachChannel(pinPWMA, FREQUENCY, RESOLUTION, channelA);
 
-    ledcAttachChannel(pinPWMB, Motor::FREQUENCY, Motor::RESOLUTION, channelB);
+    ledcAttachChannel(pinPWMB, FREQUENCY, RESOLUTION, channelB);
   } else {
-    ledcAttachChannel(pinPWMA, Motor::FREQUENCY, Motor::RESOLUTION, channelB);
+    ledcAttachChannel(pinPWMA, FREQUENCY, RESOLUTION, channelB);
 
-    ledcAttachChannel(pinPWMB, Motor::FREQUENCY, Motor::RESOLUTION, channelA);
+    ledcAttachChannel(pinPWMB, FREQUENCY, RESOLUTION, channelA);
   }
 
   ledcWriteChannel(channelA, 0);
@@ -36,28 +34,28 @@ Motor::Motor(int entrada, bool reverse) : encoder(entrada) {
 void Motor::pinos(int entrada) {
   switch (entrada) {
     case Motor::PORTA_1:
-      pinPWMA = 4; 
-      pinPWMB = 13;
-      channelA = 0;
-      channelB = 1;
+      pinPWMA = GPIO_NUM_4;  
+      pinPWMB = GPIO_NUM_13; 
+      channelA = LEDC_CHANNEL_0;
+      channelB = LEDC_CHANNEL_1;
       break;
-    case Motor::PORTA_2:
-      pinPWMA = 18;
-      pinPWMB = 19;
-      channelA = 2;
-      channelB = 3;
+    case Motor::PORTA_2: 
+      pinPWMA = GPIO_NUM_18;
+      pinPWMB = GPIO_NUM_19;
+      channelA = LEDC_CHANNEL_2;
+      channelB = LEDC_CHANNEL_3;
       break;
     case Motor::PORTA_3:
-      pinPWMA = 23;
-      pinPWMB = 25;
-      channelA = 4;
-      channelB = 5;
+      pinPWMA = GPIO_NUM_23;
+      pinPWMB = GPIO_NUM_25;
+      channelA = LEDC_CHANNEL_4; 
+      channelB = LEDC_CHANNEL_5;
       break;
     case Motor::PORTA_4:
-      pinPWMA = 32;
-      pinPWMB = 33;
-      channelA = 6;
-      channelB = 7;
+      pinPWMA = GPIO_NUM_32; 
+      pinPWMB = GPIO_NUM_33; 
+      channelA = LEDC_CHANNEL_6;
+      channelB = LEDC_CHANNEL_7;
       break;
   }
 }
@@ -70,7 +68,7 @@ void Motor::pinos(int entrada) {
  * @return N/A.
  */
 void Motor::setPower(double power) {
-  if(connection) {
+  if(DS_ENABLE) {
     power = max(-1.0, min(1.0, power));
     int output_res = abs(power) * MAX_OUTPUT;
     if (power < 0) {
@@ -87,12 +85,4 @@ void Motor::setPower(double power) {
     ledcWriteChannel(channelA, 0);
     ledcWriteChannel(channelB, 0);
   }
-}
-
-void Motor::stop() {
-  connection = false;
-}
-
-void Motor::enable() {
-  connection = true;
 }

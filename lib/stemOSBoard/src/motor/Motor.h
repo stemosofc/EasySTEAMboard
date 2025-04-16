@@ -1,11 +1,11 @@
 #ifndef MOTOR_H
 #define MOTOR_H
-#include "Arduino.h"
+
 #include "encoder/Encoder.h"
 
 class Motor {
   public:
-    explicit Motor(int entrada, bool reverse); // Construtor da classe motor
+    explicit Motor(int entrada, bool reverse=false); // Construtor da classe motor
     void setPower(double power); // Define a velocidade do motor (-1.0 a 1.0)
     Encoder encoder;
     static const int PORTA_1 = 1; // Portas de motor da placa
@@ -20,12 +20,8 @@ class Motor {
     int channelA; // Canal PWM A
     int channelB; // Canal PWM B
     void pinos(int entrada); // Configura os pinos com base na porta do motor
-    static void stop();
-    static void enable();
-    static bool connection;
-    static const int RESOLUTION = 10; // Resolução (bits) do canal PWM (1024)
+    static const int RESOLUTION = LEDC_TIMER_10_BIT; // Resolução (bits) do canal PWM (1024)
     static const int FREQUENCY = 10000; // Frequência do canal
-    static const int MAX_OUTPUT = 1002;
-    friend class Control;
+    static const int MAX_OUTPUT = 972;
 };
 #endif

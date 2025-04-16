@@ -1,15 +1,14 @@
-#ifndef servo_low_level_h
-#define servo_low_level_h
+#ifndef _SERVO_LOW_LEVEL_h_
+#define _SERVO_LOW_LEVEL_h_
 
-#include "esp32-hal-log.h"
-#include "Arduino.h"
+#include "master.h"
 
 class ServoLL
 {
     public:
-        void attach(int pin, int minPulse, int maxPulse, int channel);
-        void attach(int pin, int channel);
-        void writeAngleDegrees(int angleInDegrees); 
+        void attach(uint8_t pin, uint32_t minPulse, uint32_t maxPulse, uint8_t channel);
+        void attach(uint8_t pin, uint8_t channel);
+        void writeAngleDegrees(uint16_t angleInDegrees); 
         int readAngleDegrees();
 
     private:
@@ -18,7 +17,7 @@ class ServoLL
         static const int DEFAULT_MIN_PULSE = 500;
         static const int DEFAULT_MAX_PULSE = 2500; 
         static const int DEFAULT_FREQUENCY = 50; 
-        static const int DEFAULT_RESOLUTION_BITS = 10;
+        static const int DEFAULT_RESOLUTION_BITS = LEDC_TIMER_10_BIT;
         static const int DEFAULT_REFRESH_USEC = 20000;
         static const int DEFAULT_TIMER_WIDTH_TICKS = 1024;
         
@@ -27,15 +26,15 @@ class ServoLL
         int pin = -1;
         int currentTicks = 0;
 
-        int usToTicks(int usec);
-        int ticksToUs(int ticks);
-        int angleToUs(int angleInDegrees);
+        uint32_t usToTicks(uint32_t usec);
+        uint32_t ticksToUs(uint32_t ticks);
+        uint32_t angleToUs(uint16_t angleInDegrees);
 
-        void writeMicroseconds(int microseconds);    
+        void writeMicroseconds(uint32_t microseconds);    
         void writeTicks(uint32_t ticks);   
         
-        int readMicroseconds();
-        int readTicks();
+        uint32_t readMicroseconds();
+        uint32_t readTicks();
 };
 
 
