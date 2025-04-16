@@ -5,7 +5,7 @@
 #include "motor/Motor.h"
 #include "servos/Servo.h"
 #include "wifi/easyWiFi.h"
-#include "imu/imu.hpp"
+#include "i2c/imu/imu.hpp"
 
 Motor motor1(Motor::PORTA_1);
 Motor motor2(Motor::PORTA_2);
