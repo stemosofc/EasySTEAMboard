@@ -192,7 +192,7 @@ void setMainCtrl(bool SAI_PS, bool SAI_LS, bool SW_RESET, bool RGB_MODE, bool LS
 
 void setPsLedConfigure(PS_FREQUENCY ledPulseFreq, PS_CURRENT ledCurrent)
 {
-    uint8_t psLed = ledPulseFreq | ledCurrent;
+    uint8_t psLed = ((uint8_t)ledPulseFreq) | ((uint8_t)ledCurrent);
     ESP_ERROR_CHECK_WITHOUT_ABORT(write_register(REGISTERS::__PS_LED_ADDR, psLed));
 }
 
@@ -203,13 +203,13 @@ void setPsPulsesConfigure(PS_PULSES numberOfLedPulses)
 
 void setPsMeasRateConfigure(PS_RESOLUTION psResolution, PS_MEASUREMENT_RATE psMeasurementRate)
 {
-    uint8_t psMeasRate = psResolution | psMeasurementRate;
+    uint8_t psMeasRate = ((uint8_t)psResolution) | ((uint8_t)psMeasurementRate);
     ESP_ERROR_CHECK_WITHOUT_ABORT(write_register(REGISTERS::__PS_MEAS_RATE_ADDR, psMeasRate));
 }
 
 void setLsMeasRateConfigure(LS_RESOLUTION lsResolution, LS_MEASUREMENT_RATE lsMeasurementRate)
 {
-    uint8_t lsMeasRate = lsResolution | lsMeasurementRate;
+    uint8_t lsMeasRate = ((uint8_t)lsResolution) | ((uint8_t)lsMeasurementRate);
     ESP_ERROR_CHECK_WITHOUT_ABORT(write_register(REGISTERS::__LS_MEAS_RATE_ADDR, lsMeasRate));
 }
 
