@@ -1,0 +1,22 @@
+#ifndef SensorColor_h
+#define SensorColor_h
+
+#include "chip/APDS9151.h"
+#include "esp32-hal-log.h"
+
+// class for use of sensor color
+
+class SensorColor
+{
+    public:
+        SensorColor(void);
+        int getGreen(void);
+        int getRed(void);
+        int getBlue(void);
+        int getPS(void);
+        int getIR(void);
+        void start(void);
+};
+
+
+#endif
