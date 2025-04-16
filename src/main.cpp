@@ -1,10 +1,12 @@
 #include "EasySTEAM.h"
-#include <Arduino.h>
 
 void setup() {
   Serial.begin(115200);
-  easySTEAM.start();
+  imu.start();
 }
 void loop() {
-
+  Serial.printf("Yaw: %lf\n", imu.getYaw());
+  Serial.printf("Roll: %lf\n", imu.getRoll());
+  Serial.printf("Pitch: %lf\n", imu.getPitch());
+  imu.calc();
 }

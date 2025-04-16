@@ -12,6 +12,7 @@
         "shared_mutex": "cpp",
         "sstream": "cpp",
         "stop_token": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "icm20948_config_driver_i2c.h": "c"
     }
 }
