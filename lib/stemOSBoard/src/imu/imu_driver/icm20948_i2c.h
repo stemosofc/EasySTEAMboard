@@ -9,17 +9,11 @@
 
 extern uint32_t timeout;
 
-extern i2c_master_bus_config_t i2c_mst_config;
-
-extern i2c_master_bus_handle_t i2c_bus_handle;
-
 typedef struct
 {
 	i2c_port_t i2c_port;
 	uint8_t i2c_addr;
 } icm0948_config_i2c_t;
-
-extern i2c_device_config_t icm20948_dev_cfg;
 
 void icm20948_init_i2c(icm20948_device_t *device, icm0948_config_i2c_t *config);
 void i2c_initialize(const i2c_device_config_t *dev_config, i2c_master_dev_handle_t *ret_handle);
