@@ -31,6 +31,11 @@ void ColorSensor::start()
 {
     initialize();
 
+    if(!apds9151_is_connected())
+    {
+        log_e("Color Sensor doesn't connected in I2C bus");
+        return;
+    }
     setMainCtrl(&main_ctrl, false, false, false, true, true, true);
 
     ps_led.ps_led_bitmap_t.__LED_CURRENT = ps_current_100ma;

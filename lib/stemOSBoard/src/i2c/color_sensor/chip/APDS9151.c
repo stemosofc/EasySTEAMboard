@@ -41,77 +41,77 @@ esp_err_t apds9151_is_connected()
 
 uint8_t getMainCtrlConfigure()
 {
-    uint8_t main_ctrl;
+    uint8_t main_ctrl = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__MAIN_CTRL_ADDR, __1_BYTE, &main_ctrl));
     return main_ctrl;
 }
 
 uint8_t getPsLedConfigure()
 {
-    uint8_t psLed;
+    uint8_t psLed = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__PS_LED_ADDR, __1_BYTE, &psLed));
     return psLed;
 }
 
 uint8_t getPsPulsesConfigure()
 {
-    uint8_t psPulses;
+    uint8_t psPulses = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__PS_PULSES_ADDR, __1_BYTE, &psPulses));
     return psPulses;
 }
 
 uint8_t getPsMeasRateConfigure()
 {
-    uint8_t psMeasRate;
+    uint8_t psMeasRate = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__PS_MEAS_RATE_ADDR, __1_BYTE, &psMeasRate));
     return psMeasRate;
 }
 
 uint8_t getLsMeasRateConfigure()
 {
-    uint8_t psMeasRate;
+    uint8_t psMeasRate = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__LS_MEAS_RATE_ADDR, __1_BYTE, &psMeasRate));
     return psMeasRate;
 }
 
 uint8_t getLsGainConfigure()
 {
-    uint8_t psMeasRate;
+    uint8_t psMeasRate = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__LS_GAIN_ADDR, __1_BYTE, &psMeasRate));
     return psMeasRate;
 }
 
 uint8_t getPartID()
 {
-    uint8_t partId;
+    uint8_t partId = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__PART_ID_ADDR, __1_BYTE, &partId));
     return partId;
 }
 
 uint8_t getMainStatus()
 {
-    uint8_t mainStatus;
+    uint8_t mainStatus = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__MAIN_STATUS_ADDR, __1_BYTE, &mainStatus));
     return mainStatus;
 }
 
 uint8_t getInterruptConfigure()
 {
-    uint8_t intCfg;
+    uint8_t intCfg = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__INT_CFG_ADDR, __1_BYTE, &intCfg));
     return intCfg;
 }
 
 uint8_t getPersistInterruptConfigure()
 {
-    uint8_t intPst;
+    uint8_t intPst = 0;
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__INT_PST_ADDR, __1_BYTE, &intPst));
     return intPst;
 }
 
 uint32_t getLsDataGreen()
 {
-    uint8_t data[3];
+    uint8_t data[3] = {0};
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__LS_DATA_GREEN_0_ADDR, __3_BYTE, data));
     uint32_t greenColor = to_20_bit(data);
     return greenColor;
@@ -119,7 +119,7 @@ uint32_t getLsDataGreen()
 
 uint32_t getLsDataBlue()
 {
-    uint8_t data[3];
+    uint8_t data[3] = {0};
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__LS_DATA_BLUE_0_ADDR, __3_BYTE, data));
     uint32_t blueColor = to_20_bit(data);
     return blueColor;
@@ -127,7 +127,7 @@ uint32_t getLsDataBlue()
 
 uint32_t getLsDataRed()
 {
-    uint8_t data[3];
+    uint8_t data[3] = {0};
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__LS_DATA_RED_0_ADDR, __3_BYTE, data));
     uint32_t redColor = to_20_bit(data);
     return redColor;
@@ -135,7 +135,7 @@ uint32_t getLsDataRed()
 
 uint32_t getLsDataIR()
 {
-    uint8_t data[3];
+    uint8_t data[3] = {0};
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__LS_DATA_IR_0_ADDR, __3_BYTE, data));
     uint32_t ir = to_20_bit(data);
     return ir;
@@ -143,7 +143,7 @@ uint32_t getLsDataIR()
 
 uint16_t getPsData()
 {
-    uint8_t data[2];
+    uint8_t data[2] = {0};
     ESP_ERROR_CHECK_WITHOUT_ABORT(read_register(__PS_DATA_0_ADDR, __2_BYTE, data));
     uint32_t psData = to_11_bit(data);
     return psData;
