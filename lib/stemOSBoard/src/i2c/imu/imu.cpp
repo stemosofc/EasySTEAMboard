@@ -184,7 +184,7 @@ double IMU::getYaw()
 {
     double t3 = +2.0 * (qw * qz + qx * qy);
     double t4 = +1.0 - 2.0 * (qy * qy + qz * qz);
-    return atan2(t3, t4) * 180.0 / PI;
+    return atan2(t3, t4) * 180.0 / M_PI;
 }
 
 double IMU::getPitch()
@@ -192,12 +192,12 @@ double IMU::getPitch()
     double t2 = +2.0 * (qw * qy - qx * qz);
     t2 = t2 > 1.0 ? 1.0 : t2;
     t2 = t2 < -1.0 ? -1.0 : t2;
-    return asin(t2) * 180.0 / PI;
+    return asin(t2) * 180.0 / M_PI;
 }
 
 double IMU::getRoll()
 {
     double t0 = +2.0 * (qw * qx + qy * qz);
     double t1 = +1.0 - 2.0 * (qx * qx + qy * qy);
-    return atan2(t0, t1) * 180.0 / PI;
+    return atan2(t0, t1) * 180.0 / M_PI;
 }

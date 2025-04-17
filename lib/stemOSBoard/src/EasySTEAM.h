@@ -5,7 +5,8 @@
 #include "motor/Motor.h"
 #include "servos/Servo.h"
 #include "wifi/easyWiFi.h"
-#include "imu/imu.hpp"
+#include "i2c/imu/imu.hpp"
+#include "i2c/color_sensor/ColorSensor.hpp"
 
 Motor motor1(Motor::PORTA_1);
 Motor motor2(Motor::PORTA_2);
@@ -23,6 +24,7 @@ Digital di4(Config_IO::PORTA_4);
 Digital di5(Config_IO::PORTA_5);
 
 IMU imu;
+ColorSensor colorSensor;
 
 stemWiFi easySTEAM;
 Gamepad gamepad;

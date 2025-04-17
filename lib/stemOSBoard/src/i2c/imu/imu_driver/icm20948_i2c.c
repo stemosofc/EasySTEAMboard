@@ -3,32 +3,18 @@
 #include "icm20948.h"
 #include "icm20948_i2c.h"
 
-uint32_t timeout = 5000 / portTICK_PERIOD_MS;
-
-i2c_master_bus_handle_t i2c_bus_handle = NULL;
-
-i2c_master_bus_config_t i2c_mst_config = {
-    .i2c_port = -1,
-    .sda_io_num = GPIO_NUM_21,
-    .scl_io_num = GPIO_NUM_22,
-    .clk_source = I2C_CLK_SRC_DEFAULT,
-    .glitch_ignore_cnt = 7,
-    .intr_priority = 0
-};
-
-i2c_master_dev_handle_t *dev_handle = 0;
+i2c_master_dev_handle_t *dev_handle = NULL;
 
 void i2c_initialize(const i2c_device_config_t *dev_config, i2c_master_dev_handle_t *ret_handle)
 {
-    if(i2c_bus_handle == NULL)
-    {
-        esp_err_t bus_result = i2c_new_master_bus(&i2c_mst_config, &i2c_bus_handle);
-        log_i("Init I2C bus with code: %s", esp_err_to_name(bus_result));
-    }
 
-    esp_err_t device_result = i2c_master_bus_add_device(i2c_bus_handle, dev_config, ret_handle);
+    esp_err_t bus_result = initialize_i2c_bus();
+    if(bus_result) log_e("Init I2C bus failed with code: %s", esp_err_to_name(bus_result));
+
+    esp_err_t device_result = initialize_i2c_device(dev_config, ret_handle);
+    if(device_result) log_e("Add IMU failed with code: %s", esp_err_to_name(device_result));
+
     dev_handle = ret_handle;
-    log_i("Add device to I2C bus with code %s", esp_err_to_name(device_result));
 }
 
 icm20948_status_e icm20948_internal_write_i2c(uint8_t reg, uint8_t *data, uint32_t len, void *user)
@@ -41,7 +27,7 @@ icm20948_status_e icm20948_internal_write_i2c(uint8_t reg, uint8_t *data, uint32
     for(int i=1; i<(len+1); i++)
         data_write[i] = data[i-1];
 
-    if(i2c_master_transmit(*dev_handle, data_write, (len+1), timeout) != ESP_OK)
+    if(i2c_write_data(dev_handle, data_write, (len+1)) != ESP_OK)
 	{
 		status = ICM_20948_STAT_ERR;
 	}
@@ -53,7 +39,7 @@ icm20948_status_e icm20948_internal_read_i2c(uint8_t reg, uint8_t *buff, uint32_
 	icm20948_status_e status = ICM_20948_STAT_OK;
 	icm0948_config_i2c_t *args = (icm0948_config_i2c_t*)user;
     
-	if(i2c_master_transmit_receive(*dev_handle, &reg, 1, buff, len, timeout) != ESP_OK)
+	if(i2c_read_data(dev_handle, &reg, 1, buff, len) != ESP_OK)
 	{
 		status = ICM_20948_STAT_ERR;
 	}

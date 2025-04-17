@@ -1,13 +1,15 @@
 #ifndef IMU_h
 #define IMU_h
 
-#include "master.h"
-
-extern "C"
-{
+#ifdef __cplusplus
+extern "C" {
+#endif
     #include "imu_driver/icm20948_config_driver_i2c.h"
     #include "imu_driver/icm20948_i2c.h"
+    #include <math.h>
+#ifdef __cplusplus
 }
+#endif
 
 class IMU
 {
