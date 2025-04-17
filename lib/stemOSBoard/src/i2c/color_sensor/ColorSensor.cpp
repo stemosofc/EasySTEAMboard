@@ -1,9 +1,6 @@
-#include "SensorColor.h"
-
-SensorColor::SensorColor() {}
-
+#include "ColorSensor.hpp"
 // start color sensor
-void SensorColor::start()
+void ColorSensor::start()
 {
     initialize();
 
@@ -18,27 +15,27 @@ void SensorColor::start()
 }
 
 
-int SensorColor::getBlue()
+int ColorSensor::getBlue()
 {
     return getLsDataBlue();
 }
 
-int SensorColor::getRed()
+int ColorSensor::getRed()
 {
     return getLsDataRed();
 }
 
-int SensorColor::getGreen()
+int ColorSensor::getGreen()
 {
     return getLsDataGreen();
 }
 
-int SensorColor::getIR()
+int ColorSensor::getIR()
 {
     return getLsDataIR();
 }
 
-int SensorColor::getPS()
+int ColorSensor::getPS()
 {
     return getPsData();
 }

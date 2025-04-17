@@ -1,18 +1,11 @@
-#pragma once
-
-#include "master.h"
-#include "driver/i2c_master.h"
-#include "memory_address.h"
+#ifndef APDS9151_H
+#define APDS9151_h
 
 
-extern i2c_port_num_t i2c_port;
-extern gpio_num_t i2c_sda_port;
-extern  gpio_num_t i2c_scl_port;
-extern  uint8_t data_receive_lenght;
-extern uint8_t data_transmit_lenght;
+#include "i2c/i2c_driver.h"
 
-extern i2c_master_bus_handle_t i2c__master_bus_handle;
-extern i2c_master_bus_config_t i2c_master_bus_configure;
+#include "memory_address.hpp"
+
 extern i2c_device_config_t apds9151_i2c_configure;
 extern i2c_master_dev_handle_t apds9151_dev_handle;
 
@@ -23,7 +16,7 @@ esp_err_t read_register(uint8_t reg, uint8_t len, uint8_t *data); //
 uint32_t to_20_bit(uint8_t data[3]); //
 uint16_t to_11_bit(uint8_t data[2]); //
 
-esp_err_t device_is_conected(void);
+esp_err_t apds9151_is_connected(void);
 
 uint8_t getMainCtrlConfigure(void); //
 uint8_t getPsLedConfigure(void); //
@@ -63,3 +56,5 @@ void setPsCANValue();
 void setLsThresholdLowValue();
 void setLsThresholdUpValue();
 void setLsThresholdVarianceValue();
+
+#endif

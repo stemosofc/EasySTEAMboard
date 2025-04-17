@@ -27,7 +27,7 @@ icm20948_status_e icm20948_internal_write_i2c(uint8_t reg, uint8_t *data, uint32
     for(int i=1; i<(len+1); i++)
         data_write[i] = data[i-1];
 
-    if(i2c_write_data(*dev_handle, data_write, (len+1)) != ESP_OK)
+    if(i2c_write_data(dev_handle, data_write, (len+1)) != ESP_OK)
 	{
 		status = ICM_20948_STAT_ERR;
 	}
@@ -39,7 +39,7 @@ icm20948_status_e icm20948_internal_read_i2c(uint8_t reg, uint8_t *buff, uint32_
 	icm20948_status_e status = ICM_20948_STAT_OK;
 	icm0948_config_i2c_t *args = (icm0948_config_i2c_t*)user;
     
-	if(i2c_read_data(*dev_handle, &reg, 1, buff, len) != ESP_OK)
+	if(i2c_read_data(dev_handle, &reg, 1, buff, len) != ESP_OK)
 	{
 		status = ICM_20948_STAT_ERR;
 	}

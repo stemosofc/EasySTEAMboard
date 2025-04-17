@@ -1,52 +1,43 @@
-#include "APDS9151.h"
+#include "APDS9151.hpp"
 
 
-i2c_port_num_t i2c_auto_port = -1;
-gpio_num_t i2c_sda_port = GPIO_NUM_21;
-gpio_num_t i2c_scl_port = GPIO_NUM_22;
-uint32_t i2c_speed = 100000;
-uint32_t timeout = 1000 / portTICK_PERIOD_MS;
+const uint8_t ACK_ENABLED = 0;
+const uint32_t i2c_speed = 100000;
 
-i2c_master_bus_handle_t i2c__master_bus_handle;
-
-i2c_master_bus_config_t i2c_master_bus_configure = {
-    .i2c_port = i2c_auto_port,
-    .sda_io_num = i2c_sda_port,
-    .scl_io_num = i2c_scl_port,
-    .clk_source = I2C_CLK_SRC_DEFAULT,
-    .glitch_ignore_cnt = 7,
-    .intr_priority = 0,
+i2c_device_config_t apds9151_i2c_configure = 
+{.dev_addr_length = I2C_ADDR_BIT_LEN_7, 
+.device_address = DEVICE::__DEVICE_ADDR,
+.scl_speed_hz = i2c_speed,
+.flags = {.disable_ack_check = ACK_ENABLED}
 };
 
-i2c_device_config_t apds9151_i2c_configure = {
-    .dev_addr_length = I2C_ADDR_BIT_LEN_7,
-    .device_address = DEVICE::__DEVICE_ADDR,
-    .scl_speed_hz = i2c_speed,
-};
 
-i2c_master_dev_handle_t apds9151_dev_handle;
+i2c_master_dev_handle_t apds9151_dev_handle = NULL;
 
 
 void initialize()
 {
-    ESP_ERROR_CHECK_WITHOUT_ABORT(i2c_new_master_bus(&i2c_master_bus_configure, &i2c__master_bus_handle));
-    ESP_ERROR_CHECK_WITHOUT_ABORT(i2c_master_bus_add_device(i2c__master_bus_handle, &apds9151_i2c_configure, &apds9151_dev_handle));
+    esp_err_t bus_result = initialize_i2c_bus();
+    if(bus_result) log_e("I2C bus init failed with code: %s", esp_err_to_name(bus_result));
+
+    esp_err_t device_result = initialize_i2c_device(&apds9151_i2c_configure, &apds9151_dev_handle);
+    if(device_result) log_e("Failed to add APDS-9151 to I2C bus, with code: %s", esp_err_to_name(device_result));
 }
 
 esp_err_t write_register(uint8_t reg, uint8_t data)
 {
     uint8_t buff[2] = {reg, data};
-    return i2c_master_transmit(apds9151_dev_handle, buff, sizeof(buff), timeout);
+    return i2c_write_data(&apds9151_dev_handle, buff, sizeof(buff));
 }
 
 esp_err_t read_register(uint8_t reg, uint8_t len, uint8_t *data)
 {
-    return i2c_master_transmit_receive(apds9151_dev_handle, &reg, sizeof(reg), data, len, timeout);
+    return i2c_read_data(&apds9151_dev_handle, &reg, sizeof(reg), data, len);
 }
 
-esp_err_t device_is_conected()
+esp_err_t apds9151_is_connected()
 {
-    return i2c_master_probe(i2c__master_bus_handle, DEVICE::__DEVICE_ADDR, timeout);
+    return i2c_device_is_connected(DEVICE::__DEVICE_ADDR);
 }
 
 uint8_t getMainCtrlConfigure()

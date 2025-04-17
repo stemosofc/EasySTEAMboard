@@ -13,6 +13,8 @@
         "sstream": "cpp",
         "stop_token": "cpp",
         "streambuf": "cpp",
-        "icm20948_config_driver_i2c.h": "c"
+        "icm20948_config_driver_i2c.h": "c",
+        "memory_address.h": "c",
+        "i2c_master.h": "c"
     }
 }
