@@ -3,8 +3,8 @@
 
 
 #include "i2c/i2c_driver.h"
-
-#include "memory_address.hpp"
+#include "memory_address.h"
+#include <stdbool.h>
 
 extern i2c_device_config_t apds9151_i2c_configure;
 extern i2c_master_dev_handle_t apds9151_dev_handle;
@@ -34,7 +34,7 @@ uint16_t getPsThresholdLowConfigure(void);
 uint16_t getLsThresholdUpConfigure(void);
 uint16_t getLsThresholdLowConfigure(void);
 uint16_t getLsThresholdVarianceConfigure(void);
-uint16_t getPsCAN(void);
+//uint16_t getPsCAN(void);
 
 uint32_t getLsDataGreen(void); // 
 uint32_t getLsDataBlue(void); //
@@ -42,19 +42,21 @@ uint32_t getLsDataRed(void); //
 uint32_t getLsDataIR(void); //
 uint16_t getPsData(void); //
 
-void setMainCtrl(bool SAI_PS, bool SAI_LS, bool SW_RESET, bool RGB_MODE, bool LS_EN, bool PS_EN); // 
-void setPsLedConfigure(PS_FREQUENCY ledPulseFreq, PS_CURRENT ledCurrent); //
-void setPsPulsesConfigure(PS_PULSES numberOfLedPulses); //
-void setPsMeasRateConfigure(PS_RESOLUTION psResolution, PS_MEASUREMENT_RATE psMeasurementRate); //
-void setLsMeasRateConfigure(LS_RESOLUTION lsResolution, LS_MEASUREMENT_RATE lsMeasurementRate); //
-void setLsGainConfigure(GAIN gain); //
-void setInterruptionConfigure(INTERRUPT_CONFIGURE interruptionConfigure); // 
-void setPersistInterruptionConfigure(INTERRUPT_PERSIST_CONFIGURE interruptionPersistConfigure); //
+void setMainCtrl(data_main_ctrl_t * data_main_ctrl, bool SAI_PS, bool SAI_LS, bool SW_RESET, bool RGB_MODE, bool LS_EN, bool PS_EN); // 
+void setPsLedConfigure(ps_led_t * ps_led); //
+void setPsPulsesConfigure(ps_pulses_t * ps_pulses); //
+void setPsMeasRateConfigure(ps_meas_rate_t * ps_meas_rate); //
+void setLsMeasRateConfigure(ls_meas_rate_t * ls_meas_rate); //
+void setLsGainConfigure(ls_gain_range_t * gain); //
+/*
+//void setInterruptionConfigure(INTERRUPT_CONFIGURE interruptionConfigure); // 
+//void setPersistInterruptionConfigure(INTERRUPT_PERSIST_CONFIGURE interruptionPersistConfigure); //
 void setPsThresholdUpValue();
 void setPsThresholdLowValue();
 void setPsCANValue();
 void setLsThresholdLowValue();
 void setLsThresholdUpValue();
 void setLsThresholdVarianceValue();
+*/
 
 #endif

@@ -3,7 +3,7 @@
 
 #define DEBUG 0
 
-#include <inttypes.h>
+#include <stdint.h>
 #include "driver/gpio.h"
 #include "esp32-hal-log.h"
 #include "Arduino.h"
