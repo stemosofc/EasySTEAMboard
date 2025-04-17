@@ -1,13 +1,7 @@
 #ifndef _ICM_20948_I2C_H_
 #define _ICM_20948_I2C_H_
 
-#include "driver/i2c_master.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp32-hal-log.h"
-#include "freertos/timers.h"
-
-extern uint32_t timeout;
+#include "i2c/i2c_driver.h"
 
 typedef struct
 {
