@@ -153,32 +153,35 @@ void IMU::init_dmp(icm20948_device_t *icm)
 
 void IMU::calc()
 {
-    icm_20948_DMP_data_t data;
-	icm20948_status_e status = inv_icm20948_read_dmp_data(&icm, &data);
-		/* Was valid data available? */
-    if ((status == ICM_20948_STAT_OK) || (status == ICM_20948_STAT_FIFO_MORE_DATA_AVAIL)) 
-	{
-		/* We have asked for orientation data so we should receive Quat9 */
-		if ((data.header & DMP_header_bitmap_Quat9) > 0) 
-		{
-			// Q0 value is computed from this equation: Q0^2 + Q1^2 + Q2^2 + Q3^2 = 1.
-			// In case of drift, the sum will not add to 1, therefore, quaternion data need to be corrected with right bias values.
-			// The quaternion data is scaled by 2^30.
-			// Scale to +/- 1
-			double q1 = ((double)data.Quat9.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
-			double q2 = ((double)data.Quat9.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
-			double q3 = ((double)data.Quat9.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
-			double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
-
-			qw = q0; // See issue #145 - thank you @Gord1
-			qx = q2;
-			qy = q1;
-			qz = -q3;
-            }
-    }
-    if(status != ICM_20948_STAT_FIFO_MORE_DATA_AVAIL) 
+    for(;;)
     {
-        vTaskDelay(10 / portTICK_PERIOD_MS);
+        icm_20948_DMP_data_t data;
+        icm20948_status_e status = inv_icm20948_read_dmp_data(&icm, &data);
+            /* Was valid data available? */
+        if ((status == ICM_20948_STAT_OK) || (status == ICM_20948_STAT_FIFO_MORE_DATA_AVAIL)) 
+        {
+            /* We have asked for orientation data so we should receive Quat9 */
+            if ((data.header & DMP_header_bitmap_Quat9) > 0) 
+            {
+                // Q0 value is computed from this equation: Q0^2 + Q1^2 + Q2^2 + Q3^2 = 1.
+                // In case of drift, the sum will not add to 1, therefore, quaternion data need to be corrected with right bias values.
+                // The quaternion data is scaled by 2^30.
+                // Scale to +/- 1
+                double q1 = ((double)data.Quat9.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
+                double q2 = ((double)data.Quat9.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
+                double q3 = ((double)data.Quat9.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
+                double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+    
+                qw = q0; // See issue #145 - thank you @Gord1
+                qx = q2;
+                qy = q1;
+                qz = -q3;
+                }
+        }
+        if(status != ICM_20948_STAT_FIFO_MORE_DATA_AVAIL) 
+        {
+            vTaskDelay(10 / portTICK_PERIOD_MS);
+        }
     }
 }
 
