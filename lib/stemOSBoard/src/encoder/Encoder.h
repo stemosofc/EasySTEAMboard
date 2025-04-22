@@ -12,7 +12,7 @@ namespace Config_Encoder
     };
 }
 
-class Encoder : private EncoderLL
+class Encoder
 {
     public:
         Encoder(Config_Encoder::EncoderPorts port);
