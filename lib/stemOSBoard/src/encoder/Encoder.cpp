@@ -1,6 +1,6 @@
 
 #include "Encoder.hpp"
-#include "encoder_low_level/encoder-low-level.h"
+#include "encoder_low_level/encoder-low-level.hpp"
 
 Encoder::Encoder(Config_Encoder::EncoderPorts port)
 {
