@@ -6,7 +6,7 @@ EncoderLL encoderLowLevel;
 
 Encoder::Encoder(Config_Encoder::EncoderPorts port)
 {
-    switch(encoderPort)
+    switch(port)
     {
         case Config_Encoder::EncoderPorts::PORTA_1:
             pinA = GPIO_NUM_5;
