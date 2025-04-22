@@ -1,7 +1,7 @@
 #ifndef SERVOOS_H
 #define SERVOOS_H
 
-#include "servo_low_level/servo-low-level.h"
+#include "master.h"
 
 namespace Config_Servo {
     enum Port {
@@ -17,7 +17,6 @@ class EasyServo {
         void setPosition(int angleInDegrees);
         int getPosition();
     private:
-        ServoLL servoLowLevel;
         int channel;
 };
 

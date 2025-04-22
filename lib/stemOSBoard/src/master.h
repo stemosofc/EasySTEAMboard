@@ -4,9 +4,13 @@
 #define DEBUG 0
 
 #include <stdint.h>
+
 #include "driver/gpio.h"
+
 #include "esp32-hal-log.h"
+
 #include "Arduino.h"
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/timers.h"

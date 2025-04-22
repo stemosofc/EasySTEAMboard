@@ -4,7 +4,7 @@
 #include "digital/Digital.h"
 #include "motor/Motor.h"
 #include "encoder/Encoder.h"
-#include "servos/Servo.h"
+#include "servos/Servo.hpp"
 #include "wifi/easyWiFi.h"
 #include "i2c/imu/imu.hpp"
 #include "i2c/color_sensor/ColorSensor.hpp"
