@@ -147,6 +147,8 @@ void IMU::init_dmp(icm20948_device_t *icm)
     }
 
     alreadyCreated = true;
+
+    init(); // Init freeRTOS task
 }
 
 void IMU::calc()
