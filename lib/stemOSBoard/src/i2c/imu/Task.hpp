@@ -40,7 +40,7 @@ public:
 	void setPriority(uint8_t priority);
 	void setName(std::string name);
 	void setCore(BaseType_t coreId);
-	void start(void* taskData = nullptr);
+	void init(void* taskData = nullptr);
 	void stop();
 	/**
 	 * @brief Body of the task to execute.
