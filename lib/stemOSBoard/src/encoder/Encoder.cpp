@@ -4,7 +4,7 @@
 
 EncoderLL encoderLowLevel;
 
-Encoder::Encoder(uint8_t encoderPort)
+Encoder::Encoder(Config_Encoder::EncoderPorts port)
 {
     switch(encoderPort)
     {
