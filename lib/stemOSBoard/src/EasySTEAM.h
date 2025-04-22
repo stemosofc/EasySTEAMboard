@@ -2,10 +2,10 @@
 #define _EASYSTEAM_H
 
 #include "digital/Digital.h"
-#include "motor/Motor.h"
-#include "encoder/Encoder.h"
+#include "motor/Motor.hpp"
+#include "encoder/Encoder.hpp"
 #include "servos/Servo.hpp"
-#include "wifi/easyWiFi.h"
+#include "wifi/easyWiFi.hpp"
 #include "i2c/imu/imu.hpp"
 #include "i2c/color_sensor/ColorSensor.hpp"
 

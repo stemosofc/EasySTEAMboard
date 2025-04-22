@@ -1,6 +1,7 @@
 
+#include "Encoder.hpp"
 #include "encoder_low_level/encoder-low-level.h"
-#include "Encoder.h"
+
 
 EncoderLL encoderLowLevel;
 
