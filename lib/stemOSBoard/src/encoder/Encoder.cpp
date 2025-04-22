@@ -2,9 +2,6 @@
 #include "Encoder.hpp"
 #include "encoder_low_level/encoder-low-level.h"
 
-
-EncoderLL encoderLowLevel;
-
 Encoder::Encoder(Config_Encoder::EncoderPorts port)
 {
     switch(port)
@@ -19,12 +16,12 @@ Encoder::Encoder(Config_Encoder::EncoderPorts port)
             break;
     }
 
-    encoderLowLevel.initialize(pinA, pinB);
+    encoderLowLevel->initialize(pinA, pinB);
 }
 
 float Encoder::getPosition()
 {
-    return encoderLowLevel.getCount() * factorOfConversion;
+    return encoderLowLevel->getCount() * factorOfConversion;
 }
 
 void Encoder::setPositionFactor(float factor)
@@ -34,6 +31,6 @@ void Encoder::setPositionFactor(float factor)
 
 void Encoder::reset()
 {
-    encoderLowLevel.reset();
+    encoderLowLevel->reset();
 }
 
