@@ -1,7 +1,6 @@
 #include "Servo.hpp"
 #include "servo_low_level/servo-low-level.h"
 
-ServoLL servoLowLevel;
 
 EasyServo::EasyServo(Config_Servo::Port entrada)
 {
@@ -19,15 +18,15 @@ EasyServo::EasyServo(Config_Servo::Port entrada)
     }
 
 
-    servoLowLevel.attach(entrada, channel);
+    servoLowLevel->attach(entrada, channel);
 }
 
 void EasyServo::setPosition(int angleInDegrees)
 {
-    if(DS_ENABLE) servoLowLevel.writeAngleDegrees(angleInDegrees);
+    if(DS_ENABLE) servoLowLevel->writeAngleDegrees(angleInDegrees);
 }
 
 int EasyServo::getPosition()
 {
-    return servoLowLevel.readAngleDegrees();
+    return servoLowLevel->readAngleDegrees();
 }
