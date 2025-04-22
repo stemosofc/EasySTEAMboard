@@ -7,7 +7,7 @@
  * @param int reverse define se o motor deve ser invertido ou não
  * @return N/A.
  */
-Motor::Motor(int entrada, bool reverse) : encoder(entrada) {
+Motor::Motor(int entrada, bool reverse) {
   pinos(entrada);
 
   if (reverse) {

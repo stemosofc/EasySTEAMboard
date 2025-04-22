@@ -1,7 +1,7 @@
 #ifndef Encoder_h
 #define Encoder_h
 
-#include "encoder_low_level/encoder-low-level.h"
+#include "master.h"
 
 namespace Config_Encoder
 {
@@ -12,15 +12,14 @@ namespace Config_Encoder
     };
 }
 
-class Encoder : public EncoderLL
+class Encoder : private EncoderLL
 {
     public:
-        Encoder(uint8_t entrada);
+        Encoder(Config_Encoder::EncoderPorts port);
         float getPosition();
         void reset();
         void setPositionFactor(float factor);
     private:
-        EncoderLL encoderLowLevel;
         gpio_num_t pinA;
         gpio_num_t pinB;
         float factorOfConversion = 1;

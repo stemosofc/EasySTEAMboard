@@ -3,31 +3,35 @@
 
 #include "digital/Digital.h"
 #include "motor/Motor.h"
+#include "encoder/Encoder.h"
 #include "servos/Servo.h"
 #include "wifi/easyWiFi.h"
 #include "i2c/imu/imu.hpp"
 #include "i2c/color_sensor/ColorSensor.hpp"
 
-Motor motor1(Motor::PORTA_1);
-Motor motor2(Motor::PORTA_2);
-Motor motor3(Motor::PORTA_3);
-Motor motor4(Motor::PORTA_4);
+extern Motor motor1;
+extern Motor motor2;
+extern Motor motor3;
+extern Motor motor4;
 
-EasyServo servo1(Config_Servo::Port::PORTA_1);
-EasyServo servo2(Config_Servo::Port::PORTA_2);
-EasyServo servo3(Config_Servo::Port::PORTA_3);
+extern Encoder encoder1;
+extern Encoder encoder2;
 
-Digital di1(Config_IO::PORTA_1);
-Digital di2(Config_IO::PORTA_2);
-Digital di3(Config_IO::PORTA_3);
-Digital di4(Config_IO::PORTA_4);
-Digital di5(Config_IO::PORTA_5);
+extern EasyServo servo1;
+extern EasyServo servo2;
+extern EasyServo servo3;
 
-IMU imu;
-ColorSensor colorSensor;
+extern Digital di1;
+extern Digital di2;
+extern Digital di3;
+extern Digital di4;
+extern Digital di5;
 
-stemWiFi easySTEAM;
-Gamepad gamepad;
+extern IMU imu;
+extern ColorSensor colorSensor;
+
+extern stemWiFi easySTEAM;
+extern Gamepad gamepad;
 
 #endif
 

@@ -1,13 +1,12 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#include "encoder/Encoder.h"
+#include "master.h"
 
 class Motor {
   public:
     explicit Motor(int entrada, bool reverse=false); // Construtor da classe motor
     void setPower(double power); // Define a velocidade do motor (-1.0 a 1.0)
-    Encoder encoder;
     static const int PORTA_1 = 1; // Portas de motor da placa
     static const int PORTA_2 = 2;
     static const int PORTA_3 = 3;
