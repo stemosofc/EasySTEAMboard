@@ -1,4 +1,8 @@
+
+#include "encoder_low_level/encoder-low-level.h"
 #include "Encoder.h"
+
+EncoderLL encoderLowLevel;
 
 Encoder::Encoder(uint8_t encoderPort)
 {

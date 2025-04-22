@@ -4,7 +4,6 @@
 #include "master.h"
 #include "driver/pulse_cnt.h"
 #include "hal/pcnt_types.h"
-#include <freertos/FreeRTOS.h>
 #include <rom/gpio.h>
 
 #define UPPER_LIMIT 32767;
@@ -26,7 +25,6 @@ class EncoderLL
 
         gpio_num_t aPinNumber;
         gpio_num_t bPinNumber;
-
     private:
         pcnt_unit_config_t enc_unit_config;
         pcnt_unit_handle_t enc_unit_handler = NULL;
