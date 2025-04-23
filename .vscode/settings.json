@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "random": "cpp",
+        "*.tcc": "cpp",
+        "exception": "cpp",
+        "memory_resource": "cpp",
+        "format": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "stop_token": "cpp",
+        "streambuf": "cpp",
+        "icm20948_config_driver_i2c.h": "c",
+        "memory_address.h": "c",
+        "i2c_master.h": "c",
+        "apds9151.h": "c",
+        "stdbool.h": "c",
+        "i2c_driver.h": "c",
+        "master.h": "c",
+        "freertos.h": "c"
+    }
+}
