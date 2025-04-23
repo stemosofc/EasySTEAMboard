@@ -24,7 +24,8 @@ EasyServo::EasyServo(Config_Servo::Port entrada)
 
 void EasyServo::setPosition(int angleInDegrees)
 {
-    if(DS_ENABLE) servoLowLevel.writeAngleDegrees(angleInDegrees);
+    if(DS_ENABLE) 
+        servoLowLevel.writeAngleDegrees(angleInDegrees);
 }
 
 int EasyServo::getPosition()

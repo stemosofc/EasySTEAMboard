@@ -10,7 +10,7 @@
 Motor::Motor(int entrada, bool reverse) {
   pinos(entrada);
 
-  if (reverse) {
+  if (!reverse) {
     ledcAttachChannel(pinPWMA, FREQUENCY, RESOLUTION, channelA);
 
     ledcAttachChannel(pinPWMB, FREQUENCY, RESOLUTION, channelB);
