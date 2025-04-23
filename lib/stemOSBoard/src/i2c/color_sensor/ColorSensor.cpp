@@ -31,7 +31,7 @@ void ColorSensor::start()
 {
     initialize();
 
-    if(!apds9151_is_connected())
+    if(apds9151_is_connected())
     {
         log_e("Color Sensor doesn't connected in I2C bus");
         return;
