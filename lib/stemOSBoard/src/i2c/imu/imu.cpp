@@ -147,7 +147,10 @@ void IMU::init_dmp(icm20948_device_t *icm)
     }
 
     alreadyCreated = true;
-
+    
+    setName("IMU");
+    setPriority(1);
+    setStackSize(2500);
     init(); // Init freeRTOS task
 }
 
