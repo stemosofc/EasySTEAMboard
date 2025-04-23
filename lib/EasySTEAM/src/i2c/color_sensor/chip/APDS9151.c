@@ -17,10 +17,10 @@ i2c_master_dev_handle_t apds9151_dev_handle = NULL;
 void initialize()
 {
     esp_err_t bus_result = initialize_i2c_bus();
-    if(bus_result) log_e("I2C bus init failed with code: %s", esp_err_to_name(bus_result));
+    if(bus_result) ESP_LOGE(TAG_COLOR, "I2C bus init failed with code: %s", esp_err_to_name(bus_result));
 
     esp_err_t device_result = initialize_i2c_device(&apds9151_i2c_configure, &apds9151_dev_handle);
-    if(device_result) log_e("Failed to add APDS-9151 to I2C bus, with code: %s", esp_err_to_name(device_result));
+    if(device_result) ESP_LOGE(TAG_COLOR, "Failed to add APDS-9151 to I2C bus, with code: %s", esp_err_to_name(device_result));
 }
 
 esp_err_t write_register(uint8_t reg, uint8_t data)

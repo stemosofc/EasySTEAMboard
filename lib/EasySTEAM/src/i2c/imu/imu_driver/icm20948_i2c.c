@@ -3,16 +3,18 @@
 #include "icm20948.h"
 #include "icm20948_i2c.h"
 
+
+
 i2c_master_dev_handle_t *dev_handle = NULL;
 
 void i2c_initialize(const i2c_device_config_t *dev_config, i2c_master_dev_handle_t *ret_handle)
 {
 
     esp_err_t bus_result = initialize_i2c_bus();
-    if(bus_result) log_e("Init I2C bus failed with code: %s", esp_err_to_name(bus_result));
+    if(bus_result) ESP_LOGE(TAG_IMU, "Init I2C bus failed with code: %s", esp_err_to_name(bus_result));
 
     esp_err_t device_result = initialize_i2c_device(dev_config, ret_handle);
-    if(device_result) log_e("Add IMU failed with code: %s", esp_err_to_name(device_result));
+    if(device_result) ESP_LOGE(TAG_IMU, "Add IMU failed with code: %s", esp_err_to_name(device_result));
 
     dev_handle = ret_handle;
 }
