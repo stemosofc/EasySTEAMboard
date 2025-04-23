@@ -1,5 +1,5 @@
 #include "Servo.hpp"
-#include "servo_low_level/servo-low-level.h"
+#include "servo_low_level/servo-low-level.hpp"
 
 ServoLL servoLowLevel;
 

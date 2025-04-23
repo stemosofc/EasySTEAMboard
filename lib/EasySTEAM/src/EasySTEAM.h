@@ -1,7 +1,7 @@
 #ifndef _EASYSTEAM_H
 #define _EASYSTEAM_H
 
-#include "digital/Digital.h"
+#include "digital/Digital.hpp"
 #include "motor/Motor.hpp"
 #include "encoder/Encoder.hpp"
 #include "servos/Servo.hpp"

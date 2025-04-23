@@ -1,4 +1,4 @@
-#include "LED.h"
+#include "LED.hpp"
 
 Freenove_ESP32_WS2812 LED::fita = Freenove_ESP32_WS2812(LEDS_COUNT, PINO, CHANNEL, TYPE_GRB);
 

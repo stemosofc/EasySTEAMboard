@@ -1,4 +1,4 @@
-#include "servo-low-level.h"
+#include "servo-low-level.hpp"
 
 void ServoLL::attach(uint8_t pin, uint32_t min, uint32_t max, uint8_t channel)
 {
