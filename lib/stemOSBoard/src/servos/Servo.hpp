@@ -3,8 +3,6 @@
 
 #include "master.h"
 
-class ServoLL;
-
 namespace Config_Servo {
     enum Port {
         PORTA_1 = GPIO_NUM_2,
@@ -19,7 +17,6 @@ class EasyServo {
         void setPosition(int angleInDegrees);
         int getPosition();
     private:
-        ServoLL * servoLowLevel;
         int channel;
 };
 

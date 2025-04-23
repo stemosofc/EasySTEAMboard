@@ -22,7 +22,6 @@ class Encoder
         void reset();
         void setPositionFactor(float factor);
     private:
-        EncoderLL * encoderLowLevel;
         gpio_num_t pinA;
         gpio_num_t pinB;
         float factorOfConversion = 1;

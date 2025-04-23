@@ -1,6 +1,8 @@
 #ifndef IMU_h
 #define IMU_h
 
+#include "Task.hpp"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -11,17 +13,22 @@ extern "C" {
 }
 #endif
 
-class IMU
+class IMU : public Task
 {
     public:
         void start(void);
         double getYaw(void);
         double getPitch(void);
         double getRoll(void);
-        void calc(void);
+
     private:
+        void calc(void);
         void defaultStartup(void);
         void init_dmp(icm20948_device_t *icm);
+        void run(void * data)
+        {
+            calc();
+        }
         static bool alreadyCreated;
         double qw = 0;
         double qx = 0;
