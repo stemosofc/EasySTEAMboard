@@ -1,5 +1,5 @@
 #include "Digital.hpp"
-
+#include "Arduino.h"
 /**
  * @brief Cria um objeto da porta digital
  *

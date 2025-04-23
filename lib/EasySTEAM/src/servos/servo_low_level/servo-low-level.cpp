@@ -1,10 +1,10 @@
 #include "servo-low-level.hpp"
 
+static const char * TAG_SERVO = "Servo";
+
 void ServoLL::attach(uint8_t pin, uint32_t min, uint32_t max, uint8_t channel)
 {
     this->pin = pin;
-
-    log_d("Attempting to Attach servo on pin=%d min=%d max=%d", pin,min,max);
 
     // min/max checks 
     if (min < DEFAULT_MIN_PULSE)          // ensure pulse width is valid
@@ -15,10 +15,8 @@ void ServoLL::attach(uint8_t pin, uint32_t min, uint32_t max, uint8_t channel)
     // Set up this channel
     // if you want anything other than default timer width, you must call setTimerWidth() before attach
 
-    if(ledcAttach(pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS))
-        log_i("Successful Servo Attached on pin(%d), freq(%d), resl(%d) and channel(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel);
-    else
-        log_e("Servo don't Attached on pin(%d), freq(%d), resl(%d) and channel(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS, channel);
+    if(!ledcAttach(pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS))
+        ESP_LOGE(TAG_SERVO, "Successful Servo Attached on pin(%d), freq(%d), resl(%d)", pin, DEFAULT_FREQUENCY, DEFAULT_RESOLUTION_BITS);
 }
 
 void ServoLL::attach(uint8_t pin, uint8_t channel)

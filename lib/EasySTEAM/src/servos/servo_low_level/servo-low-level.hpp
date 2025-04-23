@@ -2,6 +2,7 @@
 #define _SERVO_LOW_LEVEL_h_
 
 #include "master.h"
+#include "Arduino.h"
 
 class ServoLL
 {
