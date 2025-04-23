@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LED_h
+#define LED_h
 
 #include "Arduino.h"
 #include "Freenove_WS2812_Lib_for_ESP32.h"
@@ -40,3 +41,5 @@ private:
   static void Check(TaskHandle_t &task, const char * taskName);
   static bool stop;
 };
+
+#endif

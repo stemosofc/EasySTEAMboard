@@ -1,4 +1,4 @@
-#include "Digital.h"
+#include "Digital.hpp"
 
 /**
  * @brief Cria um objeto da porta digital
