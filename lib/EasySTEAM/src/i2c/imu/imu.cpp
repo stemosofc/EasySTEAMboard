@@ -13,7 +13,7 @@ void IMU::start()
 {
     if(alreadyCreated)
     {
-        log_e("It's don't possible to create a new IMU object!");
+        log_e("Don't possible to create a new IMU object!");
         return;
     }
     i2c_initialize(&icm20948_dev_cfg, &icm20948_dev_handle);
