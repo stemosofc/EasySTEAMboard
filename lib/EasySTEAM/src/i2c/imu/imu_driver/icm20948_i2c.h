@@ -3,6 +3,8 @@
 
 #include "i2c/i2c_driver.h"
 
+static const char * TAG_IMU = "IMU";
+
 typedef struct
 {
 	i2c_port_t i2c_port;

@@ -5,7 +5,7 @@
 #include "i2c/i2c_driver.h"
 #include "memory_address.h"
 #include <stdbool.h>
-
+static const char * TAG_COLOR = "ColorSensor";
 extern i2c_device_config_t apds9151_i2c_configure;
 extern i2c_master_dev_handle_t apds9151_dev_handle;
 

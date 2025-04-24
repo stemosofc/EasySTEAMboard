@@ -57,8 +57,8 @@ void ColorSensor::start()
 
     setLsGainConfigure(&ls_gain_range);
 
-    log_d("Main Ctrl: %d\n", getMainCtrlConfigure());
-    log_d("Part ID: %d\n", getPartID());
+    log_i("Main Ctrl: %d\n", getMainCtrlConfigure());
+    log_i("Part ID: %d\n", getPartID());
 }
 
 

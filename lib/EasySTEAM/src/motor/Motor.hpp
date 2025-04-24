@@ -2,7 +2,7 @@
 #define MOTOR_H
 
 #include "master.h"
-
+#include "Arduino.h"
 class Motor {
   public:
     explicit Motor(int entrada, bool reverse=false); // Construtor da classe motor

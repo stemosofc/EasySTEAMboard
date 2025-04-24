@@ -13,7 +13,7 @@ void IMU::start()
 {
     if(alreadyCreated)
     {
-        log_e("It's don't possible to create a new IMU object!");
+        log_e("Don't possible to create a new IMU object!");
         return;
     }
     i2c_initialize(&icm20948_dev_cfg, &icm20948_dev_handle);
@@ -26,10 +26,9 @@ void IMU::start()
         status_wia = icm20948_check_id(&icm) == ICM_20948_STAT_OK;
         if(status_wia)
         {
-            log_d("Check ID passed");
             break;
         }
-		log_e("check id failed");
+		log_e("check ID failed");
 		vTaskDelay(1000 / portTICK_PERIOD_MS);
     } while(!status_wia);
 
@@ -139,7 +138,7 @@ void IMU::init_dmp(icm20948_device_t *icm)
 
     if (success)
     {
-        log_i("DMP enabled!");
+        log_i("DMP enabled");
     } else {
         log_e("Enable DMP failed!");
         while (1)
