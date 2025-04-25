@@ -8,6 +8,7 @@
 #include "wifi/easyWiFi.hpp"
 #include "i2c/imu/imu.hpp"
 #include "i2c/color_sensor/ColorSensor.hpp"
+#include "i2c/pinpoint/pinpoint.hpp"
 
 extern Encoder encoder1;
 extern Encoder encoder2;
@@ -20,6 +21,7 @@ extern Digital di5;
 
 extern IMU imu;
 extern ColorSensor colorSensor;
+extern PinPoint pinPoint; 
 
 extern Motor motor1;
 extern Motor motor2;
