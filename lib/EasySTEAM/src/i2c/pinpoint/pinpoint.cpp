@@ -1,5 +1,5 @@
 #include "pinpoint.hpp"
-
+#include "esp32-hal-log.h"
 #ifdef __cplusplus
 extern "C"
 {
@@ -35,6 +35,8 @@ y_raw_encoder_t y_raw = {.u32_y_raw_encoder = 0};
 void PinPoint::start()
 {
     init_pinpoint_i2c();
+
+    defaultInit();
 }
 
 bool PinPoint::isConnected()
@@ -128,8 +130,8 @@ float PinPoint::getYPose()
 
 float PinPoint::getYaw()
 {
-    wPose = w_pose.f32_heading;
-    wPose = ((fmod((wPose + M_PI), (2.0 * M_PI))) + (2.0 * M_PI)) * (M_PI / 180.0);
+    wPose = w_pose.f32_heading * 180.0 / M_PI;
+    //wPose = fmod(((fmod((wPose + M_PI), (2.0 * M_PI))) + (2.0 * M_PI)) * (180.0 / M_PI), ((2 * M_PI) - M_PI));
     return wPose;
 }
 

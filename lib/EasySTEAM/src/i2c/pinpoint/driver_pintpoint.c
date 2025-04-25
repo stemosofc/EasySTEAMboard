@@ -18,8 +18,10 @@ i2c_master_dev_handle_t pinpoint_dev_handle = NULL;
 
 void init_pinpoint_i2c(void)
 {
-    if(initialize_i2c_bus());
-        initialize_i2c_device(&pinpoint_i2c_configure, &pinpoint_dev_handle);
+    esp_err_t result = initialize_i2c_bus();
+    if(result) log_e("Error starting I2C from PinPoint, with code: %s", esp_err_to_name(result));
+    result = initialize_i2c_device(&pinpoint_i2c_configure, &pinpoint_dev_handle);
+    if(result) log_e("Error adding Pinpoint to I2C bus with code: %s", esp_err_to_name(result));
 }
 
 bool pinpoint_is_connected()
