@@ -20,6 +20,16 @@
         "stdbool.h": "c",
         "i2c_driver.h": "c",
         "master.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "array": "c",
+        "bitset": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "ranges": "c",
+        "span": "c",
+        "stacktrace": "c",
+        "regex": "c",
+        "valarray": "c",
+        "driver_pinpoint.h": "c"
     }
 }

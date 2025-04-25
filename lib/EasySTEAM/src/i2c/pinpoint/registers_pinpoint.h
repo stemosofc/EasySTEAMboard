@@ -2,7 +2,6 @@
 #define REGISTERS_PINPOINT_H
 
 #include <inttypes.h>
-#include <float.h>
 
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -42,9 +41,12 @@ typedef union
         u8 __CALIBRATING : 1;
         u8 __X_NOT_DETECTED : 1;
         u8 __Y_NOT_DETECTED : 1;
-        u8 : 4;
+        u8 __FAULT_IMU_RUNAWAY : 1;
+        u8 __FAULT_BAD_READ : 1;
+        u8 : 2;
     } device_status_bitmap;
-    u8 device_status_u8;
+    u8 device_status_u8[4];
+    u32 device_status_u32;
 } device_status_t;
 
 typedef union
@@ -60,7 +62,29 @@ typedef union
         u8 : 1;
         u8 : 1;
     } device_control_bitmap;
-};
+    u8 device_control_u8[4];
+    u32 device_status_u32;
+} device_control_t;
+
+typedef union
+{
+    u32 u32_loop_time;
+    u8 u8_loop_time[4];
+} loop_time_t;
+
+
+typedef union
+{
+    u32 u32_x_raw_encoder;
+    u8  u8_x_raw_encoder[4];
+} x_raw_encoder_t;
+
+typedef union
+{
+    u32 u32_y_raw_encoder;
+    u8  u8_y_raw_encoder[4];
+} y_raw_encoder_t;
+
 
 typedef union
 {
@@ -97,5 +121,49 @@ typedef union
     f32 f32_h_velocity;
     u8 u8_h_velocity[4];
 } h_velocity_t;
+
+typedef union
+{
+    f32 f32_ticks_per_mm;
+    u8 u8_ticks_per_mm[4];
+} ticks_per_mm_t;
+
+typedef union
+{
+    f32 f32_x_offset;
+    u8 u8_x_offset[4];
+} x_offset_t;
+
+typedef union
+{
+    f32 f32_y_offset;
+    u8 u8_y_offset[4];
+} y_offset_t;
+
+typedef union
+{
+    f32 f32_h_offset;
+    u8 u8_h_offset[4];
+} h_offset_t;
+
+typedef union
+{
+    struct bulk_read_obj_t
+    {
+        device_status_t device_status;
+        // looptime
+        // x raw
+        // y raw
+        x_position_t x_pose;
+        y_position_t y_pose;
+        h_orientation_t h_orientation;
+        x_velocity_t x_velocity;
+        y_velocity_t y_velocity;
+        h_velocity_t h_velocity;
+    } bulk_read_obj;
+    u8 u8_bulk_read[40];
+} bulk_read_t;
+
+
 
 #endif
