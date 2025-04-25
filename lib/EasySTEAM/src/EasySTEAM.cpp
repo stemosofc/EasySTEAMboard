@@ -22,5 +22,6 @@ Digital di5(Config_IO::PORTA_5);
 
 IMU imu;
 ColorSensor colorSensor;
+PinPoint pinPoint;
 
 Gamepad gamepad;
