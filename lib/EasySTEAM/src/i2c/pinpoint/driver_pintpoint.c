@@ -88,7 +88,7 @@ void get_y_position(y_position_t * y_pose)
     read_register(Y_POSITION_ADDR, sizeof(*y_pose), y_pose->u8_y_position);
 }
 
-h_orientation_t get_heading(h_orientation_t * heading)
+void get_heading(h_orientation_t * heading)
 {
     read_register(H_ORIENTATION_ADDR, sizeof(*heading), heading->u8_heading);
 }
@@ -118,7 +118,7 @@ void  get_y_velocity(y_velocity_t * y_velocity)
     read_register(Y_VELOCITY_ADDR, sizeof(*y_velocity), y_velocity->u8_y_velocity);
 }
 
-h_velocity_t get_h_velocity(h_velocity_t * h_velocity)
+void get_h_velocity(h_velocity_t * h_velocity)
 {
     read_register(H_VELOCITY_ADDR, sizeof(*h_velocity), h_velocity->u8_h_velocity);
 }
@@ -163,7 +163,7 @@ void get_h_offset(h_offset_t * h_offset)
     read_register(YAW_OFFSET_ADDR, sizeof(*h_offset), h_offset->u8_h_offset);
 }
 
-double read_all(bulk_read_t * bulk_read)
+void read_all(bulk_read_t * bulk_read)
 {
     read_register(BULK_READ_ADDR, sizeof(*bulk_read), bulk_read->u8_bulk_read);
 }

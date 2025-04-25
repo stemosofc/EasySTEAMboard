@@ -8,8 +8,6 @@
 #include "driver_pinpoint.h"
 #include "i2c/i2c_driver.h"
 
-i2c_master_dev_handle_t pinpoint_dev_handle = NULL;
-
 void init_pinpoint_i2c(void);
 bool pinpoint_is_connected(void);
 
@@ -33,7 +31,7 @@ void get_x_position(x_position_t * x_pose);
 
 void get_y_position(y_position_t * y_pose);
 
-h_orientation_t get_heading(h_orientation_t * heading);
+void get_heading(h_orientation_t * heading);
 
 void set_x_position(x_position_t * x_position);
 
@@ -45,7 +43,7 @@ void get_x_velocity(x_velocity_t * x_velocity);
 
 void  get_y_velocity(y_velocity_t * y_velocity);
 
-h_velocity_t get_h_velocity(h_velocity_t * h_velocity);
+void get_h_velocity(h_velocity_t * h_velocity);
 
 void set_ticks_per_mm(ticks_per_mm_t * ticks_per_mm);
 
@@ -63,7 +61,7 @@ void get_y_offset(y_offset_t * y_offset);
 
 void get_h_offset(h_offset_t * h_offset);
 
-double read_all(bulk_read_t * bulk_read);
+void read_all(bulk_read_t * bulk_read);
 
 void write_register(uint8_t reg, uint8_t data[4]);
 

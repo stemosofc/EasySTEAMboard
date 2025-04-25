@@ -20,12 +20,14 @@ h_offset_t h_offset = {.f32_h_offset = 0.0f};
 loop_time_t loop_time = {.u32_loop_time = 0U};
 bulk_read_t bulk_read = {.u8_bulk_read = {0}};
 ticks_per_mm_t ticks_per_mm = {.f32_ticks_per_mm = 0.0f};
-x_raw_encoder_t x_raw = {.u32_x_raw_encoder = 0.0f};
-y_raw_encoder_t y_raw = {.u32_y_raw_encoder = 0.0f};
+x_raw_encoder_t x_raw = {.u32_x_raw_encoder = 0};
+y_raw_encoder_t y_raw = {.u32_y_raw_encoder = 0};
 
 #ifdef __cplusplus
 }
 #endif
+
+#include <cmath>
 
 #define TICKS_PER_MM_SWINGARM_POD 13.26291192f
 #define TICKS_PER_MM_4_BAR_POD 19.89436789f
@@ -127,6 +129,7 @@ float PinPoint::getYPose()
 float PinPoint::getYaw()
 {
     wPose = w_pose.f32_heading;
+    wPose = ((fmod((wPose + M_PI), (2.0 * M_PI))) + (2.0 * M_PI)) * (M_PI / 180.0);
     return wPose;
 }
 
