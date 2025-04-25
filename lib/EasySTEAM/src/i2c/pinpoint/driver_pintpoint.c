@@ -22,6 +22,11 @@ void init_pinpoint_i2c(void)
         initialize_i2c_device(&pinpoint_i2c_configure, &pinpoint_dev_handle);
 }
 
+bool pinpoint_is_connected()
+{
+    return i2c_device_is_connected(PINPOINT_I2C_ADDRESS) == ESP_OK;
+}
+
 uint32_t get_device_id(void)
 {
     uint8_t id[4] = {0};

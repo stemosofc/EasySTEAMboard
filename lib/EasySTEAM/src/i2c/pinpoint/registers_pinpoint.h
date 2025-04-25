@@ -63,7 +63,7 @@ typedef union
         u8 : 1;
     } device_control_bitmap;
     u8 device_control_u8[4];
-    u32 device_status_u32;
+    u32 device_control_u32;
 } device_control_t;
 
 typedef union
@@ -151,9 +151,9 @@ typedef union
     struct bulk_read_obj_t
     {
         device_status_t device_status;
-        // looptime
-        // x raw
-        // y raw
+        loop_time_t loop_time;
+        x_raw_encoder_t x_raw_value;
+        y_raw_encoder_t y_raw_value;
         x_position_t x_pose;
         y_position_t y_pose;
         h_orientation_t h_orientation;

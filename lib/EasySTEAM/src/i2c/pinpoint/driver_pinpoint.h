@@ -11,6 +11,7 @@
 i2c_master_dev_handle_t pinpoint_dev_handle = NULL;
 
 void init_pinpoint_i2c(void);
+bool pinpoint_is_connected(void);
 
 uint32_t get_device_id(void);
 
