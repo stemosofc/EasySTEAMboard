@@ -40,5 +40,7 @@ class EasySTEAM {
     private:
 };
 
+extern EasySTEAM easySTEAM;
+
 #endif
 

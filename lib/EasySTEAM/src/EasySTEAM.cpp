@@ -1,6 +1,5 @@
 #include "EasySTEAM.h"
-#include "easy_comm.hpp"
-#include "wifi.hpp"
+#include "wifi/wifi.hpp"
 
 Motor motor1(Motor::PORTA_1);
 Motor motor2(Motor::PORTA_2);
@@ -38,3 +37,5 @@ void EasySTEAM::start() {
 
     LED::NO_DS();
 }
+
+EasySTEAM easySTEAM;

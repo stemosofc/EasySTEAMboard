@@ -40,7 +40,7 @@ void EasyWiFi::setBestChannel() {
 }
 
 
-void onEventWiFi(WiFiEvent_t event)
+void EasyWiFi::onEventWiFi(WiFiEvent_t event)
 {
     switch (event) {
         case ARDUINO_EVENT_WIFI_READY: 
