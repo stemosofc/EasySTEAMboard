@@ -1,7 +1,4 @@
 #include "Servo.hpp"
-#include "servo_low_level/servo-low-level.hpp"
-
-ServoLL servoLowLevel;
 
 EasyServo::EasyServo(Config_Servo::Port entrada)
 {

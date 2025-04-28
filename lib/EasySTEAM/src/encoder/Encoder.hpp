@@ -2,8 +2,7 @@
 #define Encoder_h
 
 #include "master.h"
-
-class EncoderLL;
+#include "encoder_low_level/encoder-low-level.hpp"
 
 namespace Config_Encoder
 {
@@ -22,6 +21,7 @@ class Encoder
         void reset();
         void setPositionFactor(float factor);
     private:
+        EncoderLL encoderLowLevel;
         gpio_num_t pinA;
         gpio_num_t pinB;
         float factorOfConversion = 1;

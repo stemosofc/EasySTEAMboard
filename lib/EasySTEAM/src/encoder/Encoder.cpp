@@ -1,8 +1,4 @@
-
-#include "encoder_low_level/encoder-low-level.hpp"
 #include "Encoder.hpp"
-
-EncoderLL encoderLowLevel;
 
 Encoder::Encoder(Config_Encoder::EncoderPorts port)
 {

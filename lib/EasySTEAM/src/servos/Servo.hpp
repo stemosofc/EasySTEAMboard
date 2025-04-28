@@ -2,7 +2,7 @@
 #define SERVOOS_H
 
 #include "master.h"
-
+#include "servo_low_level/servo-low-level.hpp"
 namespace Config_Servo {
     enum Port {
         PORTA_1 = GPIO_NUM_2,
@@ -18,6 +18,7 @@ class EasyServo {
         int getPosition();
     private:
         int channel;
+        ServoLL servoLowLevel;
 };
 
 #endif
