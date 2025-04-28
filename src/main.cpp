@@ -3,10 +3,6 @@
 void setup() {
   Serial.begin(115200);
   easySTEAM.start();
-<<<<<<< HEAD
-=======
-  colorSensor.start();
->>>>>>> main
 }
 
 boolean previousAstate = false;
@@ -15,9 +11,6 @@ boolean servo1Toggle = false;
 boolean servo2Toggle = false;
 
 void loop() {
-<<<<<<< HEAD
-
-=======
   double y = gamepad.getLeftAxisY();
   double  x = gamepad.getLeftAxisX();
   double armPower = gamepad.getRightAxisY();
@@ -73,5 +66,4 @@ void loop() {
   Serial.printf("Encoder 1: %f\n", encoder1.getPosition());
   previousAstate = buttonA;
   previousBstate = buttonB;
->>>>>>> main
 }
