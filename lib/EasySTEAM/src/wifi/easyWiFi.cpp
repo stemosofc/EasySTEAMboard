@@ -138,7 +138,7 @@ void stemWiFi::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     Gamepad::gamepad = jon;
 
     ACTUATORS_ENABLE = DS_ENABLE = Gamepad::status();
-
+    Serial.printf("DS enabled: %d\n", DS_ENABLE);
     bool comm = jon["COMM"] | true;
 
     if(!comm)
