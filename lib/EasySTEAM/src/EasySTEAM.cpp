@@ -1,4 +1,6 @@
 #include "EasySTEAM.h"
+#include "easy_comm.hpp"
+#include "wifi.hpp"
 
 Motor motor1(Motor::PORTA_1);
 Motor motor2(Motor::PORTA_2);
@@ -23,3 +25,16 @@ Gamepad gamepad;
 IMU imu;
 ColorSensor colorSensor;
 PinPoint pinPoint;
+
+EasyWiFi wifi;
+
+void EasySTEAM::start() {
+    LED::init();
+    LED::CONFIGURE_WIFI();
+    
+    wifi.initAcessPoint();
+
+    websocket.initWebServer();
+
+    LED::NO_DS();
+}

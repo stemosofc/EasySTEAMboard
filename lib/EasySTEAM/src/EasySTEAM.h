@@ -34,5 +34,11 @@ extern EasyServo servo3;
 
 extern Gamepad gamepad;
 
+class EasySTEAM {
+    public:
+        void start();
+    private:
+};
+
 #endif
 
