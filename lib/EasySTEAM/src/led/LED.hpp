@@ -18,28 +18,28 @@ struct {
 
 
 class LED {
-private:
-  friend class stemWiFi;
-  static const int PINO = 12;         // Pino GPIO do LED
-  static const int CHANNEL = 11;       // Canal PWM
-  static const int LEDS_COUNT = 1;
-  static bool BLINK;
-  static int DELAY_MS;
-  static std::vector<int> cor1;
-  static std::vector<int> cor2;
-  static void CONFIGURE_WIFI_THREAD(void * arg);
-  static void Blink_Action(void * arg);
-  static void setColor(const std::vector<int> color1, const std::vector<int> color2, int delayMicroSeconds=DELAY_MS, bool blink=BLINK);
-  static TaskHandle_t LED_HANDLER;
-  static Freenove_ESP32_WS2812 fita;
-  static void activateLED(const std::vector<int> colors);         
-  static void init();
-  static void ERRO();             // Sinaliza erro no código (Vermelho)
-  static void CONFIGURE_WIFI();  // Acesso enquanto estivermos configurando WiFi
-  static void OK();             // Quando tudo estiver correto
-  static void NO_DS();
-  static void Check(TaskHandle_t &task, const char * taskName);
-  static bool stop;
+public:
+    static void init();
+    static void ERRO();             // Sinaliza erro no código (Vermelho)
+    static void CONFIGURE_WIFI();  // Acesso enquanto estivermos configurando WiFi
+    static void OK();             // Quando tudo estiver correto
+    static void NO_DS();
+  private:
+    static const int PINO = 12;         // Pino GPIO do LED
+    static const int CHANNEL = 11;       // Canal PWM
+    static const int LEDS_COUNT = 1;
+    static void Check(TaskHandle_t &task, const char * taskName);
+    static bool stop;
+    static TaskHandle_t LED_HANDLER;
+    static Freenove_ESP32_WS2812 fita;
+    static bool BLINK;
+    static int DELAY_MS;
+    static std::vector<int> cor1;
+    static std::vector<int> cor2;
+    static void CONFIGURE_WIFI_THREAD(void * arg);
+    static void Blink_Action(void * arg);
+    static void setColor(const std::vector<int> color1, const std::vector<int> color2, int delayMicroSeconds=DELAY_MS, bool blink=BLINK);
+    static void activateLED(const std::vector<int> colors);         
 };
 
 #endif

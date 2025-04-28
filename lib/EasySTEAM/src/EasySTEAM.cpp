@@ -5,8 +5,6 @@ Motor motor2(Motor::PORTA_2);
 Motor motor3(Motor::PORTA_3);
 Motor motor4(Motor::PORTA_4);
 
-stemWiFi easySTEAM;
-
 EasyServo servo1(Config_Servo::Port::PORTA_1);
 EasyServo servo2(Config_Servo::Port::PORTA_2);
 EasyServo servo3(Config_Servo::Port::PORTA_3);
@@ -20,8 +18,8 @@ Digital di3(Config_IO::PORTA_3);
 Digital di4(Config_IO::PORTA_4);
 Digital di5(Config_IO::PORTA_5);
 
+Gamepad gamepad;
+
 IMU imu;
 ColorSensor colorSensor;
 PinPoint pinPoint;
-
-Gamepad gamepad;
