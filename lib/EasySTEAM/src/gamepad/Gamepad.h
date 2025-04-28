@@ -21,13 +21,12 @@ class Gamepad {
     double getRightTrigger();
     double getLeftTrigger();
     static JsonDocument gamepad;
+    static void reset();
+    static bool status();
   private:
     double deadband = 0.01;
     double maxMagnitude = 1;
     double getValue(double value);
-    static bool status();
-    static void reset();
-    friend class stemWiFi;
 };
 
 #endif

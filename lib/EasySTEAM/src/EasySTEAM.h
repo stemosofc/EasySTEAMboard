@@ -5,10 +5,10 @@
 #include "motor/Motor.hpp"
 #include "encoder/Encoder.hpp"
 #include "servos/Servo.hpp"
-#include "wifi/easyWiFi.hpp"
 #include "i2c/imu/imu.hpp"
 #include "i2c/color_sensor/ColorSensor.hpp"
 #include "i2c/pinpoint/pinpoint.hpp"
+#include "gamepad/Gamepad.h"
 
 extern Encoder encoder1;
 extern Encoder encoder2;
@@ -32,8 +32,15 @@ extern EasyServo servo1;
 extern EasyServo servo2;
 extern EasyServo servo3;
 
-extern stemWiFi easySTEAM;
 extern Gamepad gamepad;
+
+class EasySTEAM {
+    public:
+        void start();
+    private:
+};
+
+extern EasySTEAM easySTEAM;
 
 #endif
 

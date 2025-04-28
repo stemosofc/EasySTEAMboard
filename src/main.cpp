@@ -3,7 +3,6 @@
 void setup() {
   Serial.begin(115200);
   easySTEAM.start();
-  colorSensor.start();
 }
 
 boolean previousAstate = false;
@@ -30,7 +29,7 @@ void loop() {
 
   motor1.setPower(-powerLeft);
   motor4.setPower(powerRight);
-  motor3.setPower(armPower);
+  motor3.setPower(-armPower);
 
   if(buttonA && !previousAstate)
   {
@@ -61,9 +60,9 @@ void loop() {
     servo2.setPosition(0);
   }
 
-  //Serial.printf("Red: %d\n", colorSensor.getRed());
-  //Serial.printf("Green: %d\n", colorSensor.getGreen());
-  //Serial.printf("Blue: %d\n", colorSensor.getBlue());
+  Serial.printf("Red: %d\n", colorSensor.getRed());
+  Serial.printf("Green: %d\n", colorSensor.getGreen());
+  Serial.printf("Blue: %d\n", colorSensor.getBlue());
   Serial.printf("Encoder 1: %f\n", encoder1.getPosition());
   previousAstate = buttonA;
   previousBstate = buttonB;
