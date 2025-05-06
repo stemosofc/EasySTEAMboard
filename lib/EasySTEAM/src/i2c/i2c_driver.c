@@ -1,6 +1,5 @@
 #include "i2c_driver.h"
 
-
 uint32_t timeout = 200 / portTICK_PERIOD_MS;
 
 const i2c_master_bus_config_t i2c_mst_config = {

@@ -30,6 +30,12 @@
         "stacktrace": "c",
         "regex": "c",
         "valarray": "c",
-        "driver_pinpoint.h": "c"
+        "driver_pinpoint.h": "c",
+        "netdb.h": "c",
+        "inet.h": "c",
+        "sockets.h": "c",
+        "esp_console.h": "c",
+        "ping_sock.h": "c",
+        "esp_check.h": "c"
     }
 }

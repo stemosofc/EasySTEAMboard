@@ -3,7 +3,6 @@
 
 #include <WiFi.h>
 #include "websockets.hpp"
-
 extern Websocket websocket;
 
 class EasyWiFi
