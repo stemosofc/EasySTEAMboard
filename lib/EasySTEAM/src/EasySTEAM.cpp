@@ -36,6 +36,15 @@ void EasySTEAM::start() {
     websocket.initWebServer();
 
     LED::NO_DS();
+
+    waitForEnable();
+}
+
+void EasySTEAM::waitForEnable() {
+    while(!DS_ENABLE) 
+    {
+        delay(10);
+    }
 }
 
 EasySTEAM easySTEAM;
