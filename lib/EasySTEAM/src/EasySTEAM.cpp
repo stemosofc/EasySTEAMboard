@@ -37,7 +37,7 @@ void EasySTEAM::start() {
 
     LED::NO_DS();
 
-    waitForEnable();
+    //waitForEnable();
 }
 
 void EasySTEAM::waitForEnable() {
