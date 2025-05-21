@@ -21,6 +21,7 @@ extern bool ACTUATORS_ENABLE;
 
 #include "esp32-hal-log.h"
 
-#define SKIP_ENABLE 0
+#define SKIP_DRIVERSTATION_ENABLE 0
+#define DEBUG_PING_ENABLE 0
 
 #endif

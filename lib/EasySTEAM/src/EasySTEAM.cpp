@@ -28,6 +28,8 @@ PinPoint pinPoint;
 EasyWiFi wifi;
 
 void EasySTEAM::start() {
+    delay(50);
+
     LED::init();
     LED::CONFIGURE_WIFI();
     
@@ -37,7 +39,7 @@ void EasySTEAM::start() {
 
     LED::NO_DS();
 
-    #if SKIP_ENABLE
+    #if SKIP_DRIVERSTATION_ENABLE
         DS_ENABLE = true;
     #endif
 
