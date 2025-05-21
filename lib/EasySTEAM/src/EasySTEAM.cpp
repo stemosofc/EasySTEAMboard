@@ -37,6 +37,10 @@ void EasySTEAM::start() {
 
     LED::NO_DS();
 
+    #if SKIP_ENABLE
+        DS_ENABLE = true;
+    #endif
+
     //waitForEnable();
 }
 
