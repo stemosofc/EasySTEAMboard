@@ -38,6 +38,7 @@ class EasySTEAM {
     public:
         void start();
     private:
+        inline void waitForEnable();
 };
 
 extern EasySTEAM easySTEAM;
