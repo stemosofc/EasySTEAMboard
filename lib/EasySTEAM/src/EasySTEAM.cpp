@@ -28,6 +28,8 @@ PinPoint pinPoint;
 EasyWiFi wifi;
 
 void EasySTEAM::start() {
+    delay(50);
+
     LED::init();
     LED::CONFIGURE_WIFI();
     
