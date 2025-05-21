@@ -41,7 +41,7 @@ void EasySTEAM::start() {
         DS_ENABLE = true;
     #endif
 
-    //waitForEnable();
+    waitForEnable();
 }
 
 void EasySTEAM::waitForEnable() {
