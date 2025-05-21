@@ -1,5 +1,17 @@
 #include "wifi.hpp"
 
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
+#include "ping_ll.h"
+
+#ifdef __cplusplus
+}
+#endif
+
+
 const  char* ssid = "EasySTEAM_";
 const char* password = "password";
 
@@ -55,9 +67,11 @@ void EasyWiFi::onEventWiFi(WiFiEvent_t event)
         case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
+            stop_ping_session();
             if(websocket.hasClients()) websocket.disconnectWebsocketClients(true);
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
+            start_ping_session();
             break;
         default: break;
     }
