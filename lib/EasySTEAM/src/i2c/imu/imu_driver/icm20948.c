@@ -1,5 +1,4 @@
 #include "icm20948.h"
-#include "icm20948_registers.h"
 #include "ak09916_registers.h"
 
 /*
