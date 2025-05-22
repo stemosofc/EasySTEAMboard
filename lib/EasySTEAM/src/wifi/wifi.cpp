@@ -67,7 +67,11 @@ void EasyWiFi::onEventWiFi(WiFiEvent_t event)
             break;
         case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
             stop_ping_session();
-            if(websocket.hasClients()) websocket.disconnectWebsocketClients(true);
+            if(websocket.hasClients()) 
+            {
+                websocket.disconnectWebsocketClients(true);
+                log_e("Disconnecting clients");
+            }
             break;
         case ARDUINO_EVENT_WIFI_AP_STAIPASSIGNED:
             start_ping_session();

@@ -44,14 +44,17 @@ void Websocket::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aw
  void *arg, uint8_t *data, size_t len) {
     switch (type) {
         case WS_EVT_CONNECT:
-        id = client->id();
-        client->text("Conectado");
-        log_i("DS connected with id: %d\n", id);
-        Gamepad::gamepad["EN"] = false;
-        LED::OK();
+            id = client->id();
+            client->text("Conectado");
+            log_i("DS connected with id: %d\n", id);
+            Gamepad::gamepad["EN"] = false;
+            LED::OK();
         break;
         case WS_EVT_DISCONNECT:
-        log_i("DS disconnected");
+            ACTUATORS_ENABLE = DS_ENABLE = false;
+            Gamepad::reset();
+            LED::NO_DS();
+            log_i("DS disconnected");
         break;
         case WS_EVT_DATA:
         handleWebSocketMessage(arg, data, len);
@@ -78,10 +81,7 @@ void Websocket::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
         ACTUATORS_ENABLE = DS_ENABLE = Gamepad::status();
 
         bool comm = jon["COMM"] | true;
-
-        if(!comm)
-            disconnectWebsocketClients(false);
-        } 
+    } 
 }
 
 bool Websocket::hasClients()
@@ -92,12 +92,7 @@ bool Websocket::hasClients()
 void Websocket::disconnectWebsocketClients(bool error) {
     Gamepad::reset();
     ws->closeAll();
-    ws->cleanupClients();
-    ACTUATORS_ENABLE = DS_ENABLE = false;
-    if(error) {
-        LED::ERRO();
-    } else
-    {
-        LED::NO_DS();
-    }
+    ws->cleanupClients(0);
+    LED::ERRO();
+    //log_e("Clients: %d", hasClients());
 }
