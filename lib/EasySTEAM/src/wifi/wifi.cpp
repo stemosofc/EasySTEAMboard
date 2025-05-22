@@ -26,19 +26,16 @@ void EasyWiFi::initAcessPoint()
 
 void EasyWiFi::setBestChannel() {
     int n = WiFi.scanNetworks();
-    if (n == 0) 
-    {
-        WiFi.softAP(ssid + WiFi.macAddress(), password);
-    } else {
+    int channel = 1;
+    if (n > 0) {
         int canais[n];
         int canaisFix[14] = {};
-        log_d("networks found");
+        log_d("%d networks found", n);
         for (int i = 0; i < n; ++i) {
             canais[i] = WiFi.channel(i);
             canaisFix[canais[i]]++;
         }
         int low = 1e7;
-        int channel = 1;
         for(int i = 1; i < 14; i++) 
         {
             if(canaisFix[i] < low) 
@@ -47,8 +44,10 @@ void EasyWiFi::setBestChannel() {
                 low = canaisFix[i];
             }
         }
-        WiFi.softAP(ssid + WiFi.macAddress(), password, channel);
+        log_d("The best channel is: %d", channel);
     }
+    if(!WiFi.softAP(ssid + WiFi.macAddress(), password, channel)) 
+        log_e("Init AP error");
 }
 
 
