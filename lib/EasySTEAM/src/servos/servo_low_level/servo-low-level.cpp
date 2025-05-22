@@ -26,6 +26,7 @@ void ServoLL::attach(uint8_t pin, uint8_t channel)
 
 void ServoLL::writeAngleDegrees(uint16_t angleInDegrees)
 {
+    actual_angle_degrees = angleInDegrees;
     writeMicroseconds(angleToUs(angleInDegrees));
 }
 
@@ -42,7 +43,8 @@ void ServoLL::writeTicks(uint32_t ticks)
 
 int ServoLL::readAngleDegrees()
 {
-    return (map(readMicroseconds(), DEFAULT_MIN_PULSE, DEFAULT_MAX_PULSE, DEFAULT_ANGLE_MIN_DEGREES, DEFAULT_ANGLE_MAX_DEGREES));
+    return actual_angle_degrees;
+    //return (map(readMicroseconds(), DEFAULT_MIN_PULSE, DEFAULT_MAX_PULSE, DEFAULT_ANGLE_MIN_DEGREES, DEFAULT_ANGLE_MAX_DEGREES));
 }
 
 uint32_t ServoLL::readMicroseconds()

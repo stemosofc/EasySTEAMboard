@@ -13,6 +13,8 @@ class ServoLL
         int readAngleDegrees();
 
     private:
+        uint16_t actual_angle_degrees;
+
         static const int DEFAULT_ANGLE_MAX_DEGREES = 270;
         static const int DEFAULT_ANGLE_MIN_DEGREES = 0;
         static const int DEFAULT_MIN_PULSE = 500;
